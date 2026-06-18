@@ -946,9 +946,9 @@ export const m6Content: Record<string, TopicContent> = {
           { symbol: `x_3`, name: `Feature 3`, description: `Third word feature value` },
         ],
         sliders: [
-          { name: `x1`, label: `Feature x₁`, min: -π, max: π, step: 0.1, default: 0.5 },
-          { name: `x2`, label: `Feature x₂`, min: -π, max: π, step: 0.1, default: 1.2 },
-          { name: `x3`, label: `Feature x₃`, min: -π, max: π, step: 0.1, default: -0.8 },
+          { name: `x1`, label: `Feature x₁`, min: -Math.PI, max: Math.PI, step: 0.1, default: 0.5 },
+          { name: `x2`, label: `Feature x₂`, min: -Math.PI, max: Math.PI, step: 0.1, default: 1.2 },
+          { name: `x3`, label: `Feature x₃`, min: -Math.PI, max: Math.PI, step: 0.1, default: -0.8 },
         ],
       },
       charts: [

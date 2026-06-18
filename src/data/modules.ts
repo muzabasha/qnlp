@@ -232,7 +232,7 @@ export const modules: Module[] = [
     number: 14,
     title: 'Research Applications of QNLP',
     subtitle: 'Real-world applications and case studies',
-    icon: 'Flask',
+    icon: 'FlaskConical',
     duration: '40 min',
     topics: [
       { id: '14.1', title: 'Sentiment Analysis', duration: '5 min', prerequisites: ['13.5'], dependencies: ['14.2'], contentFile: '14.1' },
