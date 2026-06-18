@@ -5,13 +5,6 @@ export const m13Content: Record<string, TopicContent> = {
     topicId: '13.1',
     learningObjective: `Understand the key performance metrics used to evaluate QNLP models, including accuracy, precision, recall, F1-score, and quantum-specific metrics.`,
     nextPrep: `Review classification fundamentals from Module 11 and the concept of confusion matrices from classical ML.`,
-    dependencyGraph: `flowchart LR
-      A[M11: Text Classification] --> B[13.1 Performance Metrics]
-      B --> C[13.2 Accuracy Precision Recall F1]
-      C --> D[13.3 Benchmarking]
-      D --> E[13.4 Quantum Advantage]
-      E --> F[13.5 Experimental Analysis]
-      style B fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `Imagine you are a doctor developing a test for a rare disease. If your test always says the patient is healthy, it is 99% accurate (since only 1% have the disease), but it never actually catches the disease. This is why accuracy alone is a terrible metric. Now imagine evaluating a quantum NLP model — you need to know not just how often it is right, but how it performs on each class, how confident its predictions are, and whether its quantum nature actually provides a measurable benefit. This topic introduces the complete evaluation toolkit for QNLP models.`,
       questions: [
@@ -193,20 +186,6 @@ export const m13Content: Record<string, TopicContent> = {
         `Side-by-side comparison mode lets you evaluate multiple models simultaneously`,
       ],
       completionMessage: `You have mastered the complete evaluation framework for QNLP models!`,
-      dataFlow: `flowchart LR
-        A[Trained QNLP Model] --> B[Generate Predictions]
-        B --> C[Confusion Matrix]
-        C --> D[Compute Metrics]
-        D --> E{Accuracy}
-        D --> F{Precision}
-        D --> G{Recall}
-        D --> H{F1 Score}
-        D --> I{Q_eff}
-        E --> J[Evaluation Dashboard]
-        F --> J
-        G --> J
-        H --> J
-        I --> J`,
     },
     insights: {
       advantages: [
@@ -236,12 +215,6 @@ export const m13Content: Record<string, TopicContent> = {
     topicId: '13.2',
     learningObjective: `Understand the mathematical definitions of accuracy, precision, recall, and F1-score, their relationships, and their interpretation in the context of QNLP model evaluation.`,
     nextPrep: `Review the confusion matrix construction from 13.1 and ensure comfort with basic probability concepts.`,
-    dependencyGraph: `flowchart LR
-      A[13.1 Performance Metrics] --> B[13.2 Accuracy Precision Recall F1]
-      B --> C[13.3 Benchmarking]
-      B --> D[Confusion Matrix]
-      B --> E[Trade-off Analysis]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `You are a goalie in a football match. Your coach evaluates you: "You stopped 90% of shots" (accuracy). But wait — 100 shots came your way, you stopped 90, but 9 of the 10 goals were from penalty kicks, and you only blocked 1 out of 10 penalties. Your precision on penalties is 10%, and your recall is 10%. The coach needs to know: are you good at stopping regular shots but bad at penalties? This is exactly why we need multiple metrics — each tells a different part of the performance story. In QNLP, the same model might be excellent at detecting positive sentiment but terrible at detecting sarcasm — and only a breakdown of precision and recall by class reveals this.`,
       questions: [
@@ -433,17 +406,6 @@ export const m13Content: Record<string, TopicContent> = {
         `Averaging mode toggle switches between macro, micro, and weighted views`,
       ],
       completionMessage: `You have mastered the precision-recall-F1 evaluation framework and can now choose optimal operating points for any QNLP task!`,
-      dataFlow: `flowchart LR
-        A[Model Predictions] --> B[Probability Scores]
-        B --> C[Threshold T]
-        C --> D[Predicted Labels]
-        D --> E[Confusion Matrix]
-        E --> F[Precision Calculator]
-        E --> G[Recall Calculator]
-        F --> H[F1 = 2PR/(P+R)]
-        G --> H
-        H --> I[Optimal Threshold?]
-        I --> C`,
     },
     insights: {
       advantages: [
@@ -473,13 +435,6 @@ export const m13Content: Record<string, TopicContent> = {
     topicId: '13.3',
     learningObjective: `Understand the methodology of benchmarking QNLP models against classical baselines, including experimental design, statistical significance, and fair comparison.`,
     nextPrep: `Review classical NLP model architectures (from Module 11) and the metrics from 13.1-13.2.`,
-    dependencyGraph: `flowchart LR
-      A[13.2 Precision Recall F1] --> B[13.3 Benchmarking]
-      B --> C[13.4 Quantum Advantage]
-      B --> D[Baseline Selection]
-      B --> E[Statistical Testing]
-      B --> F[Fair Comparison]
-      style B fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `You are the coach of a basketball team that just recruited a player who claims to be the best in the world. To test this claim, you cannot just watch them play alone — you need to see them in games against the best opponents, under the same conditions, with the same rules. If they score 40 points against a weak team but only 10 against a strong team, the 40-point game was not a fair test. Benchmarking QNLP models works the same way: we must compare quantum models against the best classical models on the same datasets, with the same preprocessing, under the same computational constraints. Only then can we claim quantum advantage.`,
       questions: [
@@ -668,20 +623,6 @@ export const m13Content: Record<string, TopicContent> = {
         `Automated McNemar test and effect size computation with interpretation`,
       ],
       completionMessage: `You have completed a rigorous benchmarking study with full statistical analysis!`,
-      dataFlow: `flowchart TD
-        A[Select Benchmarks] --> B[Configure Models]
-        B --> C[Classical Baselines]
-        B --> D[QNLP Model]
-        C --> E[Train & Evaluate]
-        D --> E
-        E --> F{Metrics Collection}
-        F --> G[Accuracy Table]
-        F --> H[Parameter Count]
-        F --> I[Time & Memory]
-        G --> J[Statistical Tests]
-        H --> J
-        I --> J
-        J --> K[Benchmark Report]`,
     },
     insights: {
       advantages: [
@@ -711,13 +652,6 @@ export const m13Content: Record<string, TopicContent> = {
     topicId: '13.4',
     learningObjective: `Understand the formal definition of quantum advantage, when it can be expected in NLP tasks, and how to identify genuine quantum advantage versus experimental artefacts.`,
     nextPrep: `Review the benchmarking methodology from 13.3 and revisit Hilbert space concepts from Module 5.`,
-    dependencyGraph: `flowchart LR
-      A[13.3 Benchmarking] --> B[13.4 Quantum Advantage]
-      B --> C[13.5 Experimental Analysis]
-      B --> D[Provable Advantage]
-      B --> E[Heuristic Advantage]
-      B --> F[NISQ Limitations]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine two chefs competing to create the best soup. Chef A has a traditional kitchen with excellent knives, precise stoves, and years of classical training. Chef B has a strange new device that can cook all possible flavour combinations simultaneously — but it breaks down frequently, requires constant calibration, and only works for small batches. Chef B's soup is sometimes better, sometimes worse, and takes three times as long. Is Chef B's device an advantage? The answer depends on whether the occasional brilliance justifies the cost and unreliability. This is exactly the question of quantum advantage in NLP: do the theoretical benefits of quantum computing translate into practically useful improvements, given the current hardware limitations?`,
       questions: [
@@ -900,17 +834,6 @@ export const m13Content: Record<string, TopicContent> = {
         `Diagnosis report summarises: advantage level, key evidence, and caveats`,
       ],
       completionMessage: `You have mastered the framework for identifying genuine quantum advantage in QNLP models!`,
-      dataFlow: `flowchart TD
-        A[QNLP Model Config] --> B[Full Hybrid Model]
-        A --> C[Ablation Model]
-        B --> D[Performance Metrics]
-        C --> D
-        D --> E{Comparison}
-        E --> F[Expressivity Analysis]
-        E --> G[Gradient Analysis]
-        F --> H[Diagnosis]
-        G --> H
-        H --> I[Quantum Advantage Report]`,
     },
     insights: {
       advantages: [
@@ -940,13 +863,6 @@ export const m13Content: Record<string, TopicContent> = {
     topicId: '13.5',
     learningObjective: `Understand the experimental methodology for QNLP research, including experimental design, data collection, analysis, interpretation, and reporting of results.`,
     nextPrep: `Review all previous topics in Module 13 and ensure familiarity with the complete evaluation toolkit.`,
-    dependencyGraph: `flowchart LR
-      A[13.4 Quantum Advantage] --> B[13.5 Experimental Analysis]
-      B --> C[Experimental Design]
-      B --> D[Data Collection]
-      B --> E[Result Interpretation]
-      B --> F[Reporting Standards]
-      style B fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `You are a detective investigating a case. You have evidence (data), forensic tools (quantum models), and comparison samples (classical models). But the case is not solved just by running tests — you must design the investigation carefully (experimental design), collect evidence without contamination (data collection), interpret what the evidence means in context (analysis), and write a report that holds up in court (reporting). A poorly designed experiment is like a detective who contaminates the crime scene — the results are useless no matter how sophisticated the forensic tools. This topic transforms you from a QNLP practitioner into a QNLP scientist.`,
       questions: [
@@ -1133,19 +1049,6 @@ export const m13Content: Record<string, TopicContent> = {
         `Report generator produces a complete experimental report following QNLP reproducibility checklists`,
       ],
       completionMessage: `You have mastered the complete experimental methodology for QNLP research!`,
-      dataFlow: `flowchart TD
-        A[Hypothesis] --> B[Protocol Design]
-        B --> C[Pre-registration]
-        C --> D[Experiment Execution]
-        D --> E[Data Collection]
-        E --> F[Statistical Analysis]
-        F --> G{Results}
-        G --> H[Significant?]
-        G --> I[Effect Size?]
-        G --> J[Reproducible?]
-        H --> K[Research Report]
-        I --> K
-        J --> K`,
     },
     insights: {
       advantages: [

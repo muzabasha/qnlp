@@ -5,13 +5,6 @@ export const m14Content: Record<string, TopicContent> = {
     topicId: '14.1',
     learningObjective: `Understand how QNLP models can be applied to sentiment analysis tasks, including the advantages and challenges of quantum-enhanced sentiment detection.`,
     nextPrep: `Review text classification fundamentals from Module 11 and the hybrid architecture patterns from Module 12.`,
-    dependencyGraph: `flowchart LR
-      A[M12: Hybrid Architecture] --> B[14.1 Sentiment Analysis]
-      B --> C[14.2 Fake News Detection]
-      B --> D[Polarity Classification]
-      B --> E[Aspect-Based SA]
-      B --> F[Emotion Detection]
-      style B fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `A major airline receives 50,000 customer feedback messages daily. Each message carries the emotional temperature of a passenger experience — joy at a smooth journey, frustration at a delayed flight, fear during turbulence. Their classical sentiment system catches obvious cases but misses subtle sarcasm, nuanced complaints, and mixed emotions. A QNLP sentiment system could theoretically process these emotional nuances in superposition, detecting patterns invisible to classical models. This is the promise of quantum sentiment analysis: not just labelling positive and negative, but understanding the rich emotional landscape of human expression.`,
       questions: [
@@ -190,19 +183,6 @@ export const m14Content: Record<string, TopicContent> = {
         `Decision landscape visualiser projects the quantum decision boundary in 2D using PCA`,
       ],
       completionMessage: `You have built and evaluated a complete QNLP sentiment analysis system!`,
-      dataFlow: `flowchart LR
-        A[Raw Text] --> B[Tokenisation & Embedding]
-        B --> C[Quantum Encoding]
-        C --> D[Multi-Aspect VQC]
-        D --> E[Measurement]
-        E --> F{Aspect 1 Sentiment}
-        E --> G{Aspect 2 Sentiment}
-        E --> H{Aspect 3 Sentiment}
-        E --> I{Overall Sentiment}
-        F --> J[Customer Feedback Dashboard]
-        G --> J
-        H --> J
-        I --> J`,
     },
     insights: {
       advantages: [
@@ -233,13 +213,6 @@ export const m14Content: Record<string, TopicContent> = {
     topicId: '14.2',
     learningObjective: `Understand how QNLP techniques can be applied to fake news and misinformation detection, leveraging quantum feature spaces to capture subtle linguistic patterns of deceptive content.`,
     nextPrep: `Review encoding techniques from Module 11.4 and feature extraction from Module 12.4.`,
-    dependencyGraph: `flowchart LR
-      A[14.1 Sentiment Analysis] --> B[14.2 Fake News Detection]
-      B --> C[14.3 Question Answering]
-      B --> D[Stance Detection]
-      B --> E[Source Credibility]
-      B --> F[Language Pattern Analysis]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `A piece of fake news travels six times faster than the truth on social media. By the time fact-checkers verify a claim, it has already reached millions. Traditional fake news detectors look for known false statements and suspicious sources — but sophisticated disinformation evolves faster than static databases. A QNLP fake news detector could theoretically process the linguistic fingerprint of deception — the subtle patterns of exaggeration, emotional manipulation, and logical fallacies — in a high-dimensional quantum feature space where these patterns become separable. The race between disinformation and detection is the defining information war of our era, and quantum NLP could be a game-changing weapon.`,
       questions: [
@@ -418,20 +391,6 @@ export const m14Content: Record<string, TopicContent> = {
         `Dashboard shows per-component and combined accuracy, precision, recall, and F1`,
       ],
       completionMessage: `You have built a complete multi-component QNLP fake news detection system!`,
-      dataFlow: `flowchart TD
-        A[Input Article + Source] --> B[Content Encoding]
-        A --> C[Source Encoding]
-        D[Headline] --> E[Stance Encoding]
-        A --> E
-        B --> F[Content VQC]
-        C --> G[Source Credibility Module]
-        E --> H[Stance Detection VQC]
-        F --> I{Combined Classification}
-        G --> I
-        H --> I
-        I --> J[Fake / Real Decision]
-        J --> K[Update Source Credibility]
-        K --> G`,
     },
     insights: {
       advantages: [
@@ -462,13 +421,6 @@ export const m14Content: Record<string, TopicContent> = {
     topicId: '14.3',
     learningObjective: `Understand how QNLP techniques can be applied to question answering systems, including quantum encoding of questions and context passages.`,
     nextPrep: `Review attention mechanisms from classical QA systems (BERT, BiDAF) and the concept of quantum kernel methods.`,
-    dependencyGraph: `flowchart LR
-      A[14.2 Fake News Detection] --> B[14.3 Question Answering Systems]
-      B --> C[14.4 Healthcare Text Analytics]
-      B --> D[Reading Comprehension]
-      B --> E[Knowledge Base QA]
-      B --> F[Quantum Attention]
-      style B fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `Imagine a student who, when asked a question, can read all the books in the library simultaneously to find the answer. This is the promise of quantum question answering — processing the question and all candidate answers in superposition to find the correct match in a single coherent computation. Classical QA systems use attention mechanisms to compare questions with context passages one token at a time. A quantum QA system could encode the entire question-context pair into a quantum state and measure the answer directly — potentially reducing the quadratic complexity of classical attention to something far more efficient.`,
       questions: [
@@ -645,20 +597,6 @@ export const m14Content: Record<string, TopicContent> = {
         `Error analysis view categorises mistakes by question type, length, and difficulty`,
       ],
       completionMessage: `You have built and evaluated quantum and classical question answering systems!`,
-      dataFlow: `flowchart LR
-        A[Question] --> B[Question Encoding]
-        C[Context Passage] --> D[Context Encoding]
-        B --> E[Joint Quantum State]
-        D --> E
-        E --> F[VQC Processing]
-        F --> G[Measurement]
-        G --> H{Answer Type}
-        H --> I[Span Start: Qubit 0-3]
-        H --> J[Span End: Qubit 4-7]
-        H --> K[Yes/No: Qubit 0]
-        I --> L[Final Answer]
-        J --> L
-        K --> L`,
     },
     insights: {
       advantages: [
@@ -689,13 +627,6 @@ export const m14Content: Record<string, TopicContent> = {
     topicId: '14.4',
     learningObjective: `Understand how QNLP can be applied to healthcare text analytics, including clinical note classification, medical literature mining, and patient outcome prediction.`,
     nextPrep: `Review the medical NLP landscape and understand privacy considerations (HIPAA) for healthcare data.`,
-    dependencyGraph: `flowchart LR
-      A[14.3 Question Answering] --> B[14.4 Healthcare Text Analytics]
-      B --> C[14.5 Legal Document Analysis]
-      B --> D[Clinical NLP]
-      B --> E[Medical Literature]
-      B --> F[Patient Outcome]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `A hospital generates terabytes of clinical notes daily — doctor's observations, lab reports, discharge summaries, radiology findings. Hidden in these texts are early warning signs of patient deterioration, drug interactions, and treatment effectiveness signals. But the volume is overwhelming, and the language is specialised, abbreviated, and often ambiguous. A QNLP system could theoretically process these notes in superposition, detecting patterns across multiple patients simultaneously — identifying that patients with a specific combination of symptoms and lab values tend to respond poorly to a particular treatment. This is the promise of quantum healthcare analytics: finding the needle of life-saving insight in the haystack of clinical text.`,
       questions: [
@@ -875,19 +806,6 @@ export const m14Content: Record<string, TopicContent> = {
         `Privacy-accuracy curve visualises the trade-off across the full epsilon range`,
       ],
       completionMessage: `You have built a privacy-preserving QNLP healthcare analytics system!`,
-      dataFlow: `flowchart TD
-        A[Clinical Notes] --> B[Note Encoding]
-        C[Vital Signs] --> D[Vitals Encoding]
-        B --> E[Joint Quantum State]
-        D --> E
-        E --> F[VQC Processing]
-        F --> G[Measurement]
-        G --> H[Readmission Risk]
-        H --> I{Differential Privacy}
-        I --> J[Clamp Gradients]
-        J --> K[Add Noise]
-        K --> L[Update Parameters]
-        L --> F`,
     },
     insights: {
       advantages: [
@@ -918,13 +836,6 @@ export const m14Content: Record<string, TopicContent> = {
     topicId: '14.5',
     learningObjective: `Understand how QNLP can be applied to legal document analysis, including contract review, case law search, and regulatory compliance monitoring.`,
     nextPrep: `Review the structure of legal documents and common NLP tasks in the legal domain.`,
-    dependencyGraph: `flowchart LR
-      A[14.4 Healthcare Analytics] --> B[14.5 Legal Document Analysis]
-      B --> C[14.6 Multilingual Processing]
-      B --> D[Contract Review]
-      B --> E[Case Law Search]
-      B --> F[Compliance Monitoring]
-      style B fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `A law firm handles 50,000 contracts per year. Each contract is hundreds of pages of dense legal language, and every clause carries potential financial or legal risk. Currently, junior lawyers spend thousands of hours manually reviewing contracts for problematic clauses, inconsistencies, and regulatory issues. A QNLP legal document analysis system could process these documents in quantum superposition, flagging risky clauses, detecting deviations from standard terms, and ensuring regulatory compliance — all while maintaining the precision that legal applications demand. The legal domain is one where accuracy is paramount (a single missed clause can cost millions), and the complexity of legal language makes it a promising target for quantum-enhanced NLP.`,
       questions: [
@@ -1102,19 +1013,6 @@ export const m14Content: Record<string, TopicContent> = {
         `Review report summarises all findings with risk scores and recommended actions`,
       ],
       completionMessage: `You have built and operated a QNLP legal document analysis system!`,
-      dataFlow: `flowchart LR
-        A[Legal Document] --> B[Document Parser]
-        B --> C[Clause Segmentation]
-        C --> D[Clause Encoding]
-        D --> E[Quantum Clause Classifier]
-        D --> F[Risk Factor Detector]
-        D --> G[Clause Similarity]
-        E --> H[Clause Type Labels]
-        F --> I[Risk Scores by Factor]
-        G --> J[Preferred Terms Match]
-        H --> K[Contract Review Report]
-        I --> K
-        J --> K`,
     },
     insights: {
       advantages: [
@@ -1145,13 +1043,6 @@ export const m14Content: Record<string, TopicContent> = {
     topicId: '14.6',
     learningObjective: `Understand how QNLP approaches can be applied to multilingual language processing, including cross-lingual transfer learning and quantum multilingual embeddings.`,
     nextPrep: `Review multilingual NLP concepts (cross-lingual embeddings, machine translation) and revisit Module 6 on word vectors.`,
-    dependencyGraph: `flowchart LR
-      A[14.5 Legal Analysis] --> B[14.6 Multilingual Processing]
-      B --> C[14.7 Conversational AI]
-      B --> D[Cross-lingual Transfer]
-      B --> E[Multilingual Embeddings]
-      B --> F[Machine Translation]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `The United Nations produces documents in six official languages. A statement made in Arabic must have equivalent meaning in English, French, Spanish, Russian, and Chinese — but direct translation fails to capture cultural nuances, idioms, and context-specific meanings. A QNLP multilingual system could theoretically process text in multiple languages simultaneously in superposition, identifying the common semantic structure beneath the surface-level linguistic differences. This is the vision of quantum multilingual NLP: capturing universal linguistic structures that transcend individual languages, using the high-dimensional quantum state space as a universal language representation.`,
       questions: [
@@ -1330,19 +1221,6 @@ export const m14Content: Record<string, TopicContent> = {
         `Analysis view shows embedding alignment quality per language pair with t-SNE visualisation`,
       ],
       completionMessage: `You have built and evaluated a cross-lingual QNLP system with zero-shot transfer!`,
-      dataFlow: `flowchart LR
-        A[English Training Data] --> B[Language-Agnostic Encoder]
-        B --> C[Quantum Sentiment VQC]
-        C --> D[Trained Model]
-        D --> E[English Evaluation]
-        D --> F[French Zero-shot]
-        D --> G[Hindi Zero-shot]
-        D --> H[Swahili Zero-shot]
-        E --> I[Cross-lingual Comparison]
-        F --> I
-        G --> I
-        H --> I
-        I --> J[Transfer Quality Report]`,
     },
     insights: {
       advantages: [
@@ -1373,13 +1251,6 @@ export const m14Content: Record<string, TopicContent> = {
     topicId: '14.7',
     learningObjective: `Understand how QNLP techniques can be applied to conversational AI and chatbots, including quantum-enhanced dialogue state tracking, response generation, and intent classification.`,
     nextPrep: `Review dialogue systems concepts (intent classification, slot filling, dialogue management) from classical conversational AI.`,
-    dependencyGraph: `flowchart LR
-      A[14.6 Multilingual Processing] --> B[14.7 Conversational AI & Chatbots]
-      B --> C[Intent Classification]
-      B --> D[Dialogue State Tracking]
-      B --> E[Response Generation]
-      B --> F[Lab: Build a QNLP Chatbot]
-      style B fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `You are designing a customer service chatbot for a bank. It must understand thousands of possible customer intents — check balance, report fraud, open account, dispute charge — and track the conversation state across multiple turns. Each turn, the chatbot must remember what the customer said before, what has been resolved, and what still needs attention. This is dialogue state tracking, and it is notoriously hard because the state space grows exponentially with the number of possible slots and values. A QNLP chatbot could theoretically maintain the dialogue state in superposition, exploring all possible interpretations of the conversation simultaneously before collapsing to the most likely one when a response is needed. This lab is your opportunity to build one.`,
       questions: [
@@ -1559,20 +1430,6 @@ export const m14Content: Record<string, TopicContent> = {
         `Evaluation dashboard shows per-turn and overall success metrics across test scenarios`,
       ],
       completionMessage: `Congratulations! You have built a complete QNLP chatbot with quantum dialogue state tracking!`,
-      dataFlow: `flowchart TD
-        A[User Utterance] --> B[Intent Classifier]
-        A --> C[Slot Filler]
-        B --> D[Intent Label]
-        C --> E[Slot-Value Pairs]
-        D --> F[Dialogue State Update VQC]
-        E --> F
-        G[Previous State |ψ_{t-1}⟩] --> F
-        F --> H[New State |ψ_t⟩]
-        H --> I[Action Selection via Fidelity]
-        I --> J[Response Template]
-        J --> K[System Response]
-        K --> L[Display to User]
-        L --> A`,
     },
     insights: {
       advantages: [

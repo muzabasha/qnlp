@@ -5,19 +5,6 @@ export const m18Content: Record<string, TopicContent> = {
     topicId: `18.1`,
     learningObjective: `Synthesise and consolidate the key concepts from the entire QNLP workshop, mapping how each module connects to form a complete understanding of the field.`,
     nextPrep: `Review your module notes and identify the top 3 concepts you found most significant or surprising.`,
-    dependencyGraph: `flowchart TD
-      A[Module 1-6: Foundations] --> B[Module 7-9: Quantum ML]
-      B --> C[Module 10-12: Hybrid Models]
-      C --> D[Module 13-14: Advanced Topics]
-      D --> E[Module 15-16: Applications]
-      E --> F[18.1 Recap]
-      F --> G[18.2 Reflections]
-      G --> H[18.3 Assessment]
-      H --> I[18.4 Future Pathways]
-      style F fill:#f39c12,color:#fff
-      style G fill:#3498db,color:#fff
-      style H fill:#e74c3c,color:#fff
-      style I fill:#2ecc71,color:#fff`,
     storytelling: {
       story: `Imagine you have just climbed a mountain. Standing at the summit, you look back at the path you took — the steep sections where you struggled (quantum gates), the plateaus where you caught your breath (classical foundations), the stunning viewpoints that made it all worthwhile (aha moments of understanding). From this vantage point, you can see how each switchback connected to the next, how the terrain you covered built the skills you needed for the sections ahead. This recap is that summit moment. You are not learning new material; you are seeing how everything you already learned fits together into a coherent landscape. The mountain of QNLP knowledge is no longer a confusing tangle of paths — it is a structured journey with a clear route from foundations to frontiers.`,
       questions: [
@@ -174,17 +161,6 @@ export const m18Content: Record<string, TopicContent> = {
         `Learning pathway generator creates a custom study plan based on your knowledge gaps`,
       ],
       completionMessage: `You have synthesised the entire QNLP workshop into a coherent knowledge structure!`,
-      dataFlow: `flowchart TD
-        A[Knowledge Graph] --> B[Module Nodes]
-        A --> C[Concept Nodes]
-        A --> D[Relationship Edges]
-        B --> E[Module Explorer]
-        C --> F[Concept Cards]
-        D --> G[Connection Map]
-        F --> H[Mastery Quiz]
-        H --> I[Gap Analysis]
-        I --> J[Personalised Pathway]
-        J --> K[Further Study Plan]`,
     },
     insights: {
       advantages: [
@@ -214,13 +190,6 @@ export const m18Content: Record<string, TopicContent> = {
     topicId: `18.2`,
     learningObjective: `Reflect on personal learning journey, share insights with peers, and consolidate understanding through collaborative discussion and peer feedback.`,
     nextPrep: `Prepare a 2-minute reflection on your workshop experience: what you learned, what surprised you, and what you will do next.`,
-    dependencyGraph: `flowchart LR
-      A[18.1 Recap] --> B[18.2 Reflections]
-      B --> C[Share Insights]
-      B --> D[Peer Feedback]
-      B --> E[Learning Journal]
-      B --> F[18.3 Assessment]
-      style B fill:#3498db,color:#fff`,
     storytelling: {
       story: `The most valuable part of any journey is not the destination but the person you become along the way. Before this workshop, you likely knew that quantum computing existed and that NLP was transforming technology. Now you understand not just what these fields are, but how they connect at a fundamental level — through composition, through category theory, through the elegant mathematics of meaning. Take a moment to recognise how far you have come. Concepts that seemed impenetrable on Day 1 — superposition, entanglement, pregroup grammars, VQCs — are now part of your working vocabulary. This reflection is not about testing what you remember. It is about owning what you have learned, sharing your perspective with others, and letting the collective insight of the group deepen everyones understanding.`,
       questions: [
@@ -377,18 +346,6 @@ export const m18Content: Record<string, TopicContent> = {
         `Portfolio can be exported as PDF or shared as a web link`,
       ],
       completionMessage: `You have transformed your workshop experience into lasting knowledge and a clear path forward!`,
-      dataFlow: `flowchart TD
-        A[Learning Journal] --> B[Activity Log]
-        A --> C[Confidence Tracker]
-        A --> D[Quiz Results]
-        B --> E[Reflection Writer]
-        C --> E
-        E --> F[Share with Group]
-        F --> G[Peer Comments]
-        G --> H[Refine Understanding]
-        H --> I[Knowledge Portfolio]
-        I --> J[Export / Share]
-        J --> K[Post-Workshop Reference]`,
     },
     insights: {
       advantages: [
@@ -418,15 +375,6 @@ export const m18Content: Record<string, TopicContent> = {
     topicId: `18.3`,
     learningObjective: `Demonstrate comprehensive understanding of QNLP concepts through a structured post-assessment covering theoretical foundations, practical implementation, and application scenarios.`,
     nextPrep: `Ensure you have reviewed your notes from all modules before beginning the assessment.`,
-    dependencyGraph: `flowchart LR
-      A[18.1 Recap] --> B[18.2 Reflections] --> C[18.3 Assessment]
-      C --> D[Section A: Fundamentals]
-      C --> E[Section B: Quantum ML]
-      C --> F[Section C: QNLP Core]
-      C --> G[Section D: Application]
-      C --> H[Section E: Synthesis]
-      H --> I[18.4 Future Pathways]
-      style C fill:#e74c3c,color:#fff`,
     storytelling: {
       story: `This is not a test. Think of it as a flight simulator for your QNLP knowledge. Pilots do not take tests to prove they can fly — they use simulators to practise, to make mistakes safely, and to build the muscle memory and decision-making skills that keep planes in the air. This assessment gives you the same opportunity: a safe space to apply what you have learned, to discover what you truly understand, and to identify where you need more practice. The questions are designed not to trick you, but to make you think — to connect concepts across modules, to apply principles to new situations, and to synthesise ideas into coherent understanding. Every question you answer, even the ones you get wrong, moves you closer to mastery. The only failure is not trying.`,
       questions: [
@@ -722,19 +670,6 @@ export const m18Content: Record<string, TopicContent> = {
         `Assessment report includes: section scores, percentile rank, concept-wise strengths/weaknesses, and curated study resources for weak areas`,
       ],
       completionMessage: `Assessment complete! You have demonstrated your QNLP knowledge and received a personalised roadmap for continued learning.`,
-      dataFlow: `flowchart TD
-        A[Start Assessment] --> B[Section A: Fundamentals]
-        B --> C[Immediate Feedback]
-        C --> D[Section B: Quantum ML]
-        D --> E[Immediate Feedback]
-        E --> F[Section C: QNLP Core]
-        F --> G[Immediate Feedback]
-        G --> H[Section D: Application]
-        H --> I[Immediate Feedback]
-        I --> J[Section E: Synthesis]
-        J --> K[Immediate Feedback]
-        K --> L[Assessment Report]
-        L --> M[Personalised Study Plan]`,
     },
     insights: {
       advantages: [
@@ -764,18 +699,6 @@ export const m18Content: Record<string, TopicContent> = {
     topicId: `18.4`,
     learningObjective: `Create a personalised post-workshop learning and career pathway that outlines continued growth in QNLP through structured study, community participation, and practical projects.`,
     nextPrep: `Review your assessment results and reflection journal to inform your pathway planning.`,
-    dependencyGraph: `flowchart TD
-      A[18.3 Assessment] --> B[18.4 Future Pathways]
-      B --> C[Learning Pathways]
-      B --> D[Career Tracks]
-      B --> E[Project Ideas]
-      B --> F[Community Join]
-      B --> G[Long-term Goals]
-      C --> H[30-Day Plan]
-      C --> I[6-Month Plan]
-      C --> J[12-Month Plan]
-      H --> K[Post-Workshop Success]
-      style B fill:#2ecc71,color:#fff`,
     storytelling: {
       story: `A workshop is not a destination — it is a launching pad. The real learning starts now, when you apply what you have learned to your own projects, questions, and goals. Think of this workshop as a map of the QNLP landscape. You now know the major terrain features (theoretical foundations, practical tools, research directions), the settlements (communities, conferences, labs), and the routes between them. But a map is not the journey. Your journey will be unique — shaped by your interests, your resources, your constraints, and your vision. Some of you will pursue academic research, pushing the theoretical boundaries of DisCoCat models. Others will build applications, using QNLP tools to solve real problems. Some will educate, creating the next generation of QNLP learning resources. All of these paths are valuable. The only wrong path is the one not taken.`,
       questions: [
@@ -932,22 +855,6 @@ export const m18Content: Record<string, TopicContent> = {
         `Exported plan includes: pathway description, weekly schedule, OKRs, project portfolio, community plan, and career milestones`,
       ],
       completionMessage: `You have a complete, personalised post-workshop plan that will guide your QNLP journey for the next 12 months!`,
-      dataFlow: `flowchart TD
-        A[Pathway Assessment] --> B[Recommended Blend]
-        B --> C[Pathway Visualiser]
-        C --> D[Weekly Schedule]
-        A --> E[Goal Setting]
-        E --> F[30/90/365 Day OKRs]
-        A --> G[Project Portfolio]
-        G --> H[3 Selected Projects]
-        H --> I[Project Timelines]
-        A --> J[Community Plan]
-        J --> K[Events & Contributions]
-        D --> L[Integrated Plan]
-        F --> L
-        I --> L
-        K --> L
-        L --> M[Export PDF / Calendar]`,
     },
     insights: {
       advantages: [

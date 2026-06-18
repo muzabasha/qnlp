@@ -5,14 +5,6 @@ export const m7Content: Record<string, TopicContent> = {
     topicId: '7.1',
     learningObjective: `Understand the fundamental concept of Quantum Natural Language Processing and how it differs from classical approaches to language understanding.`,
     nextPrep: `Review the encoding techniques from Module 6 and prepare to connect them to the broader QNLP vision presented in this topic.`,
-    dependencyGraph: `flowchart LR
-      A[M6: Language to Quantum] --> B[7.1 What is QNLP?]
-      B --> C[7.2 Evolution of QNLP]
-      C --> D[7.3 Classical vs Quantum NLP]
-      D --> E[7.4 QNLP Pipeline]
-      E --> F[7.5 Applications]
-      F --> G[7.6 Research State]
-      G --> H[M8: Linguistic Foundations]`,
     storytelling: {
       story: `Imagine a translator who has spent decades learning languages the old way — memorising dictionaries, studying grammar rules by rote, and translating word by word. One day, she discovers a mysterious amulet that lets her see the meaning of a sentence as a shimmering geometric shape in the air. She realises that every sentence has a hidden shape — a diagram of meaning — and that languages are just different ways of describing the same shapes. This is the revelation at the heart of QNLP: meaning has a mathematical structure that quantum computers can manipulate natively.`,
       questions: [
@@ -204,16 +196,6 @@ export const m7Content: Record<string, TopicContent> = {
         `A side-by-side comparison with a Transformer's attention pattern highlights the structural differences`,
       ],
       completionMessage: `You have grasped the foundational idea of QNLP — meaning as a quantum-compatible mathematical structure!`,
-      dataFlow: `flowchart LR
-        A[Input Sentence] --> B[Parse Tree]
-        B --> C[Grammatical Types]
-        C --> D[Tensor Network]
-        D --> E[Quantum Circuit]
-        E --> F[Computation]
-        F --> G[Sentence Meaning]
-        B --> H[Classical Neural Net]
-        H --> I[Learned Representation]
-        G --> J[Comparison]`,
     },
     insights: {
       advantages: [
@@ -243,9 +225,6 @@ export const m7Content: Record<string, TopicContent> = {
     topicId: '7.2',
     learningObjective: `Trace the historical evolution of QNLP from categorical quantum mechanics through DisCoCat to modern quantum NLP experiments.`,
     nextPrep: `Familiarise yourself with the concept of compact closed categories before the session — a short Wikipedia read will suffice.`,
-    dependencyGraph: `flowchart LR
-      A[7.1 What is QNLP?] --> B[7.2 Evolution of QNLP]
-      B --> C[7.3 Classical vs Quantum NLP]`,
     storytelling: {
       story: `Imagine the discovery of a new continent. First, a few explorers catch glimpses of land from their ships — these are the early theorists who first noticed that category theory might connect language and quantum mechanics. Then, daring adventurers land on the shore and map the coastline — these are the researchers who developed the DisCoCat framework. Today, we are building the first settlements, running small experiments on quantum simulators. You are not reading about this exploration in a history book — you are part of the expedition. This module tells the story of how we got here and where we are heading.`,
       questions: [
@@ -436,16 +415,6 @@ export const m7Content: Record<string, TopicContent> = {
         `The predictions section allows students to add their own milestones with justifications, which are saved locally`,
       ],
       completionMessage: `You have traced the complete evolution of QNLP from category theory to quantum circuits!`,
-      dataFlow: `flowchart LR
-        A[2004: Pregroups] --> B[2008: DisCoCat]
-        B --> C[2010: Tensor Meanings]
-        C --> D[2016: First Quantum Expt]
-        D --> E[2020: Lambeq]
-        E --> F[2023: Quantum Advantage]
-        F --> G[2025+: Predictions]
-        B --> H[Category Theory]
-        H --> I[Quantum Circuits]
-        I --> D`,
     },
     insights: {
       advantages: [
@@ -475,10 +444,6 @@ export const m7Content: Record<string, TopicContent> = {
     topicId: '7.3',
     learningObjective: `Compare and contrast classical NLP approaches with quantum NLP approaches across multiple dimensions including representation, computation, and scalability.`,
     nextPrep: `Review the key limitations of Transformers (quadratic attention, lack of compositional generalisation) from Module 3 and Module 4.`,
-    dependencyGraph: `flowchart LR
-      A[7.1 What is QNLP?] --> B[7.2 Evolution]
-      B --> C[7.3 Classical vs Quantum NLP]
-      C --> D[7.4 QNLP Pipeline]`,
     storytelling: {
       story: `Imagine two architects asked to build a cathedral. The classical architect brings millions of identical bricks and builds by stacking them one by one — sturdy, reliable, but requiring enormous material and labour. The quantum architect brings a set of interlocking geometric blocks that each encode complex shapes — fewer blocks are needed, but they require precise alignment and specialised knowledge to assemble. Both can build cathedrals, but their approaches differ fundamentally in materials, methods, and what kinds of cathedrals they can build. Classical NLP is the brick-by-brick approach (scalable, proven, but hitting limits). QNLP is the geometric-block approach (elegant, potentially powerful, but not yet ready for large-scale construction).`,
       questions: [
@@ -667,16 +632,6 @@ export const m7Content: Record<string, TopicContent> = {
         `The hybrid tab lets you mix classical embedding with quantum composition and see the resulting trade-offs`,
       ],
       completionMessage: `You have completed a systematic comparison of classical and quantum NLP paradigms!`,
-      dataFlow: `flowchart LR
-        A[Input Text] --> B{Paradigm}
-        B --> C[Classical Pipeline]
-        B --> D[Quantum Pipeline]
-        C --> E[Embed → Attend → Classify]
-        D --> F[Encode → Circuit → Measure]
-        E --> G[Metrics Dashboard]
-        F --> G
-        G --> H[Comparison View]
-        H --> I[Hybrid Configurator]`,
     },
     insights: {
       advantages: [
@@ -705,10 +660,6 @@ export const m7Content: Record<string, TopicContent> = {
     topicId: '7.4',
     learningObjective: `Identify and describe each component of a complete QNLP pipeline, from text input to quantum output.`,
     nextPrep: `Review the lambeq library documentation online — familiarise yourself with its pipeline components before the session.`,
-    dependencyGraph: `flowchart LR
-      A[7.3 Classical vs Quantum] --> B[7.4 QNLP Pipeline]
-      B --> C[7.5 Applications]
-      B --> D[M8: Linguistic Foundations]`,
     storytelling: {
       story: `Think of a QNLP pipeline like a sophisticated chocolate factory. Raw cocoa beans (raw text) enter one end. They go through cleaning (preprocessing), roasting (parsing), grinding (encoding), conching (quantum processing), and finally tempering and moulding (measurement and interpretation). At each stage, the cocoa is transformed — from bitter bean to silky chocolate. A QNLP pipeline transforms raw language into quantum-computed meaning through a series of carefully designed stages. Unlike a classical NLP pipeline where each stage is a learned neural network, each stage in a QNLP pipeline has a precise mathematical or grammatical justification.`,
       questions: [
@@ -898,19 +849,6 @@ export const m7Content: Record<string, TopicContent> = {
         `The final circuit panel shows the executable quantum circuit with gate counts, depth, and estimated fidelity — click "Run" to execute on a simulator and see measurement results`,
       ],
       completionMessage: `You have successfully navigated a complete QNLP pipeline from text to quantum circuit!`,
-      dataFlow: `flowchart LR
-        A[Raw Text] --> B[Preprocessing]
-        B --> C[Tokenised Text]
-        C --> D[Parsing]
-        D --> E[String Diagram]
-        E --> F[Word Encoding]
-        F --> G[Encoded States]
-        G --> H[Composition / Ansatz]
-        H --> I[Quantum Circuit]
-        I --> J[Execution]
-        J --> K[Measurement Results]
-        K --> L[Post-Processing]
-        L --> M[Task Output]`,
     },
     insights: {
       advantages: [
@@ -940,9 +878,6 @@ export const m7Content: Record<string, TopicContent> = {
     topicId: '7.5',
     learningObjective: `Identify real-world applications of QNLP across multiple domains and evaluate their feasibility on current and near-term quantum hardware.`,
     nextPrep: `Think about what NLP applications you use daily and consider how they might benefit from or be transformed by quantum approaches.`,
-    dependencyGraph: `flowchart LR
-      A[7.4 QNLP Pipeline] --> B[7.5 Applications of QNLP]
-      B --> C[7.6 Current Research State]`,
     storytelling: {
       story: `Imagine a doctor reading a patient's medical history — hundreds of pages of notes, test results, and specialist reports. Hidden in this text is a pattern that no human could spot: a specific combination of symptoms, medications, and genetic markers that predicts a rare adverse drug reaction. A QNLP system, processing the grammatical structure of each sentence as a quantum circuit, could in principle detect this pattern by computing the entangled meaning of the entire document. This is not science fiction — it is the kind of application that QNLP researchers are working toward, where the compositional structure of language carries information that statistical pattern-matching alone cannot extract.`,
       questions: [
@@ -1132,16 +1067,6 @@ export const m7Content: Record<string, TopicContent> = {
         `The comparison chart shows accuracy vs qubit count, allowing you to find the minimum viable quantum resources for each application`,
       ],
       completionMessage: `You have surveyed the landscape of QNLP applications and assessed their feasibility!`,
-      dataFlow: `flowchart LR
-        A[Application Domain] --> B[Task Configuration]
-        B --> C[Dataset Loader]
-        C --> D[QNLP Pipeline]
-        D --> E[Quantum Execution]
-        E --> F[Results]
-        F --> G[Feasibility Analysis]
-        G --> H[Hardware Comparison]
-        B --> I[Classical Baseline]
-        I --> J[Comparison Dashboard]`,
     },
     insights: {
       advantages: [
@@ -1171,9 +1096,6 @@ export const m7Content: Record<string, TopicContent> = {
     topicId: '7.6',
     learningObjective: `Understand the current state of QNLP research, including key research groups, recent results, open problems, and future directions.`,
     nextPrep: `Search for "Quantum Natural Language Processing 2024" and read one recent research paper or blog post before the session.`,
-    dependencyGraph: `flowchart LR
-      A[7.5 Applications] --> B[7.6 Current Research State]
-      B --> C[M8: Linguistic Foundations]`,
     storytelling: {
       story: `Imagine standing on a beach at dawn, watching the first explorers set sail toward a new continent. Some carry detailed maps of the coastline (theoretical frameworks), others bring advanced instruments (quantum hardware), and a few carry strange devices that no one fully understands yet (quantum algorithms). The continent on the horizon is QNLP — visible, tantalising, but not yet reached. Some explorers will turn back, convinced the journey is too dangerous. Others will press on, charting the waters one experiment at a time. You are watching from the beach, deciding whether to join the next expedition. This topic gives you the chart of who is sailing, what they have found so far, and where the uncharted waters lie.`,
       questions: [
@@ -1364,16 +1286,6 @@ export const m7Content: Record<string, TopicContent> = {
         `The personal roadmap tool asks about your background and interests, then generates a suggested reading and project plan for entering QNLP research`,
       ],
       completionMessage: `You have surveyed the complete QNLP research landscape — you are ready to contribute to the next wave of discoveries!`,
-      dataFlow: `flowchart LR
-        A[Research Database] --> B[Landscape View]
-        B --> C[Group Profiles]
-        B --> D[Paper Explorer]
-        B --> E[Results Dashboard]
-        B --> F[Open Problems Board]
-        F --> G[Priority Voting]
-        A --> H[Personalisation Engine]
-        H --> I[Research Roadmap]
-        C --> I`,
     },
     insights: {
       advantages: [

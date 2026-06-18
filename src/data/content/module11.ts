@@ -5,15 +5,6 @@ export const m11Content: Record<string, TopicContent> = {
     topicId: '11.1',
     learningObjective: `Understand the fundamentals of text classification, its applications, and how quantum computing can enhance classification tasks.`,
     nextPrep: `Review basic NLP concepts from Module 2 and word embeddings from Module 6. Familiarity with vector representations will be essential.`,
-    dependencyGraph: `flowchart LR
-      A[M6: Word Vectors] --> B[11.1 Intro to Text Classification]
-      B --> C[11.2 Classical Approaches]
-      C --> D[11.3 Quantum Workflow]
-      D --> E[11.4 Data Preparation]
-      E --> F[11.5 Sentiment Model]
-      F --> G[11.6 Training & Validation]
-      G --> H[11.7 Sentiment Lab]
-      style B fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `You are the chief librarian of a massive digital library that receives 10,000 new documents every day. Each document needs to be sorted into categories: Science, History, Fiction, or Biography. Your assistant can read a document in one second but cannot tell which category it belongs to. You need to build an automatic sorting machine. This is text classification — one of the most fundamental and valuable tasks in NLP, used everywhere from spam filtering to medical diagnosis. Now imagine your sorting machine could use quantum phenomena to process all possible categories simultaneously.`,
       questions: [
@@ -178,15 +169,6 @@ export const m11Content: Record<string, TopicContent> = {
         `Comparison table showing precision, recall, and F1-score for both classifiers`,
       ],
       completionMessage: `You have successfully compared classical and quantum text classification approaches!`,
-      dataFlow: `flowchart LR
-        A[Raw Text] --> B[Preprocessing]
-        B --> C[Feature Extraction]
-        C --> D{Classifier}
-        D --> E[Classical SVM]
-        D --> F[Quantum Circuit]
-        E --> G[Predictions]
-        F --> G
-        G --> H[Evaluation]`,
     },
     insights: {
       advantages: [
@@ -215,13 +197,6 @@ export const m11Content: Record<string, TopicContent> = {
     topicId: '11.2',
     learningObjective: `Understand classical text classification approaches including Naive Bayes, SVMs, and neural networks, and identify their strengths and limitations.`,
     nextPrep: `Review probability basics (Bayes' theorem) and the concept of margin maximisation.`,
-    dependencyGraph: `flowchart LR
-      A[11.1 Text Classification] --> B[11.2 Classical Approaches]
-      B --> C[11.3 Quantum Workflow]
-      B --> D[Naive Bayes]
-      B --> E[SVM]
-      B --> F[Neural Networks]
-      style B fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `Imagine you are a detective trying to identify a suspect based on witness descriptions. One approach is to count how often each feature appears for different suspects (like Naive Bayes). Another is to find the clearest dividing line between suspects (like SVM). A third is to build a complex network of reasoning that learns from examples (like neural networks). Each approach works well in different situations. Understanding their strengths and weaknesses helps you choose the right tool — and more importantly, helps you understand why quantum approaches might eventually surpass them all.`,
       questions: [
@@ -384,16 +359,6 @@ export const m11Content: Record<string, TopicContent> = {
         `Side-by-side comparison table and confusion matrix for each classifier`,
       ],
       completionMessage: `You have thoroughly compared three classical text classification approaches!`,
-      dataFlow: `flowchart LR
-        A[20 Newsgroups] --> B[TF-IDF Features]
-        A --> C[Word Embeddings]
-        B --> D[Naive Bayes]
-        B --> E[SVM]
-        C --> F[Neural Net]
-        D --> G{Predictions}
-        E --> G
-        F --> G
-        G --> H[Evaluation Matrix]`,
     },
     insights: {
       advantages: [
@@ -423,13 +388,6 @@ export const m11Content: Record<string, TopicContent> = {
     topicId: '11.3',
     learningObjective: `Understand the complete quantum classification workflow from data encoding to measurement, and how it differs from the classical pipeline.`,
     nextPrep: `Revisit quantum circuit concepts from Module 5 and the concept of parameterised quantum circuits.`,
-    dependencyGraph: `flowchart LR
-      A[11.2 Classical Approaches] --> B[11.3 Quantum Workflow]
-      B --> C[11.4 Data Preparation]
-      B --> D[Feature Encoding]
-      B --> E[Quantum Circuit]
-      B --> F[Measurement]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `In a classical kitchen, a chef follows a recipe step by step: chop, mix, heat, serve. Each step is sequential and deterministic. In a quantum kitchen, the chef places all ingredients in a superposition of states — the soup is simultaneously hot and cold, sweet and savoury — until a measurement collapses it into a final dish. The quantum classification workflow follows this same pattern: encode data into superposition, evolve through parameterised gates, measure to extract a class label. Understanding this workflow is like learning a new cooking technique that could revolutionise your kitchen.`,
       questions: [
@@ -589,18 +547,6 @@ export const m11Content: Record<string, TopicContent> = {
         `The loss curve and decision boundary animation show the training progress`,
       ],
       completionMessage: `You have completed the full quantum classification workflow simulation!`,
-      dataFlow: `flowchart TD
-        A[Classical Data x] --> B[Encoding Circuit]
-        B --> C[Quantum State |ψ(x)⟩]
-        C --> D[Parameterised Circuit U(θ)]
-        D --> E[Evolved State |ψ(x,θ)⟩]
-        E --> F[Measurement]
-        F --> G[Class Probabilities P(c)]
-        G --> H{Loss Function}
-        H --> I[Classical Optimiser]
-        I --> J[Update θ]
-        J --> D
-        H --> K[Final Prediction]`,
     },
     insights: {
       advantages: [
@@ -630,13 +576,6 @@ export const m11Content: Record<string, TopicContent> = {
     topicId: '11.4',
     learningObjective: `Understand how to prepare classical text data for quantum classification, including tokenisation, embedding, and encoding into quantum states.`,
     nextPrep: `Review word embeddings from Module 6 and the concept of angle encoding.`,
-    dependencyGraph: `flowchart LR
-      A[11.3 Quantum Workflow] --> B[11.4 Data Preparation]
-      B --> C[Tokenisation]
-      B --> D[Embedding]
-      B --> E[Quantum Encoding]
-      E --> F[11.5 Sentiment Model]
-      style B fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `Imagine you are a translator who needs to convert a novel into a completely different language — not just a different human language, but the language of quantum mechanics. You cannot just pass the book to the quantum computer. You must first convert each word to numbers (embeddings), then convert those numbers to quantum state angles (encoding), and finally load those angles into qubits. This is the data preparation pipeline for QNLP. It is the crucial bridge between human language and quantum circuits.`,
       questions: [
@@ -797,14 +736,6 @@ export const m11Content: Record<string, TopicContent> = {
         `The final 2-qubit state is visualised as two Bloch spheres with joint probability bars`,
       ],
       completionMessage: `You have successfully converted text to a quantum-ready encoded state!`,
-      dataFlow: `flowchart LR
-        A[Raw Text] --> B[Tokenizer]
-        B --> C[Tokens]
-        C --> D[Embedding Model]
-        D --> E[Embedding Vector]
-        E --> F[Encoder Circuit]
-        F --> G[Quantum State |ψ⟩]
-        G --> H[Ready for Classification]`,
     },
     insights: {
       advantages: [
@@ -835,12 +766,6 @@ export const m11Content: Record<string, TopicContent> = {
     topicId: '11.5',
     learningObjective: `Build a complete quantum sentiment analysis model by combining encoding, parameterised circuits, and measurement into a working classifier.`,
     nextPrep: `Review the concept of binary classification and recall how softmax converts logits to probabilities.`,
-    dependencyGraph: `flowchart LR
-      A[11.3 Quantum Workflow] --> B[11.4 Data Preparation]
-      B --> C[11.5 Sentiment Model]
-      C --> D[11.6 Training & Validation]
-      D --> E[11.7 Sentiment Lab]
-      style C fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `You are building a lie detector for movie reviews. When someone says "This film was absolutely brilliant," your machine should detect positive sentiment. When they say "Waste of two hours," it should detect negative sentiment. But here is the twist: your lie detector is a quantum computer that judges all possible sentiments simultaneously before collapsing to a verdict. This is quantum sentiment analysis — and you are about to build it.`,
       questions: [
@@ -1002,16 +927,6 @@ export const m11Content: Record<string, TopicContent> = {
         `Test set evaluation shows confusion matrix, accuracy, and example predictions with confidence scores`,
       ],
       completionMessage: `Your quantum sentiment analysis model is trained and evaluated!`,
-      dataFlow: `flowchart TD
-        A[Movie Review Text] --> B[Preprocessing]
-        B --> C[Embedding]
-        C --> D[Angle Encoding]
-        D --> E[4-Qubit Quantum Circuit]
-        E --> F[Measure ⟨Z₁⟩]
-        F --> G{Sentiment Score}
-        G -->|> 0| H[Positive]
-        G -->|< 0| I[Negative]
-        G -->|≈ 0| J[Neutral]`,
     },
     insights: {
       advantages: [
@@ -1042,13 +957,6 @@ export const m11Content: Record<string, TopicContent> = {
     topicId: '11.6',
     learningObjective: `Understand the training and validation process for quantum classification models, including loss landscape challenges and evaluation metrics.`,
     nextPrep: `Review gradient-based optimisation and the concept of validation sets for hyperparameter tuning.`,
-    dependencyGraph: `flowchart LR
-      A[11.5 Sentiment Model] --> B[11.6 Training & Validation]
-      B --> C[Loss Landscape]
-      B --> D[Parameter Shift]
-      B --> E[Evaluation Metrics]
-      B --> F[11.7 Sentiment Lab]
-      style B fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `You have built a quantum sentiment engine — congratulations! But like a car that has just been assembled, it needs tuning before it can race. Training a quantum model is like teaching a musician to play a new instrument. At first, the notes are random and discordant. But through practice (iterations), feedback (loss function), and adjustment (parameter updates), the music becomes harmonious. Validation is the dress rehearsal — making sure the performance works for an audience that wasn't at the rehearsals.`,
       questions: [
@@ -1208,17 +1116,6 @@ export const m11Content: Record<string, TopicContent> = {
         `Dashboard shows: loss curve, accuracy curve, gradient heatmap, and parameter trajectory`,
       ],
       completionMessage: `Your quantum classifier has been successfully trained and validated!`,
-      dataFlow: `flowchart TD
-        A[Initialise θ] --> B[Encode Batch Data]
-        B --> C[Run Circuit]
-        C --> D[Compute Loss L(θ)]
-        D --> E[Parameter Shift: ∇L(θ)]
-        E --> F[Adam Optimiser]
-        F --> G[Update θ]
-        G --> B
-        D --> H[Validation Set]
-        H --> I[Compute Accuracy]
-        I --> J[Report Metrics]`,
     },
     insights: {
       advantages: [
@@ -1248,11 +1145,6 @@ export const m11Content: Record<string, TopicContent> = {
     topicId: '11.7',
     learningObjective: `Build, train, and evaluate a complete quantum sentiment classification model in a hands-on lab environment.`,
     nextPrep: `Ensure you understand all previous topics in Module 11. Have a quantum simulator environment ready.`,
-    dependencyGraph: `flowchart LR
-      A[11.5 Sentiment Model] --> B[11.6 Training & Validation]
-      B --> C[11.7 Sentiment Lab]
-      C --> D[M12: Hybrid Models]
-      style C fill:#e84393,color:#fff`,
     storytelling: {
       story: `The moment has arrived. Like a pilot who has completed all flight simulator training and finally takes the controls of a real aircraft, you are now going to build a real quantum sentiment classifier. This lab is not a demonstration or a thought experiment — you will write code, run circuits, and see actual results. Every line of code you write, every parameter you tune, every prediction your model makes is a step toward mastering practical quantum NLP.`,
       questions: [
@@ -1419,20 +1311,6 @@ export const m11Content: Record<string, TopicContent> = {
         `Evaluation: Confusion matrix, accuracy, precision, recall, F1, ROC curve`,
       ],
       completionMessage: `Congratulations! You have successfully built and trained a quantum sentiment classification model! You are now a QNLP practitioner.`,
-      dataFlow: `flowchart TD
-        A[Lab Setup] --> B[Load IMDB Dataset]
-        B --> C[Preprocess & Embed]
-        C --> D[Angle Encoding Circuit]
-        D --> E[Parameterised Circuit]
-        E --> F[Measurement]
-        F --> G[Loss Computation]
-        G --> H[Parameter Shift ∇L]
-        H --> I[Optimiser Update]
-        I --> E
-        G --> J[Converged?]
-        J -->|Yes| K[Test Set Evaluation]
-        K --> L[Results Dashboard]
-        L --> M[Compare Classical]`,
     },
     insights: {
       advantages: [

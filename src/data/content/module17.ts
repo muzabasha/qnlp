@@ -5,13 +5,6 @@ export const m17Content: Record<string, TopicContent> = {
     topicId: `17.1`,
     learningObjective: `Identify and evaluate key research papers and survey articles that define the current state and future directions of Quantum Natural Language Processing.`,
     nextPrep: `Review the foundational papers mentioned in earlier modules and prepare a reading list strategy for post-workshop study.`,
-    dependencyGraph: `flowchart LR
-      A[17.1 Research Papers] --> B[17.2 Tools & Libraries]
-      A --> C[17.3 Datasets]
-      A --> D[17.4 Communities]
-      D --> E[17.5 Publication]
-      D --> F[17.6 Funding]
-      style A fill:#1a5276,color:#fff`,
     storytelling: {
       story: `Imagine you have just finished an intensive masterclass with a world-renowned chef. You have learned techniques, recipes, and principles. But to become a great chef yourself, you need to study the cookbooks of the masters — the seminal papers, the survey articles that map the culinary landscape, and the latest research that pushes the boundaries. In QNLP, the research literature is your collection of master chef cookbooks. Some papers introduce fundamentally new ingredients (quantum encodings), others present novel techniques (variational circuits for language), and survey articles help you navigate the vast and rapidly evolving kitchen of ideas. This topic is your guide to building a personal research library.`,
       questions: [
@@ -170,16 +163,6 @@ export const m17Content: Record<string, TopicContent> = {
         `Reading list can be exported as BibTeX or markdown`,
       ],
       completionMessage: `You have built a personalised research roadmap and understand the QNLP literature landscape!`,
-      dataFlow: `flowchart TD
-        A[Paper Database] --> B[Network Visualiser]
-        B --> C[Citation Graph]
-        A --> D[Search & Filter]
-        D --> E[Paper Details]
-        E --> F[Add to Reading List]
-        F --> G[Export List]
-        C --> H[Influence Metrics]
-        H --> I[Trend Analysis]
-        I --> J[Research Landscape Summary]`,
     },
     insights: {
       advantages: [
@@ -209,16 +192,6 @@ export const m17Content: Record<string, TopicContent> = {
     topicId: `17.2`,
     learningObjective: `Evaluate and select appropriate open-source tools, libraries, and frameworks for building Quantum NLP applications.`,
     nextPrep: `Install the recommended QNLP development environment and verify it works with a simple quantum circuit.`,
-    dependencyGraph: `flowchart LR
-      A[17.1 Research Papers] --> B[17.2 Tools & Libraries]
-      B --> C[Qiskit]
-      B --> D[Pennylane]
-      B --> E[Lambeq]
-      B --> F[TensorFlow Quantum]
-      B --> G[Cirq]
-      B --> H[Development Environment]
-      H --> I[17.3 Datasets]
-      style B fill:#e67e22,color:#fff`,
     storytelling: {
       story: `A master carpenter does not build furniture with bare hands. They have a workshop filled with tools: saws for cutting, planes for smoothing, chisels for detail work, and clamps for holding pieces together. Each tool has a specific purpose, and the best carpenters know not just how to use each tool, but when to use which one. In QNLP, your software tools are your workshop. Qiskit is your power saw for building quantum circuits, PennyLane is your precision plane for optimisation, Lambeq is your specialised jig for linguistic structures, and TensorFlow Quantum is your workbench for integrating with classical ML. Knowing your tools — and choosing the right one for each job — is what separates a hobbyist from a professional.`,
       questions: [
@@ -371,19 +344,6 @@ export const m17Content: Record<string, TopicContent> = {
         `Configuration export creates a requirements.txt and setup script for your chosen stack`,
       ],
       completionMessage: `You have explored the QNLP tool ecosystem and can confidently select and configure the right tools for your projects!`,
-      dataFlow: `flowchart TD
-        A[Framework Selector] --> B{QNLP Task}
-        B --> C[Linguistic Parsing]
-        B --> D[Circuit Design]
-        B --> E[Hybrid Training]
-        B --> F[Hardware Execution]
-        C --> G[Lambeq Pipeline]
-        D --> H[Qiskit / Cirq]
-        E --> I[PennyLane + PyTorch]
-        F --> J[IBM / Google Hardware]
-        G --> H --> I --> J
-        K[Comparison Dashboard] --> L[Performance Metrics]
-        L --> M[Tool Recommendation]`,
     },
     insights: {
       advantages: [
@@ -415,15 +375,6 @@ export const m17Content: Record<string, TopicContent> = {
     topicId: `17.3`,
     learningObjective: `Identify, access, and prepare datasets suitable for Quantum Natural Language Processing research and experimentation.`,
     nextPrep: `Download one recommended QNLP dataset and explore its structure and statistics.`,
-    dependencyGraph: `flowchart LR
-      A[17.2 Tools] --> B[17.3 Datasets]
-      B --> C[Classical NLP Datasets]
-      B --> D[Quantum-Specific Benchmarks]
-      B --> E[Synthetic QNLP Data]
-      B --> F[Data Preprocessing]
-      F --> G[Encoding for Quantum]
-      G --> H[17.4 Communities]
-      style B fill:#27ae60,color:#fff`,
     storytelling: {
       story: `A chef can have the best knives, the most advanced oven, and a world-class kitchen — but without fresh, high-quality ingredients, the meal will be mediocre. In QNLP, datasets are your ingredients. The quality, variety, and preparation of your data determines what your quantum models can learn. Too small and your model will overfit. Too noisy and your quantum advantage will be drowned out. Poorly prepared and even the best quantum circuit will fail. Just as a chef must know their suppliers — which farm grows the best tomatoes, which fishmonger has the freshest catch — a QNLP researcher must know their data sources: which datasets are standard benchmarks, which are large enough for quantum experiments, and how to prepare data for the unique constraints of quantum hardware.`,
       questions: [
@@ -576,18 +527,6 @@ export const m17Content: Record<string, TopicContent> = {
         `Export formats: NumPy arrays, PyTorch tensors, TensorFlow datasets, or PennyLane-compatible format`,
       ],
       completionMessage: `You can now select, preprocess, and encode datasets for any QNLP experiment!`,
-      dataFlow: `flowchart TD
-        A[Dataset Catalog] --> B[Select Dataset]
-        B --> C[Explore Statistics]
-        C --> D[Configure Preprocessing]
-        D --> E[Tokenisation]
-        E --> F[Dimensionality Reduction]
-        F --> G[Encoding Selection]
-        G --> H{Feasibility Check}
-        H -->|Pass| I[Generate Quantum Data]
-        H -->|Fail| D
-        I --> J[Export]
-        J --> K[QNLP Experiment]`,
     },
     insights: {
       advantages: [
@@ -617,16 +556,6 @@ export const m17Content: Record<string, TopicContent> = {
     topicId: `17.4`,
     learningObjective: `Identify and participate in key research communities, forums, and events in the Quantum Natural Language Processing ecosystem.`,
     nextPrep: `Join the QNLP Discord server and introduce yourself in the introductions channel.`,
-    dependencyGraph: `flowchart LR
-      A[17.3 Datasets] --> B[17.4 Communities]
-      B --> C[QNLP Workshop]
-      B --> D[Discord & Slack]
-      B --> E[GitHub]
-      B --> F[Stack Exchange]
-      B --> G[Conferences]
-      B --> H[17.5 Publication]
-      H --> I[17.6 Funding]
-      style B fill:#8e44ad,color:#fff`,
     storytelling: {
       story: `A lone scientist in a basement laboratory making world-changing discoveries is a Hollywood myth. Real science happens in communities: at conference coffee breaks where ideas are born, in late-night Slack discussions that resolve bugs, in peer review that sharpens arguments, and in collaborative projects that achieve what no individual could. The QNLP community is small but passionate — spread across quantum computing, NLP, and AI conferences. The most successful researchers in this field are not necessarily the smartest individuals, but those who actively participate in the community. They ask questions on forums, present works-in-progress at workshops, review papers, and mentor newcomers. Your network is your net worth in research.`,
       questions: [
@@ -781,18 +710,6 @@ export const m17Content: Record<string, TopicContent> = {
         `Personalised guide suggests communities based on your interests, time zone, and experience level`,
       ],
       completionMessage: `You have a complete understanding of the QNLP community ecosystem and a plan for participation!`,
-      dataFlow: `flowchart TD
-        A[Community Explorer] --> B[Ecosystem Map]
-        B --> C[Platform Details]
-        C --> D[Join Community]
-        A --> E[Events Calendar]
-        E --> F[Conference Details]
-        F --> G[Submit Abstract]
-        A --> H[Researcher Network]
-        H --> I[Potential Collaborators]
-        I --> J[Reach Out]
-        A --> K[Personalised Guide]
-        K --> L[Participation Schedule]`,
     },
     insights: {
       advantages: [
@@ -823,15 +740,6 @@ export const m17Content: Record<string, TopicContent> = {
     topicId: `17.5`,
     learningObjective: `Identify publication venues, understand the submission and review process, and prepare research contributions for dissemination in QNLP.`,
     nextPrep: `Select one publication venue from the list and review its latest accepted papers to understand current standards.`,
-    dependencyGraph: `flowchart LR
-      A[17.4 Communities] --> B[17.5 Publication]
-      B --> C[Workshop Papers]
-      B --> D[Conference Papers]
-      B --> E[Journal Articles]
-      B --> F[Preprints]
-      B --> G[Peer Review]
-      G --> H[17.6 Funding]
-      style B fill:#c0392b,color:#fff`,
     storytelling: {
       story: `Publishing research is like sending a message in a bottle across an ocean of scientists. You spend months crafting the message, ensuring it is clear, correct, and significant. You seal it in a bottle (your paper format), choose the right ocean current (journal or conference), and wait. Sometimes the bottle reaches a distant shore quickly — your paper is accepted on first submission. More often, it drifts for a while, gets picked up, examined, and sometimes rejected with comments that make your next message stronger. The key is not to optimise for acceptance of a single paper, but to build a body of work that the community values. Every published paper, every preprint, every workshop presentation is a signal that you are a serious contributor to the field. Publication is not the end of research — it is the beginning of scientific conversation.`,
       questions: [
@@ -983,24 +891,6 @@ export const m17Content: Record<string, TopicContent> = {
         `Submission tracker monitors the status of all active submissions`,
       ],
       completionMessage: `You have a complete publication strategy and understand the full research dissemination lifecycle!`,
-      dataFlow: `flowchart TD
-        A[Contribution Input] --> B[Venue Recommender]
-        B --> C{Venue Type}
-        C --> D[Workshop]
-        C --> E[Conference]
-        C --> F[Journal]
-        D --> G[Submission Plan]
-        E --> G
-        F --> G
-        G --> H[arXiv Preprint]
-        H --> I[Submit to Venue]
-        I --> J[Review Process]
-        J --> K{Decision}
-        K -->|Accept| L[Camera Ready]
-        K -->|Revise| M[Address Comments]
-        M --> I
-        K -->|Reject| N[Resubmit Strategy]
-        N --> B`,
     },
     insights: {
       advantages: [
@@ -1031,15 +921,6 @@ export const m17Content: Record<string, TopicContent> = {
     topicId: `17.6`,
     learningObjective: `Identify and apply for funding opportunities in Quantum Natural Language Processing research, including grants, fellowships, and industrial partnerships.`,
     nextPrep: `Identify one funding opportunity relevant to your career stage and note its deadline.`,
-    dependencyGraph: `flowchart LR
-      A[17.5 Publication] --> B[17.6 Funding]
-      B --> C[Government Grants]
-      B --> D[Fellowships]
-      B --> E[Industrial Funding]
-      B --> F[Conference Travel Grants]
-      B --> G[Grant Writing]
-      B --> H[Career Pathways]
-      style B fill:#2ecc71,color:#fff`,
     storytelling: {
       story: `Every great expedition needs funding. When Shackleton set out to cross Antarctica, he spent years securing sponsors, writing proposals, and convincing wealthy patrons that his journey was worth supporting. Research is no different. The best ideas remain unrealised without funding for students, hardware access, travel, and computing time. The QNLP funding landscape has transformed dramatically — from a handful of small grants in 2020 to national quantum strategies in 2026 that allocate billions for quantum technologies. The key is knowing where the money is, how to frame your research to match funder priorities, and how to write proposals that stand out in a competitive landscape. Funding is not just about money — it is validation that the community believes your research direction is worth investing in.`,
       questions: [
@@ -1193,22 +1074,6 @@ export const m17Content: Record<string, TopicContent> = {
         `Calendar syncs with Google Calendar and Outlook for deadline reminders`,
       ],
       completionMessage: `You have a complete funding strategy and understand how to secure resources for your QNLP research programme!`,
-      dataFlow: `flowchart TD
-        A[Researcher Profile] --> B[Funding Matcher]
-        B --> C[Matched Opportunities]
-        C --> D[Detailed View]
-        D --> E[Apply Now?]
-        E -->|Yes| F[Proposal Generator]
-        F --> G[Section Drafts]
-        G --> H[Review & Polish]
-        H --> I[Submit]
-        E -->|Not Yet| J[Add to Calendar]
-        J --> K[Deadline Reminder]
-        K --> D
-        I --> L[Funding Tracker]
-        L --> M{Decision}
-        M -->|Awarded| N[Project Start]
-        M -->|Rejected| O[Revise & Resubmit]`,
     },
     insights: {
       advantages: [

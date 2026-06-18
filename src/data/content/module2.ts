@@ -36,12 +36,6 @@ export const m2Content: Record<string, TopicContent> = {
     topicId: '2.1',
     learningObjective: 'Define Natural Language Processing and understand its scope in modern AI systems.',
     nextPrep: 'Think about how you personally understand language and what makes it challenging for computers.',
-    dependencyGraph: `flowchart LR
-      A[1.4 Pre-Assessment] --> B[2.1 What is NLP?]
-      B --> C[2.2 Human Language Understanding]
-      C --> D[2.3 Machine Language Processing]
-      D --> E[2.4 NLP Applications]
-      E --> F[2.5 Text Classification Lab]`,
     storytelling: {
       story: 'Imagine teaching a toddler to understand language. You point to a cat and say "cat." You show them a picture and say "happy." Slowly, they connect sounds to meanings. Now imagine teaching a computer the same thing — except the computer has never seen a cat, never felt happiness, and has no senses at all. It only sees numbers: 0s and 1s. How do you explain the warmth of a sunny day or the irony in "Oh, fantastic, another flat tire!" to something that only understands binary? That is the challenge of Natural Language Processing — bridging the gap between human meaning and machine computation.',
       questions: [
@@ -154,12 +148,6 @@ export const m2Content: Record<string, TopicContent> = {
       steps: ['Enter sample text', 'Run basic NLP analysis', 'View parts of speech', 'See named entities', 'Explore language detection'],
       stepDetails: ['Type or paste any sentence', 'Click "Analyze" to process', 'Colored highlights show nouns, verbs, adjectives', 'People, places, organizations are detected', 'Language and sentiment are displayed'],
       completionMessage: 'You have experienced NLP in action! This is how machines start to "read" text.',
-      dataFlow: `flowchart LR
-        A[Raw Text Input] --> B[Tokenization]
-        B --> C[POS Tagging]
-        C --> D[NER Detection]
-        D --> E[Sentiment Analysis]
-        E --> F[Structured Output]`,
     },
     insights: baseInsights(
       ['Foundation for all advanced NLP concepts', 'Wide applicability across industries', 'Rapidly growing field with high demand'],
@@ -460,12 +448,6 @@ export const m2Content: Record<string, TopicContent> = {
         'See accuracy, precision, recall, F1 score',
       ],
       completionMessage: 'You have built a working text classifier! This is the foundation for more advanced classification models, including quantum approaches.',
-      dataFlow: `flowchart LR
-        A[Input Text] --> B[Rule Engine]
-        C[Keyword Rules] --> B
-        B --> D[Score Calculation]
-        D --> E[Category Assignment]
-        E --> F[Classification Output]`,
     },
     insights: baseInsights(
       ['Foundation for understanding ML-based NLP', 'Teaches feature engineering concepts', 'Demonstrates the classification workflow'],

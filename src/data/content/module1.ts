@@ -5,11 +5,6 @@ export const m1Content: Record<string, TopicContent> = {
     topicId: '1.1',
     learningObjective: 'Understand the workshop structure, goals, and what you will achieve by the end of this 6-hour hands-on session.',
     nextPrep: 'Review your current understanding of NLP and prepare to articulate what you hope to learn from this workshop.',
-    dependencyGraph: `flowchart LR
-      A[1.1 Workshop Introduction] --> B[1.2 Learning Outcomes]
-      B --> C[1.3 Workshop Roadmap]
-      C --> D[1.4 Pre-Assessment]
-      D --> E[Module 2: NLP Basics]`,
     storytelling: {
       story: "Picture this: You're standing at the entrance of a massive library that contains every book ever written — in every language known to humanity. A robot librarian approaches you and says, 'I can read all these books in one second, but I don't understand a single word of them.' Sounds absurd, right? Well, that's exactly where we are with computers today. They can process terabytes of text but struggle to understand simple sarcasm like 'Oh great, another Monday!' Meanwhile, quantum computers are emerging like magical glasses that could help machines finally 'get' what we're saying. This workshop is your backstage pass to understanding how this quantum magic works.",
       questions: [
@@ -187,14 +182,6 @@ export const m1Content: Record<string, TopicContent> = {
         'Reviewing the comparative performance metrics',
       ],
       completionMessage: 'You have visualized the fundamental advantage of quantum approaches for NLP tasks!',
-      dataFlow: `flowchart LR
-        A[Input Text] --> B[Tokenization]
-        B --> C[Embedding]
-        C --> D{Processing}
-        D --> E[Classical: O(n²)]
-        D --> F[Quantum: O(n)]
-        E --> G[Results]
-        F --> G`,
     },
     insights: {
       advantages: [
@@ -221,9 +208,6 @@ export const m1Content: Record<string, TopicContent> = {
     topicId: '1.2',
     learningObjective: 'Clearly articulate the 9 key learning outcomes that will be achieved by the end of this workshop.',
     nextPrep: 'Think about how each learning outcome relates to your current work or research area.',
-    dependencyGraph: `flowchart LR
-      A[1.1 Introduction] --> B[1.2 Learning Outcomes]
-      B --> C[1.3 Roadmap]`,
     storytelling: {
       story: "Imagine you're about to embark on a treasure hunt. You've been given a map, but before you start, the mapmaker says, 'Here are the 9 treasures you'll find along the way.' Knowing what treasures await makes the journey more meaningful — you'll recognize each discovery when you encounter it. That's exactly what learning outcomes do: they're your treasure map for this workshop.",
       questions: [
@@ -342,24 +326,6 @@ export const m1Content: Record<string, TopicContent> = {
     topicId: '1.3',
     learningObjective: 'Understand the complete workshop roadmap showing how each module connects to create a cohesive learning journey.',
     nextPrep: 'Review the roadmap and identify which modules you are most excited about.',
-    dependencyGraph: `flowchart LR
-      A[M1: Welcome] --> B[M2: NLP Basics]
-      B --> C[M3: Classical NLP]
-      C --> D[M4: Why Quantum?]
-      D --> E[M5: Quantum Computing]
-      E --> F[M6: Language to Quantum]
-      F --> G[M7: QNLP Intro]
-      G --> H[M8: Linguistics]
-      H --> I[M9: Tools]
-      I --> J[M10: Lambeq]
-      J --> K[M11: Classification]
-      K --> L[M12: Hybrid Models]
-      L --> M[M13: Evaluation]
-      M --> N[M14: Applications]
-      N --> O[M15: Mini Project]
-      O --> P[M16: Research Roadmap]
-      P --> Q[M17: Resources]
-      Q --> R[M18: Wrap-Up]`,
     storytelling: {
       story: 'Building a house requires a blueprint. You don\'t start with the roof or the plumbing — you begin with the foundation, then the walls, the wiring, and finally the finishing touches. Our workshop is like building a quantum NLP house. Module 1 is laying the foundation. By Module 18, you\'ll be admiring the fully furnished house and thinking about how to build your own.',
       questions: [

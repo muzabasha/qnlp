@@ -13,12 +13,6 @@ export const m3Content: Record<string, TopicContent> = {
     topicId: '3.1',
     learningObjective: 'Understand the fundamental text preprocessing techniques required to clean and prepare raw text for NLP pipelines.',
     nextPrep: 'Collect a sample paragraph of text and manually identify what preprocessing steps it might need.',
-    dependencyGraph: `flowchart LR
-      A[2.5 Text Classification Lab] --> B[3.1 Text Preprocessing]
-      B --> C[3.2 Tokenization]
-      C --> D[3.3 Stop Word Removal]
-      D --> E[3.4 Stemming & Lemmatization]
-      E --> F[3.5 Word Representations]`,
     storytelling: {
       story: `Picture a master chef preparing a five-course meal. Before any cooking begins, there is an entire ritual of washing, peeling, chopping, and marinating ingredients. A chef would never throw a muddy potato straight into a gourmet soup — that would be culinary chaos! Similarly, raw text straight from the internet is a mess: it has HTML tags, weird characters, inconsistent capitalization, emojis, typos, and formatting artifacts. If you fed this chaos directly into an NLP model, the model would throw a digital tantrum. Text preprocessing is the mise en place of NLP — cleaning, chopping, and preparing your textual ingredients so that your algorithms can cook up something delicious.`,
       questions: [
@@ -179,13 +173,6 @@ export const m3Content: Record<string, TopicContent> = {
         'Pipeline configuration is saved as a reusable preset',
       ],
       completionMessage: 'You have successfully built and tested a text preprocessing pipeline! You can see how each cleaning step transforms the text and reduces noise.',
-      dataFlow: `flowchart LR
-        A[Raw Text] --> B[Lowercasing]
-        B --> C[Remove HTML/URLs]
-        C --> D[Remove Punctuation]
-        D --> E[Expand Contractions]
-        E --> F[Spell Correction]
-        F --> G[Clean Text Output]`,
     },
     insights: baseInsights(
       ['Essential first step that improves all downstream tasks', 'Reduces vocabulary size by 20-40%', 'Helps models generalize better'],
@@ -200,10 +187,6 @@ export const m3Content: Record<string, TopicContent> = {
     topicId: '3.2',
     learningObjective: 'Understand tokenization strategies and how text is split into meaningful units for NLP processing.',
     nextPrep: 'Think about how you would define a "word" in English and why that definition might fail in other languages.',
-    dependencyGraph: `flowchart LR
-      A[3.1 Preprocessing] --> B[3.2 Tokenization]
-      B --> C[3.3 Stop Word Removal]
-      B --> D[3.4 Stemming & Lemmatization]`,
     storytelling: {
       story: `Imagine you are a tour guide in a museum, and a group of visitors walks in. You cannot show them the entire museum at once — you have to guide them through it room by room, exhibit by exhibit, piece by piece. Tokenization is the NLP equivalent of breaking the museum into individual rooms. Instead of processing a whole paragraph as one giant blob, a tokenizer says, "Let us take this one word at a time." But here is the catch: what counts as a "room"? Is "don't" one room or two? Is "New York" one room or two? Is "123-456-7890" a single token or many? Suddenly, splitting text seems as tricky as dividing a museum where some rooms are connected by secret passages!`,
       questions: [
@@ -370,14 +353,6 @@ export const m3Content: Record<string, TopicContent> = {
         'Download tokenized output as JSON or CSV',
       ],
       completionMessage: 'You have explored multiple tokenization strategies and can now choose the right one for different NLP tasks!',
-      dataFlow: `flowchart LR
-        A[Raw Text] --> B{Tokenizer}
-        B --> C[Word Tokens]
-        B --> D[Subword Tokens]
-        B --> E[Character Tokens]
-        C --> F[Downstream Tasks]
-        D --> F
-        E --> F`,
     },
     insights: baseInsights(
       ['Tokenization is the gateway to all NLP tasks', 'Subword methods provide nearly 100% coverage', 'Good tokenization reduces downstream errors'],
@@ -392,10 +367,6 @@ export const m3Content: Record<string, TopicContent> = {
     topicId: '3.3',
     learningObjective: 'Understand the concept of stop words and learn when and why to remove them from text data.',
     nextPrep: 'Brainstorm a list of 20 common English words that carry little meaning and consider what would be left without them.',
-    dependencyGraph: `flowchart LR
-      A[3.2 Tokenization] --> B[3.3 Stop Word Removal]
-      B --> C[3.4 Stemming & Lemmatization]
-      B --> D[3.6 Bag of Words]`,
     storytelling: {
       story: `Imagine you are a detective analyzing a suspect's diary. Pages and pages of text, but most of it reads like: "The the the and a to of in it was that he she they..." Frustrating, right? That is what raw text looks like to an NLP model — filled with tiny, meaningless words that are the linguistic equivalent of packing peanuts. They take up space, add weight, but contribute nothing to understanding the content. Stop words like "the," "a," "an," "in," "on," "at," "and," "or," "but," "is," "was," "were" are the grammatical scaffolding of language — necessary for building sentences but useless when you want to know what a text is actually about. Removing them is like stripping away the packaging to reveal the actual product inside.`,
       questions: [
@@ -550,12 +521,6 @@ export const m3Content: Record<string, TopicContent> = {
         'Detailed metrics table with performance comparison',
       ],
       completionMessage: 'You have mastered stop word removal! You understand how to choose task-appropriate stop word lists and evaluate their impact.',
-      dataFlow: `flowchart LR
-        A[Tokenized Text] --> B[Stop Word Filter]
-        C[Stop Word List] --> B
-        B --> D[Filtered Tokens]
-        D --> E[Vocabulary Stats]
-        D --> F[Downstream Model]`,
     },
     insights: baseInsights(
       ['Reduces feature space by 40-60%', 'Improves model efficiency and often accuracy', 'Simple but effective noise reduction technique'],
@@ -570,10 +535,6 @@ export const m3Content: Record<string, TopicContent> = {
     topicId: '3.4',
     learningObjective: 'Differentiate between stemming and lemmatization and understand when to apply each technique.',
     nextPrep: 'Think about how many different forms a single word can take (e.g., "run", "runs", "running", "ran") and whether they represent the same concept.',
-    dependencyGraph: `flowchart LR
-      A[3.3 Stop Word Removal] --> B[3.4 Stemming & Lemmatization]
-      B --> C[3.5 Word Representations]
-      B --> D[3.6 Bag of Words]`,
     storytelling: {
       story: `Imagine you are in a foreign country and you only know three phrases: "where bathroom," "how much cost," and "I want pizza." Your grammar is atrocious — no verb conjugations, no prepositions, no articles — but you are understood! Congratulations, you just invented real-life stemming: reducing words to their bare essence. Stemming is like taking "running," "runs," and "ran" and shouting "RUN!" — you get the point across with zero elegance. Lemmatization, on the other hand, is like having Google Translate in your pocket — it knows that "better" relates to "good" and that "went" is a tortured version of "go." It is the difference between a grunting caveman and a polished diplomat. Both work, but one is much more sophisticated!`,
       questions: [
@@ -738,16 +699,6 @@ export const m3Content: Record<string, TopicContent> = {
         'Statistics panel shows over/under-stemming rates, vocabulary reduction, processing time',
       ],
       completionMessage: 'You have mastered stemming and lemmatization! You understand the speed-accuracy trade-off and can choose the right technique for any NLP task.',
-      dataFlow: `flowchart LR
-        A[Tokenized Text] --> B{Stemmer or Lemmatizer?}
-        B --> C[Stemmer]
-        B --> D[Lemmatizer]
-        C --> E[Crucial Non-Word Stems]
-        D --> F[POS Tagger]
-        F --> G[Dictionary Lookup]
-        G --> H[Valid Lemmas]
-        E --> I[Normalized Output]
-        H --> I`,
     },
     insights: baseInsights(
       ['Stemming is fast and simple for search/retrieval', 'Lemmatization provides linguistically accurate normalization', 'Both reduce vocabulary size significantly'],
@@ -762,11 +713,6 @@ export const m3Content: Record<string, TopicContent> = {
     topicId: '3.5',
     learningObjective: 'Understand different word representation techniques from one-hot encoding to distributed representations.',
     nextPrep: 'Consider how you would represent the meaning of a word to a computer that has never seen one before.',
-    dependencyGraph: `flowchart LR
-      A[3.4 Stemming & Lemmatization] --> B[3.5 Word Representations]
-      B --> C[3.6 Bag of Words]
-      B --> D[3.7 TF-IDF]
-      B --> E[3.8 Word Embeddings]`,
     storytelling: {
       story: `Imagine you are an alien who has just arrived on Earth and found a dictionary. Unfortunately, the dictionary defines words using other words you do not know. "What is a dog?" the dictionary says: "a domesticated carnivorous mammal." You do not know "domesticated," "carnivorous," or "mammal." This is exactly the problem of representing word meaning to computers. Early NLP tried "one-hot encoding" — giving each word a unique ID number, like assigning everyone in a city a random ID. But "dog"=4271 and "puppy"=8312 have nothing in common in this scheme, even though they are clearly related. Modern word representations solve this by placing words in a "semantic space" where similar words are close together — like mapping that city so that neighbors live near each other. "Dog" and "puppy" become neighbors!`,
       questions: [
@@ -935,14 +881,6 @@ export const m3Content: Record<string, TopicContent> = {
         'Analogy solver: type "a : b :: c : ?" and see predicted answer',
       ],
       completionMessage: 'You have explored the landscape of word representations! You understand how different encoding schemes capture (or fail to capture) word meaning.',
-      dataFlow: `flowchart LR
-        A[Vocabulary] --> B{Representation Method}
-        B --> C[One-Hot: |V| x |V| matrix]
-        B --> D[Count-Based: |V| x d matrix]
-        B --> E[Dense Embeddings: |V| x d matrix]
-        C --> F[Numerical Word Vectors]
-        D --> F
-        E --> F`,
     },
     insights: baseInsights(
       ['Dense embeddings capture semantic similarity', 'Enable analogical reasoning through vector arithmetic', 'Reduce dimensionality from |V| to d (50-300)'],
@@ -957,10 +895,6 @@ export const m3Content: Record<string, TopicContent> = {
     topicId: '3.6',
     learningObjective: 'Understand the Bag of Words model and how it represents text as numerical feature vectors for machine learning.',
     nextPrep: 'Consider how you would represent a document using only word counts — what information is gained and what is lost?',
-    dependencyGraph: `flowchart LR
-      A[3.5 Word Representations] --> B[3.6 Bag of Words]
-      B --> C[3.7 TF-IDF]
-      B --> D[3.9 NLP Pipelines Lab]`,
     storytelling: {
       story: `Imagine you are at a party where everyone is talking. A friend asks you, "What was that conversation about?" But you were across the room and could only hear individual words, not full sentences. "I heard: pizza, project, deadline, pizza, Monday, meeting, pizza, budget." Despite missing the grammar and sentence structure, you can guess the topic: someone ordered pizza during a project meeting about deadlines and budgets. You have just performed a perfect Bag of Words analysis! You ignored word order, grammar, and sentence structure — exactly like Bag of Words does. The model simply counts how many times each word appears and uses those counts as features. It is surprisingly effective for many tasks, like a party-goer who misses all the nuances but still gets the gist!`,
       questions: [
@@ -1129,13 +1063,6 @@ export const m3Content: Record<string, TopicContent> = {
         'Built-in classifier shows accuracy, confusion matrix, and important words per category',
       ],
       completionMessage: 'You have built and explored a complete Bag of Words model! You understand how raw text becomes numerical features for machine learning.',
-      dataFlow: `flowchart LR
-        A[Raw Documents] --> B[Tokenization]
-        B --> C[Vocabulary Building]
-        C --> D[Word Count Matrix]
-        D --> E[BoW Feature Vectors]
-        E --> F[Classifier Training]
-        F --> G[Predictions]`,
     },
     insights: baseInsights(
       ['Simple, fast, interpretable', 'Works well for topic classification', 'Foundation for understanding text representations'],
@@ -1150,10 +1077,6 @@ export const m3Content: Record<string, TopicContent> = {
     topicId: '3.7',
     learningObjective: 'Understand TF-IDF (Term Frequency-Inverse Document Frequency) and how it improves upon simple Bag of Words by weighting word importance.',
     nextPrep: 'Think about which words should be considered "important" in a document and how you would measure importance across a collection of documents.',
-    dependencyGraph: `flowchart LR
-      A[3.6 Bag of Words] --> B[3.7 TF-IDF]
-      B --> C[3.8 Word Embeddings]
-      B --> D[3.9 NLP Pipelines Lab]`,
     storytelling: {
       story: `Imagine you are a detective investigating a series of thefts across a city. You collect witness statements from each neighborhood. Some words appear in every statement: "the," "and," "saw," "person," "thing." These are useless for finding the thief — they are just the background noise of storytelling. But one statement mentions "striped purple hat," another mentions "purple backpack," and a third mentions "striped gloves." Now those are clues! The words "purple" and "striped" are rare across all statements but appear multiple times in a few — they are the distinctive features that connect the crimes. This is exactly what TF-IDF does: it down-weights words that appear everywhere (like "the") and up-weights words that appear frequently in a few documents but rarely across the whole collection — the "purple striped" clues that define each document uniquely.`,
       questions: [
@@ -1324,16 +1247,6 @@ export const m3Content: Record<string, TopicContent> = {
         'Run a query and see ranked results with similarity scores',
       ],
       completionMessage: 'You have mastered TF-IDF! You understand how to weight word importance and why TF-IDF outperforms raw BoW for most tasks.',
-      dataFlow: `flowchart LR
-        A[Document Collection] --> B[Tokenization]
-        B --> C[Term Frequency (TF)]
-        B --> D[Document Frequency (DF)]
-        C --> E[TF-IDF Weighting]
-        D --> E
-        E --> F[TF-IDF Vectors]
-        F --> G[Document Similarity]
-        F --> H[Classification]
-        F --> I[Information Retrieval]`,
     },
     insights: baseInsights(
       ['Significantly improves over BoW for most tasks', 'Simple, interpretable, computationally efficient', 'Widely used in industry for text analytics'],
@@ -1348,10 +1261,6 @@ export const m3Content: Record<string, TopicContent> = {
     topicId: '3.8',
     learningObjective: 'Understand word embeddings and how they learn dense, distributed vector representations that capture semantic meaning.',
     nextPrep: 'Think about what it means for two words to be "similar" and how you might measure that numerically.',
-    dependencyGraph: `flowchart LR
-      A[3.7 TF-IDF] --> B[3.8 Word Embeddings]
-      B --> C[3.9 NLP Pipelines Lab]
-      B --> D[Module 4: Why Quantum?]`,
     storytelling: {
       story: `Imagine you are a cartographer, but instead of mapping land, you are mapping meaning. Your goal: create a map of all words where similar words are placed close together and related concepts form neighborhoods. "Doctor" lives near "nurse" and "hospital." "Paris" is close to "France" and "Eiffel." "Happy" neighbors "joyful," "elated," and "cheerful." This "semantic map" is what word embeddings create — a geography of meaning where distances represent semantic differences. And here is the mind-bending part: on this map, you can travel along meaningful directions. Walk from "man" toward "king" and you are walking in the "royalty + masculine" direction. Walk from "woman" the same distance and you arrive at "queen". Word embeddings discovered that meaning has geometry, and you can navigate it like a city!`,
       questions: [
@@ -1522,14 +1431,6 @@ export const m3Content: Record<string, TopicContent> = {
         'Bias probe: check gender/racial associations for selected word pairs',
       ],
       completionMessage: 'You have explored the power and limitations of word embeddings! You understand how meaning is captured geometrically and how to use embeddings in practice.',
-      dataFlow: `flowchart LR
-        A[Large Text Corpus] --> B[Training Algorithm]
-        B --> C[Word Vectors]
-        C --> D[Nearest Neighbors]
-        C --> E[Analogy Solving]
-        C --> F[Document Vectors]
-        F --> G[Semantic Search]
-        F --> H[Classification]`,
     },
     insights: baseInsights(
       ['Dense vectors capture rich semantics', 'Enable analogical reasoning', 'Foundation for transfer learning in NLP', 'Compact representation (300d vs 100000d)'],
@@ -1544,10 +1445,6 @@ export const m3Content: Record<string, TopicContent> = {
     topicId: '3.9',
     learningObjective: 'Build a complete classical NLP pipeline end-to-end, combining preprocessing, tokenization, and vectorization for text classification.',
     nextPrep: 'Review all topics from Module 3 and sketch a pipeline diagram showing how they connect.',
-    dependencyGraph: `flowchart LR
-      A[3.1-3.8 All Module 3 Topics] --> B[3.9 NLP Pipelines Lab]
-      B --> C[Module 4: Why Quantum?]
-      B --> D[Module 5: Quantum Computing Basics]`,
     storytelling: {
       story: `Congratulations! You have learned all the individual kitchen skills: washing vegetables, sharpening knives, chopping onions, boiling pasta, sautéing garlic, and plating dishes. Now it is time to actually cook a meal! Building an NLP pipeline is like running a restaurant kitchen — each station (preprocessing, tokenization, stop word removal, vectorization, classification) has its own job, and they must work together in perfect sequence. If the chopping station sends whole potatoes to the boiling station, the entire kitchen falls apart. In this lab, you become the head chef of an NLP kitchen, orchestrating all the techniques you have learned into a working pipeline that takes raw text and produces meaningful predictions. Time to cook!`,
       questions: [
@@ -1712,15 +1609,6 @@ export const m3Content: Record<string, TopicContent> = {
         'Results dashboard shows accuracy, precision, recall, F1, confusion matrix, ROC curve, and stage-wise latency breakdown',
       ],
       completionMessage: 'You have built a complete NLP pipeline! You understand how classical NLP components connect end-to-end and how to optimize them for real-world tasks.',
-      dataFlow: `flowchart LR
-        A[Raw Text] --> B[Text Preprocessor]
-        B --> C[Tokenizer]
-        C --> D[Stop Word Remover]
-        D --> E[Stemmer/Lemmatizer]
-        E --> F[TF-IDF Vectorizer]
-        F --> G[Classifier]
-        G --> H[Predictions]
-        H --> I[Evaluation Metrics]`,
     },
     insights: baseInsights(
       ['Complete understanding of NLP pipelines end-to-end', 'Ability to debug and optimize real NLP systems', 'Foundation for building more complex pipelines (neural, quantum)'],

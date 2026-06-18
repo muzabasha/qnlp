@@ -5,15 +5,6 @@ export const m5Content: Record<string, TopicContent> = {
     topicId: '5.1',
     learningObjective: `Understand what quantum computing is, why it matters for NLP, and the key principles that distinguish it from classical computing.`,
     nextPrep: `Review basic linear algebra concepts — vectors, matrices, and complex numbers. No prior quantum knowledge required.`,
-    dependencyGraph: `flowchart LR
-      A[5.1 Intro to QC] --> B[5.2 Bits vs Qubits]
-      B --> C[5.3 Superposition]
-      C --> D[5.4 Entanglement]
-      D --> E[5.5 Measurement]
-      E --> F[5.6 Quantum Gates]
-      F --> G[5.7 Quantum Circuits]
-      G --> H[5.8 Qiskit Lab]
-      style A fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you are a librarian with two rooms. In the first room, you can only place one book on the table at a time. To read another, you must swap it out. In the second room, the table is magical — you can place every book you own on it simultaneously, and you can read them all at once. That second room is a quantum computer. Classical computers process one state at a time, like flipping a coin and catching it to see heads or tails. Quantum computers place that spinning coin into your hand — still spinning — so you can examine every possibility at once. For NLP researchers drowning in terabytes of text, that magic room offers a tantalizing promise: what if we could process all possible meanings of every word simultaneously?`,
       questions: [
@@ -192,10 +183,6 @@ export const m5Content: Record<string, TopicContent> = {
     topicId: '5.2',
     learningObjective: `Distinguish between classical bits and quantum qubits, understand the physical implementations of qubits, and explain why qubits offer more computational power per unit.`,
     nextPrep: `Review the qubit state equation from 5.1 and refresh your understanding of complex numbers (i² = -1, complex conjugate, magnitude squared).`,
-    dependencyGraph: `flowchart LR
-      A[5.1 Intro to QC] --> B[5.2 Bits vs Qubits]
-      B --> C[5.3 Superposition]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you are a chef at a high-end restaurant. Classical bits are like a light switch — it's either on (kitchen is open) or off (kitchen is closed). Now imagine you have a dimmer switch instead. The dimmer can be off, fully on, or anywhere in between. A qubit is like that dimmer switch — but with a twist. While a dimmer is just "partially on," a qubit is simultaneously 100% on AND 100% off at the same time, just with different weights. Better yet, when you have multiple dimmers wired together in a quantum circuit, flipping one dimmer affects all the others instantly, no matter how far apart they are. That's where the real magic begins.`,
       questions: [
@@ -385,11 +372,6 @@ export const m5Content: Record<string, TopicContent> = {
     topicId: '5.3',
     learningObjective: `Understand quantum superposition mathematically, visualize it on the Bloch sphere, and explain why superposition enables quantum parallelism for NLP applications.`,
     nextPrep: `Review complex numbers, vector spaces, and the normalization condition |α|² + |β|² = 1 from the previous topics.`,
-    dependencyGraph: `flowchart LR
-      A[5.2 Bits vs Qubits] --> B[5.3 Superposition]
-      B --> C[5.4 Entanglement]
-      B --> D[5.6 Quantum Gates]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you are searching for a lost key in a stadium with 50,000 seats. A classical search means checking seat by seat — row 1, row 2, row 3 — until you find it. A quantum search using superposition is like cloning yourself 50,000 times and having each clone check one seat simultaneously. All clones report back at the same moment, pointing to exactly where the key is. This is the power of superposition: not doing things faster, but doing all possible things at once. In NLP terms, imagine trying to find the correct parse tree for an ambiguous sentence like "I saw the man with the telescope." Classical parsers try one interpretation at a time (or use clever pruning). Quantum superposition could explore all parse trees simultaneously and then amplify the correct one.`,
       questions: [
@@ -577,11 +559,6 @@ export const m5Content: Record<string, TopicContent> = {
     topicId: '5.4',
     learningObjective: `Understand quantum entanglement, its mathematical description, and why it is a uniquely quantum resource with transformative potential for NLP.`,
     nextPrep: `Review tensor products and multi-qubit states. Understand how combining two qubits creates a 4-dimensional state space.`,
-    dependencyGraph: `flowchart LR
-      A[5.3 Superposition] --> B[5.4 Entanglement]
-      B --> C[5.5 Measurement]
-      B --> D[5.6 Quantum Gates]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you have two magic coins. You flip them together, then put one in a box in London and the other in a box in Tokyo — millions of miles apart. When you open the London box, you see heads. At that exact moment, you instantly know the Tokyo coin is heads too. But here's the eerie part: before you opened either box, neither coin was heads or tails — they were both in a "heads-tails superposition" linked together. They had no individual identity, only a shared identity. Einstein called this "spooky action at a distance," and it is the essence of quantum entanglement. For NLP, entanglement means we can model linguistic relationships — like agreement between a subject and verb across a sentence — as fundamentally correlated quantum systems.`,
       questions: [
@@ -771,11 +748,6 @@ export const m5Content: Record<string, TopicContent> = {
     topicId: '5.5',
     learningObjective: `Understand how quantum measurement works, why it collapses superposition, and how the Born rule determines measurement probabilities. Explore the implications for quantum algorithm design.`,
     nextPrep: `Review probability theory and the normalization condition. Understand why measurement in quantum mechanics is fundamentally different from observation in classical physics.`,
-    dependencyGraph: `flowchart LR
-      A[5.4 Entanglement] --> B[5.5 Measurement]
-      B --> C[5.6 Quantum Gates]
-      B --> D[5.7 Quantum Circuits]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you are a wildlife photographer trying to photograph a rare butterfly. You set up your camera, focus, and press the shutter. The flash goes off — and the butterfly, startled, flies away. You got the photo, but the butterfly's position changed. This is the measurement problem in a nutshell: to observe something, you must interact with it, and that interaction changes it. Now imagine a butterfly that is simultaneously in all 100 possible positions in the garden. Your camera flash doesn't just startle it — it forces the butterfly to choose one position and stay there forever after. That is quantum measurement: it doesn't just observe the state; it irrevocably creates the outcome.`,
       questions: [
@@ -963,10 +935,6 @@ export const m5Content: Record<string, TopicContent> = {
     topicId: '5.6',
     learningObjective: `Understand single-qubit and multi-qubit quantum gates, their matrix representations, and how they transform quantum states. Learn to combine gates into quantum operations.`,
     nextPrep: `Review matrix multiplication and how linear operators act on state vectors. Refresh your understanding of unitary matrices (U†U = I).`,
-    dependencyGraph: `flowchart LR
-      A[5.3 Superposition] --> B[5.6 Quantum Gates]
-      B --> C[5.7 Quantum Circuits]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you have a Rubik's cube that can be in every possible arrangement at the same time — a quantum Rubik's cube. Now, instead of twisting one face at a time, which is what classical operations do, your moves rotate all arrangements simultaneously. Each twist is a "quantum gate." The Hadamard gate is like splitting the cube into two parallel cubes, one where you twist left and one where you twist right. The CNOT gate is like linking two cubes so that turning one automatically turns the other. A quantum algorithm is just a carefully choreographed sequence of these magical twists — a dance that amplifies the arrangements you want and cancels out the ones you don't.`,
       questions: [
@@ -1155,10 +1123,6 @@ export const m5Content: Record<string, TopicContent> = {
     topicId: '5.7',
     learningObjective: `Understand how to combine quantum gates into circuits, represent them as circuit diagrams, and analyze the state evolution through a multi-gate quantum circuit.`,
     nextPrep: `Review how individual gates work (5.6) and how sequential matrix multiplication composes operations. Refresh tensor products for multi-qubit circuits.`,
-    dependencyGraph: `flowchart LR
-      A[5.6 Quantum Gates] --> B[5.7 Quantum Circuits]
-      B --> C[5.8 Qiskit Lab]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you are a choreographer designing a dance for 10 dancers. Each dancer has a set of moves (gates), and the dancers sometimes move independently and sometimes in pairs. The entire dance — all 10 dancers, all moves, all timings — is a quantum circuit. The beauty is that the quantum dance happens on every possible stage arrangement simultaneously. In one arrangement, dancer 3 spins while dancer 7 jumps; in another, dancer 3 jumps while dancer 7 spins. The quantum circuit performs the entire dance on all arrangements at once. Your job as the choreographer is to arrange the moves so that at the end, the dancers are aligned in the formation you want — the correct answer to your computation.`,
       questions: [
@@ -1349,9 +1313,6 @@ export const m5Content: Record<string, TopicContent> = {
     topicId: '5.8',
     learningObjective: `Apply all concepts from Module 5 by creating and running real quantum circuits using Qiskit. Build a Bell state circuit, measure it, and interpret the results.`,
     nextPrep: `Ensure you have Python installed and can install Qiskit (pip install qiskit qiskit-aer). Review the Bell state circuit from topic 5.7.`,
-    dependencyGraph: `flowchart LR
-      A[5.7 Quantum Circuits] --> B[5.8 Qiskit Lab]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `After weeks of studying sheet music and practicing scales, the day has arrived to play your first real piece. Your quantum piano — called Qiskit — is ready. You will write notes (gates), arrange them in time (circuits), and hear the music (measurement results). Today you are not just learning about quantum computing. You are doing quantum computing. Every quantum pioneer started here — typing a few lines of code, running their first circuit, watching the histogram of results appear. For NLP researchers, this is the moment quantum theory becomes a practical tool in your arsenal.`,
       questions: [

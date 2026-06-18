@@ -5,14 +5,6 @@ export const m4Content: Record<string, TopicContent> = {
     topicId: `4.1`,
     learningObjective: `Identify the key challenges facing modern NLP systems and understand why new computing paradigms are needed.`,
     nextPrep: `Read about the computational cost of training large language models and come prepared to discuss their environmental impact.`,
-    dependencyGraph: `flowchart LR
-      A[Module 3: Classical NLP] --> B[4.1 Challenges of Modern NLP]
-      B --> C[4.2 Computational Complexity]
-      C --> D[4.3 Limitations of Classical ML]
-      D --> E[4.4 Motivation for QML]
-      E --> F[4.5 Potential Benefits of QNLP]
-      F --> G[4.6 Interactive Discussion]
-      G --> H[Module 5: Quantum Computing Basics]`,
     storytelling: {
       story: `Imagine you are a world-class chef who has been given a microwave to cook a ten-course gourmet meal. You can press buttons, set timers, and follow recipes, but no matter how hard you try, the microwave simply cannot sear a steak, caramelize onions, or bake a soufflé. That is modern NLP. We have incredibly powerful microwave-ovens called Transformers — they heat things up fast and handle large volumes — but they fundamentally cannot do certain things like truly understand context, reason causally, or grasp sarcasm. We are trying to cook gourmet language understanding with a microwave, and quantum computing might just be the gas stove we have been waiting for.`,
       questions: [
@@ -224,18 +216,6 @@ export const m4Content: Record<string, TopicContent> = {
         `Download a report showing all scaling metrics, carbon footprint estimates, and the quantum advantage window`,
       ],
       completionMessage: `You have quantified the key scaling challenges driving the search for quantum alternatives to classical NLP!`,
-      dataFlow: `flowchart TD
-        A[Model Configuration] --> B[Cost Estimator]
-        B --> C[FLOP Calculator]
-        B --> D[Energy Estimator]
-        C --> E[Scaling Curves]
-        D --> E
-        E --> F{Comparison Mode}
-        F --> G[Classical O(n²) Curve]
-        F --> H[Quantum O(n) Curve]
-        G --> I[Report Generator]
-        H --> I
-        I --> J[Comprehensive Report]`,
     },
     insights: {
       advantages: [
@@ -263,9 +243,6 @@ export const m4Content: Record<string, TopicContent> = {
     topicId: `4.2`,
     learningObjective: `Analyze the computational complexity of language models and understand where quantum computing offers theoretical advantages.`,
     nextPrep: `Review Big O notation and complexity classes (P, NP, BQP) to prepare for complexity analysis.`,
-    dependencyGraph: `flowchart LR
-      A[4.1 Challenges of Modern NLP] --> B[4.2 Computational Complexity]
-      B --> C[4.3 Limitations of Classical ML]`,
     storytelling: {
       story: `Think of computational complexity like ordering pizza for a party. A classical approach is like calling each person individually to ask what topping they want — if you have 10 people, you make 10 calls; if you have 100 people, you make 100 calls. That is linear O(n) work. But some problems are trickier. Imagine you need to find the perfect seating arrangement so everyone sits next to someone who likes the same toppings. Now you have to check every possible arrangement — that is factorial O(n!) time. For 10 people there are 3.6 million arrangements. For 20 people, there are more arrangements than atoms in the universe. This is the nightmare of exponential complexity. Quantum computing offers a different approach: checking many arrangements at once through superposition, like having infinite parallel-universe versions of yourself each checking a different seating plan simultaneously.`,
       questions: [
@@ -480,17 +457,6 @@ export const m4Content: Record<string, TopicContent> = {
         `Export a detailed complexity budget report with charts, tables, and quantum advantage analysis`,
       ],
       completionMessage: `You have performed a complete complexity analysis of a Transformer model and identified the key targets for quantum speedup!`,
-      dataFlow: `flowchart LR
-        A[Architecture Config] --> B[Complexity Engine]
-        B --> C[FLOP Counter]
-        B --> D[Memory Estimator]
-        C --> E[Breakdown Chart]
-        D --> E
-        E --> F{Quantum Mode}
-        F --> G[Classical Budget]
-        F --> H[Hybrid Budget]
-        G --> I[Report]
-        H --> I`,
     },
     insights: {
       advantages: [
@@ -518,9 +484,6 @@ export const m4Content: Record<string, TopicContent> = {
     topicId: `4.3`,
     learningObjective: `Understand the fundamental limitations of classical machine learning approaches for language tasks and how quantum computing overcomes them.`,
     nextPrep: `Review key concepts from traditional ML: loss landscapes, local minima, representational capacity, and the curse of dimensionality.`,
-    dependencyGraph: `flowchart LR
-      A[4.2 Computational Complexity] --> B[4.3 Limitations of Classical ML]
-      B --> C[4.4 Motivation for QML]`,
     storytelling: {
       story: `You are training a dog to fetch the morning newspaper. Classical ML is like teaching through treats and repetition: you throw the paper, the dog fetches it, you give a treat, repeat. This works wonderfully until one day you throw the paper onto the roof. The dog looks at the roof, looks at you, then tries to climb the wall the same way it always fetches. It has learned the pattern perfectly but cannot generalize to a situation where the paper is not on the ground. Classical ML has the same blind spot: it learns correlations from training data but lacks the causal understanding to handle novel situations. Quantum ML, with its richer representational capacity, is like a dog that can reason: "The paper is on the roof. I cannot climb walls. But I can bark to get someone's attention, or find a ladder, or wait for the wind to blow it down." It explores more possibilities simultaneously.`,
       questions: [
@@ -731,17 +694,6 @@ export const m4Content: Record<string, TopicContent> = {
         `The lab automatically generates a comparison report summarizing the quantitative differences between classical and quantum approaches for the configurations you tested.`,
       ],
       completionMessage: `You have experienced first-hand the key limitations of classical ML and seen how quantum approaches offer a way forward!`,
-      dataFlow: `flowchart TD
-        A[Lab Control Panel] --> B[Dimension Selector]
-        A --> C[Loss Landscape Simulator]
-        A --> D[Circuit Comparator]
-        B --> E[Distance Distribution]
-        C --> F[Optimization Trajectory]
-        D --> G[Gate Count Comparison]
-        E --> H[Report Generator]
-        F --> H
-        G --> H
-        H --> I[Comprehensive Report]`,
     },
     insights: {
       advantages: [
@@ -769,9 +721,6 @@ export const m4Content: Record<string, TopicContent> = {
     topicId: `4.4`,
     learningObjective: `Understand the key motivations for combining quantum computing with machine learning and how QML addresses specific NLP challenges.`,
     nextPrep: `Read about variational quantum circuits and the parameter-shift rule to prepare for hands-on quantum ML content.`,
-    dependencyGraph: `flowchart LR
-      A[4.3 Limitations of Classical ML] --> B[4.4 Motivation for QML]
-      B --> C[4.5 Potential Benefits of QNLP]`,
     storytelling: {
       story: `Imagine you are a master key-maker. Your customers bring you locks, and you craft keys that open them. Each new lock requires studying its mechanism, measuring its pins, and filing a key with precision. Some days you get complex locks with strange mechanisms, and you spend hours at your workbench. One day, a customer brings in a lock that has no keyhole — it is a combination lock made of light beams and mirrors. Your entire key-making toolkit is useless. You need a completely new approach. That is where we are with classical ML and NLP. Our classical toolkit — gradient descent, backpropagation, loss functions — works brilliantly for certain problems but fundamentally cannot handle others. Quantum machine learning is the new toolkit designed for locks made of quantum phenomena. It does not replace the old toolkit; it adds capabilities that were previously impossible.`,
       questions: [
@@ -983,14 +932,6 @@ export const m4Content: Record<string, TopicContent> = {
         `The lab generates a report summarizing the conditions under which the quantum approach outperforms the classical one, including data requirements and architectural considerations.`,
       ],
       completionMessage: `You have compared classical and quantum ML approaches firsthand and identified the conditions for quantum advantage!`,
-      dataFlow: `flowchart LR
-        A[Task Selector] --> B[Classical Trainer]
-        A --> C[Quantum Circuit Composer]
-        B --> D[Training Curves]
-        C --> E[Quantum Measurements]
-        D --> F[Comparison Engine]
-        E --> F
-        F --> G[Advantage Report]`,
     },
     insights: {
       advantages: [
@@ -1019,9 +960,6 @@ export const m4Content: Record<string, TopicContent> = {
     topicId: `4.5`,
     learningObjective: `Identify and evaluate the potential benefits of applying quantum computing to NLP, including speedup, expressibility, and sample efficiency.`,
     nextPrep: `Review recent papers on quantum NLP to see real-world results and benchmark comparisons.`,
-    dependencyGraph: `flowchart LR
-      A[4.4 Motivation for QML] --> B[4.5 Potential Benefits of QNLP]
-      B --> C[4.6 Interactive Discussion]`,
     storytelling: {
       story: `You have been playing chess on a standard board your whole life. You know every strategy, every opening, every endgame pattern. One day, someone shows you a 3D chess board from a science fiction show — pieces can move across multiple levels simultaneously. At first it seems unnecessarily complicated, but then you realize: that move you have been trying to pull off for years, the one that requires 15 steps and three sacrifices in 2D chess? In 3D chess, it takes one move. The extra dimension is not just complexity — it is a fundamentally new capability. Quantum NLP is like adding dimensions to the chess board of language processing. Classical NLP plays on a flat board with two dimensions (sequence and embedding). Quantum NLP adds dimensions of superposition, entanglement, and interference — allowing certain "moves" that were previously impossible or required impossibly many steps.`,
       questions: [
@@ -1234,19 +1172,6 @@ export const m4Content: Record<string, TopicContent> = {
         `Enter your own NLP scenario (document length, vocabulary size, model dimension). The lab calculates theoretical speedups using HHL, Grover, and quantum sampling, with a hardware feasibility report.`,
       ],
       completionMessage: `You have explored the full spectrum of potential QNLP benefits, from representation and composition to speedup and disambiguation!`,
-      dataFlow: `flowchart TD
-        A[Lab Entry] --> B[Superposition Explorer]
-        A --> C[Tensor Product Lab]
-        A --> D[Interference Simulator]
-        A --> E[Speedup Calculator]
-        B --> F[Resource Comparison]
-        C --> G[Composition Quality]
-        D --> H[Disambiguation Results]
-        E --> I[Speedup Report]
-        F --> J[Benefits Summary]
-        G --> J
-        H --> J
-        I --> J`,
     },
     insights: {
       advantages: [
@@ -1276,9 +1201,6 @@ export const m4Content: Record<string, TopicContent> = {
     topicId: `4.6`,
     learningObjective: `Synthesize the module content through interactive discussion and debate about whether quantum computing can transform NLP.`,
     nextPrep: `Reflect on the module content and prepare your position on the key question: Can quantum computing transform NLP? Come with at least one argument each for and against.`,
-    dependencyGraph: `flowchart LR
-      A[4.5 Potential Benefits of QNLP] --> B[4.6 Interactive Discussion]
-      B --> C[Module 5: Quantum Computing Basics]`,
     storytelling: {
       story: `Picture the last time a new technology was going to "change everything." The internet was going to make paper obsolete. Smartphones were going to make cameras, maps, and wallets disappear. AI was going to replace all jobs. Each prediction was partly right and partly wrong. The internet did not kill paper — it created more paper usage than ever. Smartphones did not kill cameras — they made everyone a photographer. AI did not replace jobs — it changed what jobs look like. Now we stand at the edge of quantum computing promising to transform NLP. Will it be the same pattern — partial transformation alongside unexpected consequences? Or is this genuinely different? That is what we are here to debate: not with hype, but with the technical understanding you have built throughout this module.`,
       questions: [
@@ -1496,14 +1418,6 @@ export const m4Content: Record<string, TopicContent> = {
         `The lab generates a comprehensive report including your assumptions, projections, crossover analysis, and a summary of the key factors that most influence the outcome.`,
       ],
       completionMessage: `You have completed the QNLP transformation analysis! You can now make evidence-based projections about if, when, and how quantum computing will transform NLP.`,
-      dataFlow: `flowchart TD
-        A[Assumption Settings] --> B[Growth Model Engine]
-        B --> C[Performance Projections]
-        C --> D[Crossover Analysis]
-        D --> E[Scenario Comparison]
-        E --> F[Your Predictions]
-        F --> G[Deviation Analysis]
-        G --> H[Final Assessment Report]`,
     },
     insights: {
       advantages: [

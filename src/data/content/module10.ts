@@ -5,13 +5,6 @@ export const m10Content: Record<string, TopicContent> = {
     topicId: '10.1',
     learningObjective: `Understand how Lambeq parses sentences into pregroup grammar diagrams, including word type assignment, cup/string reduction, and diagram visualisation.`,
     nextPrep: `Review Module 8.5 on pregroup grammars and Module 9.4 on Lambeq's architecture. Refresh your understanding of grammatical types (n, s, adjoint types).`,
-    dependencyGraph: `flowchart LR
-      A[M8: Linguistics] --> B[10.1 Parsing]
-      B --> C[10.2 Sentence Diagrams]
-      C --> D[10.3 Diagrams to Circuits]
-      D --> E[10.4 Parameterised Circuits]
-      E --> F[10.5 QLM Lab]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you are an architect who has been handed a pile of lumber, bricks, and glass and told to build a house. Before you can build, you need a blueprint — a diagram showing how each piece connects. Lambeq's parser is like an automatic architect that takes a sentence (the pile of words) and produces a blueprint (the pregroup diagram) showing exactly how the words grammatically connect. Just as a blueprint reveals which walls support which beams, the pregroup diagram reveals how nouns connect to verbs, how adjectives modify nouns, and how the whole structure forms a complete sentence. Without this blueprint, building a quantum circuit for a sentence would be like constructing a house without any plan.`,
       questions: [
@@ -219,17 +212,6 @@ export const m10Content: Record<string, TopicContent> = {
         `View toggle: "String View" shows the traditional string diagram. "Compact View" shows a simplified version with reduced wire crossings`,
       ],
       completionMessage: `You have mastered pregroup parsing! You can read pregroup diagrams, trace reductions, and understand how grammatical structure is represented.`,
-      dataFlow: `flowchart LR
-        A[Input Sentence] --> B[Tokenisation]
-        B --> C[Lexicon Lookup]
-        C --> D[Type Assignment]
-        D --> E[Reduction Search]
-        E --> F{Valid Parse Found?}
-        F -->|Yes| G[Pregroup Diagram]
-        F -->|No| H[Fallback: Default Types]
-        H --> G
-        G --> I[Diagram Visualisation]
-        G --> J[Circuit Generation]`,
     },
     insights: {
       advantages: [
@@ -259,10 +241,6 @@ export const m10Content: Record<string, TopicContent> = {
     topicId: '10.2',
     learningObjective: `Interpret pregroup sentence diagrams, understand the meaning of wires, cups, and word boxes, and recognise how grammatical relationships are represented visually.`,
     nextPrep: `Review the pregroup diagram from 10.1 and familiarise yourself with Lambeq's Diagram class documentation.`,
-    dependencyGraph: `flowchart LR
-      A[10.1 Parsing] --> B[10.2 Sentence Diagrams]
-      B --> C[10.3 Circuits]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you are learning to read music. At first, a musical score looks like meaningless dots and lines on a staff. But as you learn that the treble clef means "higher notes," the staff lines represent pitches, and each note's position tells you which key to press, the score transforms from scribbles to a complete musical instruction manual. Sentence diagrams are exactly this — a visual language for grammar. The wires are the staff lines, the word boxes are the notes, and the cups are the dynamics telling you how parts connect. Learning to "read" sentence diagrams is like learning to read music: once you see the pattern, you can instantly grasp the grammatical structure of any sentence.`,
       questions: [
@@ -465,15 +443,6 @@ export const m10Content: Record<string, TopicContent> = {
         `Quantum View toggle: transitions the diagram to show the equivalent quantum circuit — word boxes become parameterised gates, cups become Bell preparations + traces, swaps become SWAP gates. Animation shows the transformation`,
       ],
       completionMessage: `You can now read pregroup diagrams fluently! You understand how every visual element encodes grammatical information and how it maps to quantum circuits.`,
-      dataFlow: `flowchart LR
-        A[Input Sentence] --> B[BobcatParser]
-        B --> C[Pregroup Diagram]
-        C --> D[Render SVG]
-        D --> E[Interactive Viewer]
-        E --> F[Hover: Component Info]
-        E --> G[Click: Highlight Wire]
-        E --> H[Quantum View Overlay]
-        H --> I[Parameterised Quantum Circuit]`,
     },
     insights: {
       advantages: [
@@ -503,10 +472,6 @@ export const m10Content: Record<string, TopicContent> = {
     topicId: '10.3',
     learningObjective: `Understand how Lambeq converts pregroup sentence diagrams into quantum circuits, including the role of cups as Bell state preparations, word boxes as parameterised unitaries, and the overall circuit topology.`,
     nextPrep: `Review basic quantum circuit concepts: qubits, gates (RX, RY, RZ, CNOT), and measurement. Refresh understanding of Bell states and entanglement from Module 5.`,
-    dependencyGraph: `flowchart LR
-      A[10.2 Sentence Diagrams] --> B[10.3 Diagrams to Circuits]
-      B --> C[10.4 Parameterised Circuits]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you are translating a novel from English to Japanese. You cannot translate word by word — the sentence structures are completely different. You must understand the deep meaning and then express it in the target language's grammar. Converting pregroup diagrams to quantum circuits is similar translation. The diagram's cups become Bell state preparations (entanglement). The word boxes become parameterised rotation gates (encoding meaning). The wires become qubits (quantum memory). The translator is Lambeq's CircuitFactory, which knows exactly how each diagram element maps to a quantum circuit element. Just as a skilled translator preserves the meaning while changing the form, Lambeq preserves the grammatical structure while changing the representation from diagrams to circuits.`,
       questions: [
@@ -711,17 +676,6 @@ export const m10Content: Record<string, TopicContent> = {
         `Circuit summary: panel showing qubit count, parameter count, gate count, and circuit depth. Updates live as different ansatzes are selected`,
       ],
       completionMessage: `You have mastered the diagram-to-circuit conversion! You understand how every part of a pregroup diagram maps to a specific quantum operation.`,
-      dataFlow: `flowchart LR
-        A[Pregroup Diagram] --> B[CircuitFactory]
-        B --> C{Apply Ansatz}
-        C --> D[Word Boxes → Parameterised Gates]
-        C --> E[Cups → Bell States + Traces]
-        C --> F[Swaps → SWAP Gates]
-        D --> G[Parameterised Circuit]
-        E --> G
-        F --> G
-        G --> H[Qiskit Backend]
-        G --> I[PennyLane Optimiser]`,
     },
     insights: {
       advantages: [
@@ -751,10 +705,6 @@ export const m10Content: Record<string, TopicContent> = {
     topicId: '10.4',
     learningObjective: `Understand parameterised quantum circuits for language: how trainable rotation gates encode word meanings, how circuit parameters are updated during training, and how the circuit produces meaningful sentence representations.`,
     nextPrep: `Review PennyLane's parameter-shift rule (9.3) and the concept of variational quantum circuits. Refresh understanding of rotation gates (RX, RY, RZ).`,
-    dependencyGraph: `flowchart LR
-      A[10.3 Diagrams to Circuits] --> B[10.4 Parameterised Circuits]
-      B --> C[10.5 QLM Lab]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine a sculptor faced with a block of marble. The block contains infinite possibilities — it could become a lion, a human, or an abstract shape. The sculptor's chisel transforms the block, one chip at a time, until the intended form emerges. A parameterised quantum circuit is like that block of marble, and the parameters are the sculptor's chisel. Initially, the circuit produces random outputs, just as the marble block looks like nothing specific. But as training progresses — chips falling as the parameters are updated — the circuit's output takes shape, eventually producing meaningful sentence classifications. Every parameter in the circuit is like a precise angle of the chisel, and the gradient (computed by PennyLane) tells us exactly how to adjust each angle to reveal the intended form.`,
       questions: [
@@ -972,18 +922,6 @@ export const m10Content: Record<string, TopicContent> = {
         `Inspector mode: pause training and enter a specific sentence. The lab shows the full circuit with current parameter values, simulates it, and displays the predicted class with confidence score`,
       ],
       completionMessage: `You have mastered parameterised quantum circuits for language! You understand how trainable parameters encode word meanings and how gradient-based optimisation tunes them for QNLP tasks.`,
-      dataFlow: `flowchart LR
-        A[Initial Parameters θ₀] --> B[Parameterised Circuit]
-        B --> C[Forward Pass: f(x; θ)]
-        C --> D[Loss Computation L]
-        D --> E{Converged?}
-        E -->|No| F[Parameter-Shift Rule]
-        F --> G[Gradients ∇L]
-        G --> H[Optimiser Update]
-        H --> I[New Parameters θₜ]
-        I --> B
-        E -->|Yes| J[Trained Model]
-        J --> K[Classification Results]`,
     },
     insights: {
       advantages: [
@@ -1013,11 +951,6 @@ export const m10Content: Record<string, TopicContent> = {
     topicId: '10.5',
     learningObjective: `Build, train, and evaluate your first Quantum Language Model (QLM) using Lambeq, Qiskit, and PennyLane, achieving > 75% accuracy on a binary sentence classification task in a simulated environment.`,
     nextPrep: `Ensure all three frameworks (Lambeq, Qiskit, PennyLane) are installed and working. Review the complete pipeline from 9.6 to be prepared.`,
-    dependencyGraph: `flowchart LR
-      A[10.4 Parameterised Circuits] --> B[10.5 QLM Lab]
-      C[9.5 Dev Setup] --> B
-      D[9.6 Lab] --> B
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Today is the day you become a quantum language engineer. Over the past nine modules, you have learned the theory of quantum computing, the structure of language, the mathematics of the DisCoCat model, and the tools of the trade. Now, you will build your first Quantum Language Model — a complete working system that takes sentences as input and outputs classifications using a quantum circuit. This is like the Wright Brothers' first flight at Kitty Hawk. Their first plane flew only 120 feet — a humble distance compared to modern jets. Your first QLM will classify only simple sentences — a humble capability compared to GPT-4. But just as that first flight proved that powered flight was possible, your first QLM will prove that quantum language models are real, buildable, and functional.`,
       questions: [
@@ -1228,24 +1161,6 @@ export const m10Content: Record<string, TopicContent> = {
         `Evaluation panel: test set accuracy score, confusion matrix (absolute counts and percentages), per-class precision/recall/F1. Misclassification table showing each error with the sentence, true label, predicted label, and confidence score`,
       ],
       completionMessage: `Congratulations! You have built, trained, and evaluated your first Quantum Language Model. You are now a quantum NLP practitioner!`,
-      dataFlow: `flowchart LR
-        A[Training Sentences] --> B[Lambeq Parser]
-        B --> C[Pregroup Diagrams]
-        C --> D[CircuitFactory + Ansatz]
-        D --> E[Parameterised Circuits]
-        E --> F[Qiskit Aer Simulator]
-        F --> G[Measurement Counts]
-        G --> H[Loss Computation]
-        H --> I[PennyLane Optimiser]
-        I --> J[Parameter-Shift Gradients]
-        J --> K[Parameter Update]
-        K --> E
-        G --> L{Prediction}
-        L --> M[Training Accuracy]
-        E --> N[New Sentences]
-        N --> O[Trained Circuit]
-        O --> P[Test Predictions]
-        P --> Q[Test Accuracy & Report]`,
     },
     insights: {
       advantages: [

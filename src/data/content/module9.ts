@@ -5,15 +5,6 @@ export const m9Content: Record<string, TopicContent> = {
     topicId: '9.1',
     learningObjective: `Understand the complete QNLP ecosystem, including the roles of major frameworks (Qiskit, PennyLane, Lambeq) and how they interconnect to build quantum language models.`,
     nextPrep: `Review Module 8 on linguistic categories and pregroup grammars, as these are the input to the QNLP pipeline.`,
-    dependencyGraph: `flowchart LR
-      A[M8: Linguistics] --> B[9.1 QNLP Ecosystem]
-      B --> C[9.2 Qiskit]
-      B --> D[9.3 PennyLane]
-      B --> E[9.4 Lambeq]
-      C --> F[9.5 Setup]
-      D --> F
-      E --> F
-      F --> G[9.6 Lab]`,
     storytelling: {
       story: `Imagine you are building a high-speed train. You need tracks (the infrastructure), an engine (the computation), control systems (the optimisation), and a scheduling platform (the high-level interface). Each component comes from a different specialised manufacturer, but they must all work together seamlessly. The QNLP ecosystem is exactly this: Qiskit provides the quantum hardware access and low-level circuit construction like the tracks and wheels. PennyLane handles optimisation and automatic differentiation like the engine control unit. Lambeq is the train driver's cockpit — the high-level interface that takes linguistic descriptions and turns them into quantum circuits. Together, they form a complete pipeline from language to quantum computation.`,
       questions: [
@@ -221,17 +212,6 @@ export const m9Content: Record<string, TopicContent> = {
         `Animation traces "John loves Mary" through parse -> diagram -> circuit -> measurement -> update`,
       ],
       completionMessage: `You have explored the complete QNLP ecosystem and understand how Lambeq, Qiskit, and PennyLane work together!`,
-      dataFlow: `flowchart LR
-        A[Input Sentence] --> B[Lambeq Parser]
-        B --> C[Pregroup Derivation]
-        C --> D[Lambeq Circuit Generator]
-        D --> E[Parameterised Quantum Circuit]
-        E --> F[Qiskit Backend]
-        F --> G[Measurement Outcomes]
-        G --> H[PennyLane Optimiser]
-        H --> I[Updated Parameters]
-        I --> E
-        G --> J[Classification Result]`,
     },
     insights: {
       advantages: [
@@ -261,11 +241,6 @@ export const m9Content: Record<string, TopicContent> = {
     topicId: '9.2',
     learningObjective: `Understand IBM's Qiskit framework — its architecture, core components, how to build and execute quantum circuits, and how it serves as the backend execution layer for QNLP.`,
     nextPrep: `Install Qiskit using pip (pip install qiskit qiskit-aer) and verify the installation before this session. Alternatively, use the IBM Quantum Lab online environment.`,
-    dependencyGraph: `flowchart LR
-      A[9.1 QNLP Ecosystem] --> B[9.2 Qiskit]
-      B --> C[9.5 Setup]
-      B --> D[9.6 Lab]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you are a master chef who has invented a revolutionary recipe. But you do not have a kitchen — no stove, no oven, no utensils. You need a place to cook. Qiskit is that kitchen for quantum computing. It provides all the tools: the stove (quantum simulator), the oven (real quantum hardware), the measuring cups (quantum gates), and the recipe book (circuit library). IBM has been building this kitchen since 2017, and it now serves millions of quantum recipes every day. For QNLP, Qiskit is where our quantum circuits — designed by Lambeq and optimised by PennyLane — actually run.`,
       questions: [
@@ -464,16 +439,6 @@ export const m9Content: Record<string, TopicContent> = {
         `Results show histogram of counts, probability distribution, and comparison with ideal`,
       ],
       completionMessage: `You have mastered Qiskit circuit construction! You can build, visualise, and execute quantum circuits with noise awareness.`,
-      dataFlow: `flowchart LR
-        A[QuantumCircuit] --> B[Gate Operations]
-        B --> C[Circuit Visualisation]
-        C --> D[Transpiler]
-        D --> E[Optimised Circuit]
-        E --> F{Aer Simulator}
-        E --> G[IBM Hardware]
-        F --> H[Measurement Results]
-        G --> H
-        H --> I[Counts & Histogram]`,
     },
     insights: {
       advantages: [
@@ -503,11 +468,6 @@ export const m9Content: Record<string, TopicContent> = {
     topicId: '9.3',
     learningObjective: `Understand Xanadu's PennyLane framework — its automatic differentiation engine, the parameter-shift rule for quantum gradients, and how it optimises parameterised quantum circuits for QNLP applications.`,
     nextPrep: `Install PennyLane using pip install pennylane and review basic calculus concepts (partial derivatives, chain rule).`,
-    dependencyGraph: `flowchart LR
-      A[9.1 QNLP Ecosystem] --> B[9.3 PennyLane]
-      B --> C[9.5 Setup]
-      B --> D[9.6 Lab]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you are trying to tune a complex musical instrument with hundreds of dials. Each dial changes the sound in subtle ways, and you want to find the perfect setting for a beautiful melody. Turning dials at random would take forever. You need a way to know: if I turn this dial slightly, does the music get better or worse? That is exactly what PennyLane does for quantum circuits. It computes the gradient — the direction each dial should be turned to improve the result. Without PennyLane, training quantum models would be like tuning that instrument in the dark, guessing randomly at each dial. With PennyLane, you have a precise measurement of exactly how to adjust every parameter.`,
       questions: [
@@ -725,17 +685,6 @@ export const m9Content: Record<string, TopicContent> = {
         `Gradient inspector: click any parameter to see the two shifted circuit evaluations that compute its gradient via parameter-shift rule`,
       ],
       completionMessage: `You have mastered PennyLane training! You can design, train, and optimise parameterised quantum circuits for QNLP tasks.`,
-      dataFlow: `flowchart LR
-        A[Circuit Architecture] --> B[PennyLane QNode]
-        B --> C[Forward Pass]
-        C --> D[Expectation Values]
-        D --> E[Loss Computation]
-        E --> F[Parameter-Shift Rule]
-        F --> G[Gradients]
-        G --> H[Optimiser]
-        H --> I[Updated Parameters]
-        I --> B
-        D --> J[Classification Output]`,
     },
     insights: {
       advantages: [
@@ -765,12 +714,6 @@ export const m9Content: Record<string, TopicContent> = {
     topicId: '9.4',
     learningObjective: `Understand Quantinuum's Lambeq framework — how it translates pregroup grammar derivations into parameterised quantum circuits, its core components, and its role as the linguistic-to-quantum bridge in QNLP.`,
     nextPrep: `Review Module 8 on pregroup grammars and linguistic categories. Ensure you understand how words map to types like n, s, and their adjoints.`,
-    dependencyGraph: `flowchart LR
-      A[9.1 QNLP Ecosystem] --> B[9.4 Lambeq]
-      B --> C[9.5 Setup]
-      B --> D[9.6 Lab]
-      B --> E[M10: Building QLMs]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you have a brilliant engineer who speaks only Mandarin and a brilliant architect who speaks only Spanish. They need to build a bridge together, but they cannot communicate directly. You need a translator who speaks both languages fluently. Lambeq is that translator — but between linguistics and quantum computing. It takes the language of pregroup grammar — noun phrases, sentence types, adjoint types — and translates them into the language of quantum circuits — qubits, gates, and measurements. Without Lambeq, you would need to manually design quantum circuits for each sentence structure. With Lambeq, the translation is automatic, correct by construction, and grounded in the mathematics of category theory.`,
       questions: [
@@ -969,18 +912,6 @@ export const m9Content: Record<string, TopicContent> = {
         `Circuit panel: generated circuit with parameterised gates. Hover over any gate to see its unitary matrix. Statistics bar shows qubit count, gate count, depth, and parameter count`,
       ],
       completionMessage: `You have mastered Lambeq! You can translate any sentence into a parameterised quantum circuit ready for QNLP tasks.`,
-      dataFlow: `flowchart LR
-        A[Input Sentence] --> B[BobcatParser]
-        B --> C[Pregroup Derivation]
-        C --> D[Rewrite Rules]
-        D --> E[Simplified Diagram]
-        E --> F[CircuitFactory + Ansatz]
-        F --> G[Parameterised Quantum Circuit]
-        G --> H[Qiskit Backend]
-        H --> I[Measurement Results]
-        G --> J[PennyLane Optimiser]
-        J --> K[Updated Parameters]
-        K --> G`,
     },
     insights: {
       advantages: [
@@ -1010,12 +941,6 @@ export const m9Content: Record<string, TopicContent> = {
     topicId: '9.5',
     learningObjective: `Set up a complete QNLP development environment with Python, Qiskit, PennyLane, Lambeq, and supporting libraries, and verify the installation with a test pipeline.`,
     nextPrep: `Ensure Python 3.9+ is installed on your machine. Create a fresh virtual environment for the QNLP workshop to avoid dependency conflicts.`,
-    dependencyGraph: `flowchart LR
-      A[9.2 Qiskit] --> D[9.5 Dev Setup]
-      B[9.3 PennyLane] --> D
-      C[9.4 Lambeq] --> D
-      D --> E[9.6 Lab]
-      style D fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you are an astronaut preparing for a mission to Mars. Before you can explore the red planet, you must build the rocket, install the navigation system, pack the supplies, and run countless tests on the ground. The launch pad is your development environment — if it is not built correctly, the mission fails before it begins. Setting up your QNLP development environment is like preparing that launch pad. You need Python (the rocket frame), Qiskit (the engines), PennyLane (the navigation computer), and Lambeq (the Mars rover itself). Installing and configuring each component correctly, with compatible versions, is the essential groundwork for the exciting quantum NLP explorations ahead.`,
       questions: [
@@ -1213,24 +1138,6 @@ export const m9Content: Record<string, TopicContent> = {
         `Troubleshooting panel: click any failed test to see common causes and suggested fixes with command examples`,
       ],
       completionMessage: `Your QNLP development environment is fully set up and verified! You are ready to start building quantum language models.`,
-      dataFlow: `flowchart LR
-        A[Python Installation] --> B[Virtual Environment]
-        B --> C[pip install qiskit]
-        C --> D{Qiskit Smoke Test}
-        D -->|Pass| E[pip install pennylane]
-        D -->|Fail| F[Debug Qiskit]
-        F --> C
-        E --> G{PennyLane Smoke Test}
-        G -->|Pass| H[pip install lambeq]
-        G -->|Fail| I[Debug PennyLane]
-        I --> E
-        H --> J{Lambeq Smoke Test}
-        J -->|Pass| K[Integration Test]
-        J -->|Fail| L[Debug Lambeq]
-        L --> H
-        K --> M{All Tests Pass}
-        M -->|Yes| N[Environment Ready]
-        M -->|No| O[Report Issues]`,
     },
     insights: {
       advantages: [
@@ -1260,12 +1167,6 @@ export const m9Content: Record<string, TopicContent> = {
     topicId: '9.6',
     learningObjective: `Apply the three QNLP frameworks (Qiskit, PennyLane, Lambeq) in a hands-on lab session, running simulated workflows that demonstrate the complete pipeline from sentence to classification.`,
     nextPrep: `Ensure your development environment from 9.5 is working. Review the Lambeq parser examples and Qiskit circuit basics.`,
-    dependencyGraph: `flowchart LR
-      A[9.2 Qiskit] --> D[9.6 Lab]
-      B[9.3 PennyLane] --> D
-      C[9.4 Lambeq] --> D
-      E[9.5 Setup] --> D
-      style D fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Think of this lab as a flight simulator for quantum NLP pilots. Before you fly a real plane (deploy a QNLP model on quantum hardware), you practice in a simulator where there are no risks, you can pause and examine every system, and you can repeat exercises until they become second nature. This lab simulates the complete QNLP workflow: you will load sentences, parse them with Lambeq, generate circuits, run them on Qiskit's simulator, and optimise parameters with PennyLane — all without needing an actual quantum computer. By the end of this lab, you will have flown the complete QNLP mission in the simulator, ready to take on real quantum hardware.`,
       questions: [
@@ -1470,25 +1371,6 @@ export const m9Content: Record<string, TopicContent> = {
         `Training panel: real-time loss curve (epoch vs loss), parameter trackers showing each θ's value over time, gradient magnitude plot. Accuracy meter showing current validation accuracy`,
       ],
       completionMessage: `You have successfully completed the QNLP lab! You ran the complete pipeline from sentence to classification using Lambeq, Qiskit, and PennyLane in a simulated environment.`,
-      dataFlow: `flowchart LR
-        A[Input Sentence] --> B[BobcatParser]
-        B --> C[Pregroup Diagram]
-        C --> D[Rewriter]
-        D --> E[Simplified Diagram]
-        E --> F[IQPAnsatz]
-        F --> G[Parameterised Circuit]
-        G --> H[Qiskit Aer Simulator]
-        H --> I[Measurement Counts]
-        I --> J[Classification Result]
-        G --> K[PennyLane Optimiser]
-        K --> L{Training Loop}
-        L --> M[Loss Computation]
-        M --> N{Gradient Check}
-        N --> O[Parameter Update]
-        O --> G
-        L --> P[Converged?]
-        P -->|Yes| Q[Final Model]
-        P -->|No| M`,
     },
     insights: {
       advantages: [

@@ -5,14 +5,6 @@ export const m8Content: Record<string, TopicContent> = {
     topicId: '8.1',
     learningObjective: `Understand how grammar provides the structural scaffolding for meaning, and how different grammatical formalisms represent syntactic relationships.`,
     nextPrep: `Review parts of speech (noun, verb, adjective, etc.) and basic sentence structure (subject-verb-object) before this session.`,
-    dependencyGraph: `flowchart LR
-      A[M7: QNLP Introduction] --> B[8.1 Grammar and Meaning]
-      B --> C[8.2 Compositional Semantics]
-      C --> D[8.3 Distributional Semantics]
-      D --> E[8.4 DisCoCat Framework]
-      E --> F[8.5 Diagrammatic Representation]
-      F --> G[8.6 Visualising Sentences]
-      G --> H[M9: Tools & Libraries]`,
     storytelling: {
       story: `Imagine a child building with LEGO bricks. The bricks themselves are just coloured plastic — they could become anything. But the instruction booklet shows which brick connects to which, and in what order. The bricks are words; the instruction booklet is grammar. Without the booklet, you have a pile of pieces. Without grammar, you have a vocabulary list but no sentences. Now imagine that the instruction booklet is written in a strange language — that is formal grammar. And imagine the completed LEGO model is not just a static object but a machine that computes meaning — that is the quantum view of grammar.`,
       questions: [
@@ -206,15 +198,6 @@ export const m8Content: Record<string, TopicContent> = {
         `The quantum circuit preview shows how the pregroup derivation translates to qubit connectivity — each type becomes a qubit wire, each contraction becomes a Bell measurement or gate`,
       ],
       completionMessage: `You have mastered the connection between grammar and quantum structure!`,
-      dataFlow: `flowchart LR
-        A[Input Sentence] --> B[Word Sequence]
-        B --> C[Type Assignment]
-        C --> D[Pregroup Derivation]
-        D --> E[Type Contraction Steps]
-        D --> F[Parse Tree View]
-        E --> G[String Diagram]
-        G --> H[Quantum Circuit Mapping]
-        F --> I[Constituent Structure]`,
     },
     insights: {
       advantages: [
@@ -244,10 +227,6 @@ export const m8Content: Record<string, TopicContent> = {
     topicId: '8.2',
     learningObjective: `Understand the principle of compositionality (Frege's principle) and how it provides the foundation for computing meaning from structure.`,
     nextPrep: `Read about Frege's principle of compositionality and think about how it applies to your own language use.`,
-    dependencyGraph: `flowchart LR
-      A[8.1 Grammar and Meaning] --> B[8.2 Compositional Semantics]
-      B --> C[8.3 Distributional Semantics]
-      C --> D[8.4 DisCoCat Framework]`,
     storytelling: {
       story: `Imagine you are a chef creating a new dish. You understand the flavour of each ingredient individually — basil is aromatic, tomato is tangy, mozzarella is creamy. When you combine them in a caprese salad, the resulting flavour is not just the sum of individual flavours. It is a new, complex flavour where each ingredient modifies and is modified by the others. Similarly, the meaning of a sentence is not just the sum of word meanings. The meaning of "cat chases mouse" is different from "mouse chases cat" even though the words are the same. Compositionality explains how the arrangement of words creates new meaning from old.`,
       questions: [
@@ -435,15 +414,6 @@ export const m8Content: Record<string, TopicContent> = {
         `The comparison panel shows both approaches side by side with the same colours for corresponding operations — green for entity, blue for property, red for quantifier`,
       ],
       completionMessage: `You have mastered the principles of compositional semantics in both classical and quantum frameworks!`,
-      dataFlow: `flowchart LR
-        A[Words] --> B[Individual Meanings]
-        B --> C{Composition Framework}
-        C --> D[Classical Function Application]
-        C --> E[DisCoCat Tensor Contraction]
-        D --> F[Truth-Conditional Meaning]
-        E --> G[Meaning Tensor]
-        F --> H[Comparison]
-        G --> H`,
     },
     insights: {
       advantages: [
@@ -473,9 +443,6 @@ export const m8Content: Record<string, TopicContent> = {
     topicId: '8.3',
     learningObjective: `Understand distributional semantics — how word meanings are learned from patterns of co-occurrence in large text corpora — and its role in modern NLP.`,
     nextPrep: `Think about how you might guess the meaning of an unfamiliar word from the words that appear around it in text.`,
-    dependencyGraph: `flowchart LR
-      A[8.2 Compositional Semantics] --> B[8.3 Distributional Semantics]
-      B --> C[8.4 DisCoCat Framework]`,
     storytelling: {
       story: `Imagine an alien who has landed on Earth and is trying to learn English by reading only the internet. The alien has never seen a cat, a dog, or a mouse, but notices that the word "cat" always appears near words like "pet", "furry", "meow", and "cute", while "dog" appears near "bark", "fetch", and "loyal". Meanwhile, "mouse" appears near both "cheese" (animal) and "click", "cursor", "screen" (computer). The alien will learn a lot about these words from the company they keep — this is distributional semantics. The alien will also notice that "mouse" keeps two different types of company, revealing its ambiguity — a nuance that grammar alone cannot capture.`,
       questions: [
@@ -668,15 +635,6 @@ export const m8Content: Record<string, TopicContent> = {
         `The export panel lets you select a word and download its vector in JSON format compatible with the lambeq library for use in sentence composition experiments`,
       ],
       completionMessage: `You have mastered distributional semantics — the data-driven foundation for word meanings in QNLP!`,
-      dataFlow: `flowchart LR
-        A[Input Word] --> B[Word Vector Lookup]
-        B --> C[Nearest Neighbours]
-        B --> D[Vector Arithmetic]
-        D --> E[Analogy Results]
-        B --> F[PCA Projection]
-        F --> G[2D Visualisation]
-        B --> H[Vector Export]
-        H --> I[Lambeq Composer]`,
     },
     insights: {
       advantages: [
@@ -706,12 +664,6 @@ export const m8Content: Record<string, TopicContent> = {
     topicId: '8.4',
     learningObjective: `Understand the DisCoCat (Distributional Compositional Categorical) framework that unifies distributional and compositional semantics using the mathematics of compact closed categories.`,
     nextPrep: `Review the concepts of compact closed categories, tensor products, and cups/caps from the quantum computing modules (Module 5).`,
-    dependencyGraph: `flowchart LR
-      A[8.2 Compositional Semantics] --> B[8.3 Distributional Semantics]
-      A --> C[8.4 DisCoCat Framework]
-      B --> C
-      C --> D[8.5 Diagrammatic Representation]
-      D --> E[8.6 Visualising Sentences]`,
     storytelling: {
       story: `Imagine two ancient maps of the same territory. One map shows the landscape as points and coordinates (distributional semantics: words as points in space). The other map shows travel routes connecting cities (compositional semantics: grammatical rules connecting words). Alone, each map is incomplete. The coordinate map tells you where things are but not how to travel between them. The route map tells you how to navigate but not what each place is. DisCoCat is the master map that overlays both — it shows both the locations (word vectors) and the routes (grammatical contractions) on a single unified chart. The mathematics of category theory is the cartographic technology that makes this overlay possible.`,
       questions: [
@@ -899,15 +851,6 @@ export const m8Content: Record<string, TopicContent> = {
         `The quantum circuit panel shows the equivalent circuit — each word becomes a gate, each contraction becomes a Bell measurement — ready for execution on a simulator or hardware`,
       ],
       completionMessage: `You have mastered the DisCoCat framework — the theoretical core of QNLP!`,
-      dataFlow: `flowchart LR
-        A[Grammar Fragment] --> B[Pregroup Derivation]
-        B --> C[String Diagram]
-        C --> D[Tensor Network]
-        D --> E[Word Vectors]
-        E --> F[Tensor Contraction]
-        F --> G[Sentence Meaning Vector]
-        C --> H[Quantum Circuit Mapping]
-        H --> I[Executable Circuit]`,
     },
     insights: {
       advantages: [
@@ -937,9 +880,6 @@ export const m8Content: Record<string, TopicContent> = {
     topicId: '8.5',
     learningObjective: `Understand string diagrams and other diagrammatic representations of linguistic structure, and how they serve as a bridge between grammar and quantum circuits.`,
     nextPrep: `Review string diagrams from quantum computing (Module 5) — particularly cups, caps, and the diagrammatic representation of tensor contraction.`,
-    dependencyGraph: `flowchart LR
-      A[8.4 DisCoCat Framework] --> B[8.5 Diagrammatic Representation]
-      B --> C[8.6 Visualising Sentences]`,
     storytelling: {
       story: `Imagine you are an architect trying to explain the structure of a building. You could describe it in words: "The building has a steel frame, with load-bearing walls at coordinates (0,0) to (10,0)..." Or you could show a blueprint — a visual diagram where walls are lines, doors are arcs, and rooms are boxes. The blueprint communicates in a glance what paragraphs of text struggle to convey. String diagrams are the blueprints of language. They show words as boxes, grammatical types as wires, and composition as the physical connection of wires. A single string diagram captures the entire grammatical structure of a sentence in a visual form that is also a valid quantum circuit diagram.`,
       questions: [
@@ -1127,15 +1067,6 @@ export const m8Content: Record<string, TopicContent> = {
         `The lab can export diagrams as SVG, PNG, or LaTeX/TikZ for use in presentations and papers`,
       ],
       completionMessage: `You have mastered diagrammatic reasoning for QNLP — the visual language of meaning and quantum computation!`,
-      dataFlow: `flowchart LR
-        A[Input Sentence] --> B[Parser]
-        B --> C[Pregroup Derivation]
-        C --> D[String Diagram Generator]
-        D --> E[Interactive String Diagram]
-        E --> F[Topological Manipulation]
-        E --> G[Quantum View]
-        G --> H[Quantum Circuit Diagram]
-        E --> I[Export: SVG/PNG/LaTeX]`,
     },
     insights: {
       advantages: [
@@ -1165,9 +1096,6 @@ export const m8Content: Record<string, TopicContent> = {
     topicId: '8.6',
     learningObjective: `Master the practical skills of visualising sentence structures as string diagrams and quantum circuits using modern QNLP software tools.`,
     nextPrep: `Ensure you have lambeq installed and working. Review the lambeq documentation for diagram and circuit visualisation functions.`,
-    dependencyGraph: `flowchart LR
-      A[8.5 Diagrammatic Representation] --> B[8.6 Visualising Sentences]
-      B --> C[M9: Tools & Libraries for QNLP]`,
     storytelling: {
       story: `Think of the difference between having a musical score on paper and hearing the symphony performed. A score contains all the information — notes, rhythms, dynamics — but it takes training and imagination to hear the music in your head from the page. A performance makes the music real, tangible, audible. Similarly, we have been studying the "score" of QNLP — the mathematical structures, types, and diagrams. Now it is time to hear the symphony: to use software that takes a sentence, parses it, draws the string diagram, builds the quantum circuit, and lets us see and manipulate every step. This lab transforms abstract knowledge into practical, visual experience.`,
       questions: [
@@ -1359,21 +1287,6 @@ export const m8Content: Record<string, TopicContent> = {
         `The export button saves the current view as PNG, SVG, or PDF — choose between string diagram view, quantum circuit view, or combined dashboard view`,
       ],
       completionMessage: `You have mastered the art of visualising sentence structures for QNLP. You can now go from any sentence to its quantum circuit in seconds!`,
-      dataFlow: `flowchart LR
-        A[Input Sentence] --> B[BobcatParser]
-        B --> C[CCG Parse Tree]
-        C --> D[Pregroup Diagram]
-        D --> E[String Diagram Visualisation]
-        D --> F{Ansatz Selection}
-        F --> G[IQPAnsatz]
-        F --> H[MPSAnsatz]
-        F --> I[SpiderNetAnsatz]
-        G --> J[Quantum Circuit]
-        H --> J
-        I --> J
-        J --> K[Circuit Visualisation]
-        E --> L[Export: SVG/PNG/PDF]
-        K --> L`,
     },
     insights: {
       advantages: [

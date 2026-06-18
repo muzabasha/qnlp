@@ -5,13 +5,6 @@ export const m6Content: Record<string, TopicContent> = {
     topicId: '6.1',
     learningObjective: `Understand how words can be represented as numerical vectors and how this bridges language and quantum computing.`,
     nextPrep: `Review basic linear algebra concepts: vectors, dot products, and vector spaces before the next session.`,
-    dependencyGraph: `flowchart LR
-      A[M5: Quantum Computing] --> B[6.1 Words as Vectors]
-      B --> C[6.2 Vector Spaces in NLP]
-      C --> D[6.3 Quantum State Representation]
-      D --> E[6.4 Encoding Text into Quantum States]
-      E --> F[6.5 Feature Mapping]
-      F --> G[6.6 Hands-On Lab]`,
     storytelling: {
       story: `Imagine you are a librarian in the world's strangest library. Every book is written in a language you have never seen, but you notice each book has a unique scent. After years of careful sniffing, you realise that books about cooking smell like basil and garlic, while books about space smell like ozone and metal. You have just invented vector representations — mapping complex objects to measurable features. This is exactly how word vectors work: we map words to lists of numbers that capture their meaning based on the company they keep.`,
       questions: [
@@ -203,16 +196,6 @@ export const m6Content: Record<string, TopicContent> = {
         `A side panel shows how a quantum state vector would differ — superposition and phase`,
       ],
       completionMessage: `You have mastered the concept of word vectors and their geometric properties!`,
-      dataFlow: `flowchart LR
-        A[Input Word] --> B[Lookup Table]
-        B --> C[300-dim Vector]
-        C --> D[Cosine Similarity]
-        D --> E[Nearest Neighbours]
-        C --> F[Vector Arithmetic]
-        F --> G[Analogy Result]
-        C --> H[PCA Reduction]
-        H --> I[2D Visualisation]
-        E --> I`,
     },
     insights: {
       advantages: [
@@ -242,9 +225,6 @@ export const m6Content: Record<string, TopicContent> = {
     topicId: '6.2',
     learningObjective: `Understand vector spaces as the mathematical foundation for both classical NLP and quantum state representations.`,
     nextPrep: `Refresh your knowledge of basis vectors, linear transformations, and inner product spaces before the next session.`,
-    dependencyGraph: `flowchart LR
-      A[6.1 Words as Vectors] --> B[6.2 Vector Spaces in NLP]
-      B --> C[6.3 Quantum State Representation]`,
     storytelling: {
       story: `Think of a vector space as a vast coordinate system, like the grid of streets in Manhattan. Each word is a building at a specific intersection. "Coffee shop" and "cafe" are neighbours on the same block. "Hospital" is further away. Now imagine that this city has not just two dimensions but three hundred. You cannot see it, but you can navigate it mathematically. This invisible city is the vector space of language, and quantum computing gives us a new kind of map for exploring it.`,
       questions: [
@@ -419,15 +399,6 @@ export const m6Content: Record<string, TopicContent> = {
         `Toggle between different projection methods: PCA, t-SNE, or random projection`,
       ],
       completionMessage: `You have mastered the geometry of vector spaces and their role in word representation!`,
-      dataFlow: `flowchart LR
-        A[Word Vectors] --> B[Vector Space]
-        B --> C[Basis Transformation]
-        C --> D[Transformed Vectors]
-        B --> E[Inner Product]
-        E --> F[Similarity Matrix]
-        B --> G[Dimensionality Reduction]
-        G --> H[2D Visualisation]
-        D --> H`,
     },
     insights: {
       advantages: [
@@ -456,9 +427,6 @@ export const m6Content: Record<string, TopicContent> = {
     topicId: '6.3',
     learningObjective: `Understand quantum state vectors (qubits), their mathematical representation, and how they differ from classical word vectors.`,
     nextPrep: `Review complex numbers and the postulates of quantum mechanics before the next session.`,
-    dependencyGraph: `flowchart LR
-      A[6.2 Vector Spaces] --> B[6.3 Quantum State Representation]
-      B --> C[6.4 Encoding Text into Quantum States]`,
     storytelling: {
       story: `Imagine you have a magic coin. While it is spinning in the air, it is neither heads nor tails — it is both at once. Only when you catch it does it decide. This is superposition. Now imagine two magic coins that are entangled: when you catch one, the other instantly becomes the opposite, even if they are on opposite sides of the universe. This is entanglement. A quantum state vector is the mathematical description of this magic: it tells you everything that can be known about the system before you measure it.`,
       questions: [
@@ -634,15 +602,6 @@ export const m6Content: Record<string, TopicContent> = {
         `In 2-qubit mode, explore Bell states and see how entanglement creates correlations that classical probability cannot explain`,
       ],
       completionMessage: `You have mastered the fundamentals of quantum state representation!`,
-      dataFlow: `flowchart LR
-        A[Qubit Parameters] --> B[State Vector]
-        B --> C[Bloch Sphere Display]
-        B --> D[Gate Operations]
-        D --> B
-        B --> E[Measurement]
-        E --> F[Probability Distribution]
-        B --> G[Tensor Product]
-        G --> H[Multi-Qubit State]`,
     },
     insights: {
       advantages: [
@@ -672,10 +631,6 @@ export const m6Content: Record<string, TopicContent> = {
     topicId: '6.4',
     learningObjective: `Learn how to encode classical text data into quantum state representations for quantum NLP processing.`,
     nextPrep: `Review tensor products and how to decompose words into their constituent characters or subwords before the next session.`,
-    dependencyGraph: `flowchart LR
-      A[6.3 Quantum State Representation] --> B[6.4 Encoding Text into Quantum States]
-      B --> C[6.5 Feature Mapping Techniques]
-      B --> D[6.6 Hands-On Lab]`,
     storytelling: {
       story: `Imagine you are a translator tasked with converting a beautiful poem into a language that uses only coloured lights. Each word becomes a specific hue and brightness. "Love" might be a warm crimson glow, "ocean" a deep cerulean pulse. Now imagine you can mix these colours together — not on a palette, but by shining them through the same point in space so they combine into a single, richer colour. This is exactly what encoding text into quantum states does: it maps linguistic meaning into the language of quantum amplitudes, where words can coexist in superposition.`,
       questions: [
@@ -854,19 +809,6 @@ export const m6Content: Record<string, TopicContent> = {
         `Fidelity score measures how well the quantum state preserves the original word relationships`,
       ],
       completionMessage: `You have successfully encoded text into quantum states!`,
-      dataFlow: `flowchart LR
-        A[Input Text] --> B[Word Embedding]
-        B --> C{Encoding Scheme}
-        C --> D[Basis Encoding]
-        C --> E[Amplitude Encoding]
-        C --> F[Angle Encoding]
-        D --> G[Quantum Circuit]
-        E --> G
-        F --> G
-        G --> H[Quantum State]
-        H --> I[State Visualisation]
-        H --> J[Fidelity Check]
-        J --> K[Compare with Classical]`,
     },
     insights: {
       advantages: [
@@ -896,9 +838,6 @@ export const m6Content: Record<string, TopicContent> = {
     topicId: '6.5',
     learningObjective: `Master feature mapping techniques that transform classical word features into quantum-ready representations.`,
     nextPrep: `Read about quantum feature maps in the Qiskit documentation, focusing on ZZFeatureMap and PauliFeatureMap.`,
-    dependencyGraph: `flowchart LR
-      A[6.4 Encoding Text] --> B[6.5 Feature Mapping Techniques]
-      B --> C[6.6 Hands-On Lab]`,
     storytelling: {
       story: `Imagine you are a cartographer in the age of exploration. You have reports from sailors about a new land, but they describe it in terms of "wind direction," "water depth," and "star positions." To create a useful map, you need to decide how to project these features onto paper. A Mercator projection preserves direction but distorts size. A Peters projection preserves area but distorts shape. Feature mapping is the same idea: choosing how to project word features into quantum states, with each projection preserving different properties and enabling different operations.`,
       questions: [
@@ -1075,16 +1014,6 @@ export const m6Content: Record<string, TopicContent> = {
         `Side-by-side comparison mode shows two feature maps simultaneously for easy contrast`,
       ],
       completionMessage: `You have mastered quantum feature mapping techniques for NLP!`,
-      dataFlow: `flowchart LR
-        A[Word Features] --> B[Feature Map Selection]
-        B --> C[Circuit Generation]
-        C --> D[Quantum State Encoding]
-        D --> E[Kernel Matrix Computation]
-        E --> F[Similarity Visualisation]
-        C --> G[Circuit Depth Analysis]
-        B --> H[Expressivity Score]
-        F --> I[Model Training]
-        H --> I`,
     },
     insights: {
       advantages: [
@@ -1114,10 +1043,6 @@ export const m6Content: Record<string, TopicContent> = {
     topicId: '6.6',
     learningObjective: `Build hands-on experience encoding words into quantum circuits using a quantum computing framework.`,
     nextPrep: `Review the lab worksheet and ensure Qiskit or Cirq is installed on your machine. Bring your laptop with the quantum SDK ready.`,
-    dependencyGraph: `flowchart LR
-      A[6.4 Encoding Text] --> B[6.5 Feature Mapping]
-      B --> C[6.6 Hands-On Lab: Words to Circuits]
-      C --> D[M7: QNLP Introduction]`,
     storytelling: {
       story: `Think of the Wright brothers at Kitty Hawk. They had studied aerodynamics, built wind tunnels, and designed wing shapes. But the true test came when they had to build a machine that actually flew. Today, you are the Wright brothers of QNLP. You have studied word vectors, quantum states, and feature maps. Now it is time to build — to wire up actual quantum gates that encode real words into circuits. Your first flight may be short, but it will prove that words can indeed fly in the quantum realm.`,
       questions: [
@@ -1302,18 +1227,6 @@ export const m6Content: Record<string, TopicContent> = {
         `The comparison panel shows classical word vector, encoded quantum state, and fidelity score. A heatmap shows similarity to other encoded words`,
       ],
       completionMessage: `Congratulations! You have successfully built quantum circuits that encode real words. You are now a QNLP programmer!`,
-      dataFlow: `flowchart LR
-        A[Word Input] --> B[Embedding Lookup]
-        B --> C[Encoding Selection]
-        C --> D[Circuit Generation]
-        D --> E[Gate Assembly]
-        E --> F[Circuit Transpilation]
-        F --> G[Simulator Execution]
-        G --> H[State Vector]
-        H --> I[Fidelity Check]
-        I --> J[Classical Comparison]
-        F --> K[Hardware Deployment]
-        K --> L[Measurement Results]`,
     },
     insights: {
       advantages: [

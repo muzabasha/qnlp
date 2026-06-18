@@ -5,14 +5,6 @@ export const m12Content: Record<string, TopicContent> = {
     topicId: '12.1',
     learningObjective: `Understand why hybrid quantum-classical models are necessary, their architectural principles, and the problems they solve.`,
     nextPrep: `Review Module 11 on quantum text classification and refresh your knowledge of classical neural network architectures.`,
-    dependencyGraph: `flowchart LR
-      A[M11: Quantum Classification] --> B[12.1 Why Hybrid Models?]
-      B --> C[12.2 Variational Quantum Circuits]
-      C --> D[12.3 Hybrid Architecture]
-      D --> E[12.4 Quantum Feature Extraction]
-      E --> F[12.5 Integration with Classical Nets]
-      F --> G[12.6 Hybrid NLP Lab]
-      style B fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `Imagine you are building the ultimate chef. A classical chef is incredible at following precise recipes, measuring ingredients, and timing dishes perfectly. A quantum chef can taste all possible flavour combinations simultaneously but struggles with precise measurements. The best restaurant in the world would not hire one or the other — they would hire both. The classical chef prepares the ingredients and handles the precise execution, while the quantum chef explores creative flavour combinations that no classical chef would ever discover. This is the hybrid quantum-classical model: classical computers handle what they are good at (preprocessing, optimisation, structured computation), while quantum computers handle what they are good at (exploring high-dimensional spaces, superposition of possibilities).`,
       questions: [
@@ -162,16 +154,6 @@ export const m12Content: Record<string, TopicContent> = {
         `Comparison dashboard shows all metrics side-by-side with visualisations`,
       ],
       completionMessage: `You have empirically compared pure classical, pure quantum, and hybrid architectures!`,
-      dataFlow: `flowchart LR
-        A[Input Text] --> B[Classical Embedding]
-        B --> C{Architecture}
-        C --> D[Pure Classical NN]
-        C --> E[Pure Quantum Circuit]
-        C --> F[Hybrid: Classical + Quantum + Classical]
-        D --> G[Predictions]
-        E --> G
-        F --> G
-        G --> H[Comparison Dashboard]`,
     },
     insights: {
       advantages: [
@@ -202,12 +184,6 @@ export const m12Content: Record<string, TopicContent> = {
     topicId: '12.2',
     learningObjective: `Understand Variational Quantum Circuits (VQCs): their structure, expressivity, training, and role as the quantum workhorse in hybrid models.`,
     nextPrep: `Review parameterised quantum gates from Module 5 and the concept of unitary evolution.`,
-    dependencyGraph: `flowchart LR
-      A[12.1 Why Hybrid?] --> B[12.2 Variational Quantum Circuits]
-      B --> C[12.3 Hybrid Architecture]
-      B --> D[Ansatz Design]
-      B --> E[Expressivity Analysis]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `A variational quantum circuit is like a Swiss Army knife for quantum computing. It is a flexible, reusable tool that can be configured for many different tasks by simply turning its knobs (parameters). Imagine a musical synthesiser — with the same hardware, you can produce any sound by adjusting the sliders. A VQC is the same: a fixed circuit structure with adjustable rotation angles that can learn to perform classification, regression, feature extraction, or generation. It is the most important architectural pattern in near-term quantum ML.`,
       questions: [
@@ -370,19 +346,6 @@ export const m12Content: Record<string, TopicContent> = {
         `Comparison mode runs multiple ansätze side-by-side`,
       ],
       completionMessage: `You have mastered the fundamentals of Variational Quantum Circuit design and training!`,
-      dataFlow: `flowchart TD
-        A[Select Ansatz] --> B[Choose Qubits & Layers]
-        B --> C[Visualise Circuit]
-        C --> D[Initialise Parameters]
-        D --> E[Encode Training Data]
-        E --> F[Run VQC Forward Pass]
-        F --> G[Compute Loss]
-        G --> H[Parameter Shift ?L]
-        H --> I[Update Parameters]
-        I --> F
-        G --> J[Converged?]
-        J -->|Yes| K[Evaluate Expressivity]
-        K --> L[Report Metrics]`,
     },
     insights: {
       advantages: [
@@ -412,12 +375,6 @@ export const m12Content: Record<string, TopicContent> = {
     topicId: '12.3',
     learningObjective: `Understand the complete hybrid learning architecture: how classical and quantum components connect, communicate, and co-train.`,
     nextPrep: `Review classical neural network architectures (feed-forward, convolutional, Transformer) and VQC concepts from the previous topic.`,
-    dependencyGraph: `flowchart LR
-      A[12.1 Why Hybrid?] --> B[12.2 VQC] --> C[12.3 Hybrid Architecture]
-      C --> D[12.4 Quantum Feature Extraction]
-      C --> E[Data Flow]
-      C --> F[Gradient Flow]
-      style C fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `You are the architect designing a bridge that connects two cities: Classica (a well-established city with excellent infrastructure) and Quantuma (a new, experimental city with extraordinary capabilities but limited roads). The bridge needs to allow smooth traffic in both directions — data flowing from Classica to Quantuma for processing, and gradients flowing back from Quantuma to Classica for learning. This bridge is the hybrid learning architecture. Getting its design right is the key to unlocking the potential of both cities.`,
       questions: [
@@ -567,23 +524,6 @@ export const m12Content: Record<string, TopicContent> = {
         `Comparison dashboard aggregates results from multiple runs with different configurations`,
       ],
       completionMessage: `You have mastered hybrid architecture design and can now choose the right configuration for any task!`,
-      dataFlow: `flowchart TD
-        A[Input Text] --> B[Classical Embedding]
-        B --> C[Dimensionality Reduction]
-        C --> D[Quantum Encoding]
-        D --> E[VQC Layer]
-        E --> F[Measurement]
-        F --> G[Classical Postprocessing]
-        G --> H[Output Layer]
-        H --> I[Predictions]
-        I --> J[Loss Computation]
-        J --> K{Backpropagate}
-        K --> L[Classical Gradients]
-        K --> M[Parameter Shift]
-        L --> N[Update Classical Parameters]
-        M --> O[Update Quantum Parameters]
-        N --> B
-        O --> E`,
     },
     insights: {
       advantages: [
@@ -614,12 +554,6 @@ export const m12Content: Record<string, TopicContent> = {
     topicId: '12.4',
     learningObjective: `Understand how quantum circuits extract features in exponentially high-dimensional Hilbert spaces and how these features benefit NLP tasks.`,
     nextPrep: `Review the concept of feature maps from classical ML and the quantum feature map equation.`,
-    dependencyGraph: `flowchart LR
-      A[12.3 Hybrid Architecture] --> B[12.4 Quantum Feature Extraction]
-      B --> C[12.5 Integration with Classical Nets]
-      B --> D[Feature Maps]
-      B --> E[Hilbert Space]
-      style B fill:#6a0dad,color:#fff`,
     storytelling: {
       story: `Imagine you are an art critic who can see details invisible to everyone else. While others see a painting's basic colours and shapes, you can see the brushstroke patterns, the chemical composition of each pigment, and the artist's emotional state at the moment of each stroke. This is what quantum feature extraction does: it transforms data into a representation where patterns that were invisible in the original space become obvious. The quantum feature map is like a magical lens that reveals hidden structure in text data.`,
       questions: [
@@ -782,14 +716,6 @@ export const m12Content: Record<string, TopicContent> = {
         `Separability score quantifies how well the classes are separated in each feature map`,
       ],
       completionMessage: `You have explored quantum feature extraction and understand how feature maps affect class separability!`,
-      dataFlow: `flowchart LR
-        A[Input Data] --> B[Quantum Feature Map]
-        B --> C[Quantum Feature State]
-        C --> D[Kernel Matrix K]
-        D --> E[Kernel SVM]
-        E --> F[Classification]
-        C --> G[PCA Projection]
-        G --> H[Feature Space Visualisation]`,
     },
     insights: {
       advantages: [
@@ -820,13 +746,6 @@ export const m12Content: Record<string, TopicContent> = {
     topicId: '12.5',
     learningObjective: `Understand how quantum feature extraction integrates with classical neural networks to create powerful hybrid models for NLP tasks.`,
     nextPrep: `Review classical neural network architectures, particularly how dense layers and attention mechanisms process features.`,
-    dependencyGraph: `flowchart LR
-      A[12.4 Quantum Feature Extraction] --> B[12.5 Integration with Classical Nets]
-      B --> C[12.6 Hybrid NLP Lab]
-      B --> D[Dense Layers]
-      B --> E[Attention Mechanisms]
-      B --> F[Transformers]
-      style B fill:#4a90d9,color:#fff`,
     storytelling: {
       story: `You have built a powerful quantum microscope that can see details invisible to the naked eye. But seeing those details is useless unless you can interpret them. This is where classical neural networks come in — they are the expert interpreters that take the rich, high-dimensional features from the quantum microscope and make sense of them. The quantum feature extractor reveals patterns, and the classical network understands what those patterns mean. Together, they form a complete perception system.`,
       questions: [
@@ -975,24 +894,6 @@ export const m12Content: Record<string, TopicContent> = {
         `Comparison table aggregates results from all integration strategies tested`,
       ],
       completionMessage: `You have mastered the integration of quantum feature extraction with classical neural networks!`,
-      dataFlow: `flowchart TD
-        A[Input Text] --> B[Classical Embedding]
-        B --> C[Dense Layer 1]
-        C --> D[Classical Features h_c]
-        D --> E{Integration Strategy}
-        E --> F[Concatenation]
-        E --> G[Residual Connection]
-        E --> H[Attention Mechanism]
-        C --> I[Quantum Feature Extract]
-        I --> J[Quantum Features h_q]
-        J --> F
-        J --> G
-        J --> H
-        F --> K[Dense Layer 2]
-        G --> K
-        H --> K
-        K --> L[Output Layer]
-        L --> M[Predictions]`,
     },
     insights: {
       advantages: [
@@ -1023,11 +924,6 @@ export const m12Content: Record<string, TopicContent> = {
     topicId: '12.6',
     learningObjective: `Build, train, and evaluate a complete hybrid quantum-classical NLP pipeline in a hands-on lab environment.`,
     nextPrep: `Ensure you understand all previous topics in Module 12. Have a quantum computing environment (simulator) ready.`,
-    dependencyGraph: `flowchart LR
-      A[12.4 Quantum Feature Extraction] --> B[12.5 Integration]
-      B --> C[12.6 Hybrid NLP Lab]
-      C --> D[M13: Model Evaluation]
-      style C fill:#e84393,color:#fff`,
     storytelling: {
       story: `The day has arrived. You are no longer a student learning about hybrid quantum-classical models — you are an engineer building one. This lab is your opportunity to bring together everything you have learned: classical embeddings, quantum feature maps, VQC architectures, integration strategies, and hybrid training. You will build a pipeline that uses a quantum circuit to extract features from text, and a classical neural network to make classifications. When you are done, you will have a working hybrid NLP system that demonstrates the power of combining classical and quantum computation.`,
       questions: [
@@ -1187,27 +1083,6 @@ export const m12Content: Record<string, TopicContent> = {
         `Comparison dashboard: side-by-side accuracy, loss curves, parameter counts, and inference times`,
       ],
       completionMessage: `Congratulations! You have built and evaluated a complete hybrid quantum-classical NLP pipeline. You now have a portfolio-worthy demonstration of practical quantum-enhanced natural language processing!`,
-      dataFlow: `flowchart TD
-        A[Input Text] --> B[GloVe Embedding 50D]
-        B --> C[Dimensionality Reduction 50D -> 4D]
-        C --> D[ZZFeatureMap Encoding]
-        D --> E[VQC 3 Layers]
-        E --> F[Measurement: 4 Expectation Values]
-        F --> G{Residual Integration}
-        C --> H[Classical Dense 64D]
-        H --> G
-        G --> I[Dense Layer 32D]
-        I --> J[Output Layer 2D]
-        J --> K[Softmax Prediction]
-        K --> L[Sentiment: Positive/Negative]
-        K --> M[Loss Computation]
-        M --> N{Gradient Flow}
-        N --> O[Classical Backpropagation]
-        N --> P[Parameter Shift Rule]
-        O --> Q[Update Classical Parameters]
-        P --> R[Update Quantum Parameters]
-        Q --> C
-        R --> E`,
     },
     insights: {
       advantages: [
