@@ -38,23 +38,43 @@
   --color-info: #3b82f6;
 }
 
-@layer base {
-  html {
-    font-size: 18px;
-    scroll-behavior: smooth;
-  }
+html {
+  font-size: 18px;
+  scroll-behavior: smooth;
+}
+body {
+  background-color: var(--color-surface-50);
+  color: var(--color-surface-900);
+  font-family: var(--font-sans);
+}
+@media (prefers-color-scheme: dark) {
   body {
-    @apply bg-surface-50 text-surface-900 dark:bg-surface-950 dark:text-surface-100 font-sans;
+    background-color: var(--color-surface-950);
+    color: var(--color-surface-100);
   }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold leading-tight;
-  }
-  h1 { @apply text-3xl md:text-4xl lg:text-5xl; }
-  h2 { @apply text-2xl md:text-3xl; }
-  h3 { @apply text-xl md:text-2xl; }
-  h4 { @apply text-lg md:text-xl; }
-  p { @apply text-base md:text-lg leading-relaxed; }
-  a { @apply text-primary-600 dark:text-primary-400 hover:underline; }
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+}
+h1 { font-size: var(--text-3xl); line-height: var(--tw-leading, var(--text-3xl--line-height)); }
+h2 { font-size: var(--text-2xl); line-height: var(--tw-leading, var(--text-2xl--line-height)); }
+h3 { font-size: var(--text-xl); line-height: var(--tw-leading, var(--text-xl--line-height)); }
+h4 { font-size: var(--text-lg); line-height: var(--tw-leading, var(--text-lg--line-height)); }
+p { font-size: var(--text-base); line-height: var(--leading-relaxed); }
+a { color: var(--color-primary-600); }
+@media (prefers-color-scheme: dark) {
+  a { color: var(--color-primary-400); }
+}
+@media (width >= 48rem) {
+  h1 { font-size: var(--text-4xl); line-height: var(--tw-leading, var(--text-4xl--line-height)); }
+  h2 { font-size: var(--text-3xl); line-height: var(--tw-leading, var(--text-3xl--line-height)); }
+  h3 { font-size: var(--text-2xl); line-height: var(--tw-leading, var(--text-2xl--line-height)); }
+  h4 { font-size: var(--text-xl); line-height: var(--tw-leading, var(--text-xl--line-height)); }
+  p { font-size: var(--text-lg); line-height: var(--leading-relaxed); }
+}
+@media (width >= 64rem) {
+  h1 { font-size: var(--text-5xl); line-height: var(--tw-leading, var(--text-5xl--line-height)); }
 }
 
 @layer utilities {
