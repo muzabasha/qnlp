@@ -1,0 +1,1341 @@
+import type { TopicContent } from './loader'
+
+export const m6Content: Record<string, TopicContent> = {
+  '6.1': {
+    topicId: '6.1',
+    learningObjective: `Understand how words can be represented as numerical vectors and how this bridges language and quantum computing.`,
+    nextPrep: `Review basic linear algebra concepts: vectors, dot products, and vector spaces before the next session.`,
+    dependencyGraph: `flowchart LR
+      A[M5: Quantum Computing] --> B[6.1 Words as Vectors]
+      B --> C[6.2 Vector Spaces in NLP]
+      C --> D[6.3 Quantum State Representation]
+      D --> E[6.4 Encoding Text into Quantum States]
+      E --> F[6.5 Feature Mapping]
+      F --> G[6.6 Hands-On Lab]`,
+    storytelling: {
+      story: `Imagine you are a librarian in the world's strangest library. Every book is written in a language you have never seen, but you notice each book has a unique scent. After years of careful sniffing, you realise that books about cooking smell like basil and garlic, while books about space smell like ozone and metal. You have just invented vector representations — mapping complex objects to measurable features. This is exactly how word vectors work: we map words to lists of numbers that capture their meaning based on the company they keep.`,
+      questions: [
+        `If you had to represent the word "king" using only five numbers, what would they be?`,
+        `How would you mathematically measure whether "king" is closer to "queen" than to "apple"?`,
+        `What makes a good numerical representation of meaning?`,
+      ],
+      connection: `Word vectors are the bridge between human language and mathematical computation. By converting words into numbers, we unlock the power of linear algebra, geometry, and eventually quantum mechanics to process language. This is the foundational insight that makes QNLP possible.`,
+      technicalIntro: `Word embeddings are dense vector representations where semantically similar words cluster together in the vector space. Techniques like Word2Vec, GloVe, and FastText learn these embeddings by analysing word co-occurrence patterns in large text corpora. Each word is mapped to a fixed-dimensional vector of real numbers, typically ranging from 50 to 300 dimensions in classical NLP.`,
+      lifeSkills: `The ability to represent complex ideas as measurable quantities is a powerful mental model. Whether you are tracking project metrics, evaluating job candidates, or making data-driven decisions, you are essentially creating vector representations of intangible concepts.`,
+    },
+    mathModelling: {
+      need: `Words must be converted into numerical form before any mathematical or computational processing can occur.`,
+      motivation: `Classical one-hot encodings are sparse and fail to capture semantic relationships. Dense vector embeddings capture meaning, analogy, and context in a compact form.`,
+      challenge: `Finding a mapping f: words -> R^d such that semantic similarity corresponds to geometric proximity in the vector space.`,
+      equations: [
+        {
+          latex: `\\vec{w} \\in \\mathbb{R}^d`,
+          meaning: `Each word w is represented as a d-dimensional vector of real numbers.`,
+          interpretation: `A word like "cat" becomes a point in a 300-dimensional space. Each dimension encodes some latent feature of meaning.`,
+        },
+        {
+          latex: `\\text{sim}(\\vec{a}, \\vec{b}) = \\frac{\\vec{a} \\cdot \\vec{b}}{\\|\\vec{a}\\| \\|\\vec{b}\\|}`,
+          meaning: `Cosine similarity measures the semantic similarity between two word vectors.`,
+          interpretation: `If the angle between two word vectors is small (cosine near 1), the words are semantically similar. "King" and "queen" have high cosine similarity.`,
+        },
+        {
+          latex: `\\vec{\\text{king}} - \\vec{\\text{man}} + \\vec{\\text{woman}} \\approx \\vec{\\text{queen}}`,
+          meaning: `Word vectors support analogical reasoning through vector arithmetic.`,
+          interpretation: `The vector offset that encodes the "man -> woman" gender relationship can be added to "king" to arrive at "queen", proving that vectors capture relational meaning.`,
+        },
+      ],
+      variables: [
+        { symbol: `d`, name: `Embedding Dimension`, description: `Number of dimensions in the vector space` },
+        { symbol: `\\vec{w}`, name: `Word Vector`, description: `Dense vector representation of a word` },
+        { symbol: `\\text{sim}`, name: `Cosine Similarity`, description: `Measure of semantic similarity between -1 and 1` },
+      ],
+      interactive: {
+        equation: `\\text{sim}(\\vec{a}, \\vec{b}) = \\frac{\\sum_{i=1}^{d} a_i b_i}{\\sqrt{\\sum_{i=1}^{d} a_i^2} \\sqrt{\\sum_{i=1}^{d} b_i^2}}`,
+        description: `Adjust the vector components to see how cosine similarity changes:`,
+        variables: [
+          { symbol: `\\vec{a}`, name: `Word Vector A`, description: `First word's embedding` },
+          { symbol: `\\vec{b}`, name: `Word Vector B`, description: `Second word's embedding` },
+        ],
+        sliders: [
+          { name: `a1`, label: `Word A — Dimension 1`, min: -5, max: 5, step: 0.1, default: 2 },
+          { name: `a2`, label: `Word A — Dimension 2`, min: -5, max: 5, step: 0.1, default: 3 },
+          { name: `b1`, label: `Word B — Dimension 1`, min: -5, max: 5, step: 0.1, default: 4 },
+          { name: `b2`, label: `Word B — Dimension 2`, min: -5, max: 5, step: 0.1, default: 1 },
+        ],
+      },
+      charts: [
+        {
+          title: `Classical Word Vector vs Quantum State Vector`,
+          type: `radar`,
+          data: [
+            { feature: `Dimensionality`, classical: `50 — 300`, quantum: `2^n` },
+            { feature: `Values`, classical: `Real numbers`, quantum: `Complex amplitudes` },
+            { feature: `Normalisation`, classical: `Optional`, quantum: `Unit norm (L2)` },
+            { feature: `Superposition`, classical: `No`, quantum: `Yes` },
+            { feature: `Entanglement`, classical: `No`, quantum: `Yes` },
+            { feature: `Operations`, classical: `Linear algebra`, quantum: `Unitary gates` },
+          ],
+        },
+        {
+          title: `Semantic Similarity Matrix for Sample Words`,
+          type: `heatmap`,
+          data: [
+            { wordPair: `king — queen`, similarity: 0.85 },
+            { wordPair: `king — man`, similarity: 0.72 },
+            { wordPair: `king — apple`, similarity: 0.12 },
+            { wordPair: `queen — woman`, similarity: 0.78 },
+            { wordPair: `queen — apple`, similarity: 0.09 },
+            { wordPair: `apple — orange`, similarity: 0.74 },
+            { wordPair: `apple — car`, similarity: 0.05 },
+          ],
+        },
+      ],
+      advantages: `Word vectors capture rich semantic information in a compact numerical form, enable analogical reasoning through vector arithmetic, and can be learned automatically from unlabelled text data.`,
+      limitations: `Word vectors are static — they do not account for polysemy (multiple meanings of the same word). "Bank" as a river bank and "bank" as a financial institution share the same vector. Contextual embeddings like BERT address this but are computationally expensive.`,
+    },
+    activities: [
+      {
+        title: `Word Vector Analogy Challenge`,
+        description: `Students use pre-trained word vectors to solve analogy problems using vector arithmetic.`,
+        steps: [
+          `Load the pre-trained Word2Vec or GloVe embeddings in Python`,
+          `Compute vector arithmetic for "paris - france + italy"`,
+          `Find the closest word to the resulting vector`,
+          `Create your own analogy puzzle for classmates to solve`,
+        ],
+        materials: `Jupyter notebook with pre-trained embeddings, list of analogy prompts`,
+        timeRequired: `10 min`,
+        outcomes: `Students observe first-hand that word vectors encode relational meaning through geometric relationships.`,
+        rubrics: `Correct analogy completion (4/5), creativity of self-made analogy (3/5)`,
+      },
+      {
+        title: `Visualising the Vector Space`,
+        description: `Using PCA or t-SNE to project high-dimensional word vectors into 2D for visual inspection.`,
+        steps: [
+          `Select 20 words from 4 different semantic categories`,
+          `Reduce dimensionality using PCA`,
+          `Plot the 2D projection and observe clusters`,
+          `Identify which words are close together and discuss why`,
+        ],
+        materials: `Pre-computed embeddings, PCA visualisation notebook`,
+        timeRequired: `10 min`,
+        outcomes: `Students see semantic clustering in the vector space and understand dimensionality reduction.`,
+      },
+      {
+        title: `One-Hot vs Dense Embeddings Comparison`,
+        description: `Hands-on comparison of one-hot encoding and dense vector representations.`,
+        steps: [
+          `Create one-hot vectors for a small vocabulary of 10 words`,
+          `Compute pairwise distances between one-hot vectors`,
+          `Load dense embeddings for the same words`,
+          `Compare the distance matrices and discuss sparsity vs density`,
+        ],
+        outcomes: `Students understand why dense embeddings are preferred over sparse one-hot encodings for capturing meaning.`,
+      },
+      {
+        title: `Group Discussion: What Makes a Good Representation?`,
+        description: `Small groups debate the properties of an ideal word representation.`,
+        steps: [
+          `In groups of 4, list 5 properties a good word vector should have`,
+          `Present your list to the class`,
+          `Compare with the actual properties of word embeddings`,
+          `Discuss how quantum representations might differ`,
+        ],
+        timeRequired: `8 min`,
+        outcomes: `Students develop critical thinking about representation learning.`,
+      },
+    ],
+    project: {
+      scope: `Build a small word vector analogy solver that takes vector arithmetic queries and returns the nearest words.`,
+      objectives: [
+        `Load pre-trained word embeddings`,
+        `Implement cosine similarity computation`,
+        `Perform vector arithmetic for analogy solving`,
+        `Visualise word neighbourhoods in 2D`,
+      ],
+      timeline: [
+        { phase: `Setup and data loading`, duration: `2 min`, percent: 20 },
+        { phase: `Implement similarity functions`, duration: `3 min`, percent: 30 },
+        { phase: `Analogy engine`, duration: `3 min`, percent: 30 },
+        { phase: `Visualisation`, duration: `2 min`, percent: 20 },
+      ],
+      teamRoles: [
+        { role: `Data Engineer`, responsibility: `Load and preprocess embeddings` },
+        { role: `Algorithm Developer`, responsibility: `Implement vector arithmetic` },
+        { role: `Visualisation Specialist`, responsibility: `Create 2D projections` },
+      ],
+      deliverables: [
+        `Working analogy solver script`,
+        `Visualisation of 3 successful analogies`,
+        `Short report on observed semantic patterns`,
+      ],
+    },
+    questions: [
+      {
+        question: `What is the key advantage of dense word vectors over one-hot encodings?`,
+        answer: `Dense word vectors capture semantic relationships between words by placing similar words close together in the vector space.`,
+        explanation: `One-hot encodings treat every word as equally distinct, giving zero information about word meaning or similarity. Dense embeddings learn these relationships from data.`,
+        commonMistake: `Thinking higher dimensionality always gives better representations`,
+        tip: `Think of embedding dimensions as learned features rather than arbitrary coordinates`,
+      },
+      {
+        question: `How does the analogy "king - man + woman = queen" demonstrate the properties of word vectors?`,
+        answer: `It shows that word vectors encode relational structure — the vector offset representing gender is consistent across different word pairs.`,
+        explanation: `The same vector direction that transforms "man" into "woman" also transforms "king" into "queen", proving that these relationships are encoded geometrically.`,
+        commonMistake: `Assuming word vectors understand meaning like humans do — they only capture statistical patterns`,
+        tip: `Vector arithmetic works because of statistical regularities in the training data, not genuine understanding`,
+      },
+    ],
+    virtualLab: {
+      description: `Explore word vectors interactively — enter words, compute similarities, and visualise the semantic space.`,
+      steps: [
+        `Enter a word to look up its vector`,
+        `Find the top 5 most similar words`,
+        `Perform a vector arithmetic analogy`,
+        `Visualise the word neighbourhood in 2D`,
+        `Compare classical vectors with quantum state vectors`,
+      ],
+      stepDetails: [
+        `Type a word like "king" or "computer" to see its 300-dimensional embedding`,
+        `The lab computes cosine similarity against the entire vocabulary and ranks results`,
+        `Enter an analogy query like "paris : france :: rome : ?" and see the magic`,
+        `PCA projection maps the high-dimensional space to a 2D scatter plot`,
+        `A side panel shows how a quantum state vector would differ — superposition and phase`,
+      ],
+      completionMessage: `You have mastered the concept of word vectors and their geometric properties!`,
+      dataFlow: `flowchart LR
+        A[Input Word] --> B[Lookup Table]
+        B --> C[300-dim Vector]
+        C --> D[Cosine Similarity]
+        D --> E[Nearest Neighbours]
+        C --> F[Vector Arithmetic]
+        F --> G[Analogy Result]
+        C --> H[PCA Reduction]
+        H --> I[2D Visualisation]
+        E --> I`,
+    },
+    insights: {
+      advantages: [
+        `Compact numerical representation of word meaning`,
+        `Enables semantic arithmetic and analogical reasoning`,
+        `Automatic learning from unlabelled text data`,
+        `Foundation for all modern NLP systems`,
+      ],
+      disadvantages: [
+        `Static vectors cannot handle polysemy`,
+        `Requires large corpora for training`,
+        `Bias in training data propagates to vectors`,
+        `No built-in mechanism for compositionality`,
+      ],
+      futureScope: `Quantum word vectors could encode exponentially more information using superposition, allowing contextual and polysemous representations within the same framework. Hybrid classical-quantum embeddings are an active research area.`,
+      industrialApplications: [
+        `Semantic search and information retrieval`,
+        `Recommendation systems using content similarity`,
+        `Sentiment analysis and opinion mining`,
+        `Machine translation and cross-lingual retrieval`,
+      ],
+      careerRelevance: `Expertise in word embeddings and representation learning is essential for NLP engineer roles, data science positions involving text, and research positions in quantum machine learning.`,
+    },
+  },
+
+  '6.2': {
+    topicId: '6.2',
+    learningObjective: `Understand vector spaces as the mathematical foundation for both classical NLP and quantum state representations.`,
+    nextPrep: `Refresh your knowledge of basis vectors, linear transformations, and inner product spaces before the next session.`,
+    dependencyGraph: `flowchart LR
+      A[6.1 Words as Vectors] --> B[6.2 Vector Spaces in NLP]
+      B --> C[6.3 Quantum State Representation]`,
+    storytelling: {
+      story: `Think of a vector space as a vast coordinate system, like the grid of streets in Manhattan. Each word is a building at a specific intersection. "Coffee shop" and "cafe" are neighbours on the same block. "Hospital" is further away. Now imagine that this city has not just two dimensions but three hundred. You cannot see it, but you can navigate it mathematically. This invisible city is the vector space of language, and quantum computing gives us a new kind of map for exploring it.`,
+      questions: [
+        `What does it mean for a set of vectors to "span" a space?`,
+        `How does choosing a different basis change the representation?`,
+        `Why is the inner product important for measuring similarity?`,
+      ],
+      connection: `Vector spaces are the common mathematical language shared by classical NLP and quantum mechanics. Quantum states live in Hilbert spaces — special vector spaces with an inner product. Understanding vector spaces prepares you for the leap to quantum state vectors.`,
+      technicalIntro: `A vector space V over a field F is a set of vectors closed under addition and scalar multiplication. In NLP, word embeddings live in R^d, a d-dimensional real vector space. The choice of basis determines how words are represented. Orthogonal bases simplify computation, while non-orthogonal bases can capture correlations between features. Inner product spaces add geometric structure: length, angle, and distance.`,
+      lifeSkills: `Understanding systems through the lens of vector spaces teaches you to think in terms of dimensions, bases, and transformations. This is useful whenever you need to decompose a complex problem into independent factors — a skill applicable to project management, system design, and strategic planning.`,
+    },
+    mathModelling: {
+      need: `A formal mathematical framework is required to model word meanings, similarities, and transformations in a consistent way.`,
+      motivation: `Without the structure of a vector space, we cannot define distance, direction, or linear transformations — all essential for language processing.`,
+      challenge: `Constructing a vector space where the geometric relationships between word vectors faithfully represent semantic relationships.`,
+      equations: [
+        {
+          latex: `V = \\{ \\vec{v} \\mid \\vec{v} = \\sum_{i=1}^{d} \\alpha_i \\vec{e}_i, \\alpha_i \\in \\mathbb{R} \\}`,
+          meaning: `A vector space V consists of all linear combinations of basis vectors e_i with real coefficients.`,
+          interpretation: `Every word vector is a weighted combination of d basis features. The weights determine the word's position in semantic space.`,
+        },
+        {
+          latex: `\\langle \\vec{a}, \\vec{b} \\rangle = \\sum_{i=1}^{d} a_i b_i`,
+          meaning: `The standard Euclidean inner product defines the geometry of the vector space.`,
+          interpretation: `The inner product induces a notion of length (norm) and angle, allowing us to measure how similar two word vectors are.`,
+        },
+        {
+          latex: `\\|\\vec{v}\\| = \\sqrt{\\langle \\vec{v}, \\vec{v} \\rangle}`,
+          meaning: `The norm of a vector is its length, derived from the inner product.`,
+          interpretation: `Word vectors are often normalised to unit length so that only direction (meaning) matters, not magnitude.`,
+        },
+      ],
+      variables: [
+        { symbol: `V`, name: `Vector Space`, description: `The mathematical space containing all word vectors` },
+        { symbol: `\\vec{e}_i`, name: `Basis Vector`, description: `i-th basis vector spanning the space` },
+        { symbol: `\\alpha_i`, name: `Coefficient`, description: `Scalar weight for the i-th basis direction` },
+        { symbol: `\\langle \\cdot, \\cdot \\rangle`, name: `Inner Product`, description: `Measures the angle between vectors` },
+      ],
+      interactive: {
+        equation: `\\vec{v} = \\alpha_1 \\begin{pmatrix}1 \\\\ 0\\end{pmatrix} + \\alpha_2 \\begin{pmatrix}0 \\\\ 1\\end{pmatrix}`,
+        description: `Explore how a 2D vector changes as you adjust its basis coefficients:`,
+        variables: [
+          { symbol: `\\alpha_1`, name: `First Coefficient`, description: `Weight along the x-axis` },
+          { symbol: `\\alpha_2`, name: `Second Coefficient`, description: `Weight along the y-axis` },
+        ],
+        sliders: [
+          { name: `a1`, label: `Coefficient \\alpha_1`, min: -5, max: 5, step: 0.1, default: 2 },
+          { name: `a2`, label: `Coefficient \\alpha_2`, min: -5, max: 5, step: 0.1, default: 3 },
+        ],
+      },
+      charts: [
+        {
+          title: `Inner Product Space Properties Comparison`,
+          type: `bar`,
+          data: [
+            { property: `Closure`, classical: `Yes`, quantum: `Yes` },
+            { property: `Inner Product`, classical: `Real-valued`, quantum: `Complex-valued` },
+            { property: `Norm`, classical: `L2 norm`, quantum: `L2 norm (unit)` },
+            { property: `Basis`, classical: `Standard basis`, quantum: `Computational basis` },
+            { property: `Dimensions`, classical: `Finite (50-300)`, quantum: `2^n (exponential)` },
+            { property: `Linearity`, classical: `Full`, quantum: `Unitary only` },
+          ],
+        },
+        {
+          title: `Basis Representation of Sample Words`,
+          type: `radar`,
+          data: [
+            { dimension: `Dim 1`, king: 0.8, queen: 0.7, apple: 0.1 },
+            { dimension: `Dim 2`, king: 0.3, queen: 0.8, apple: 0.2 },
+            { dimension: `Dim 3`, king: 0.6, queen: 0.5, apple: 0.9 },
+            { dimension: `Dim 4`, king: 0.9, queen: 0.4, apple: 0.1 },
+            { dimension: `Dim 5`, king: 0.2, queen: 0.6, apple: 0.3 },
+          ],
+        },
+      ],
+      advantages: `Vector spaces provide a complete mathematical framework for defining similarity, transformation, and composition of word representations. They are the foundation for both classical and quantum NLP.`,
+      limitations: `Standard vector spaces are limited to linear relationships. Many linguistic phenomena involve non-linear interactions that cannot be captured by linear spaces alone. Kernel methods and neural networks address this.`,
+    },
+    activities: [
+      {
+        title: `Basis Exploration`,
+        description: `Students manually compute word vectors in different basis representations.`,
+        steps: [
+          `Given a set of words with feature counts, construct vectors in the standard basis`,
+          `Transform the vectors to a new orthonormal basis`,
+          `Verify that distances are preserved under the transformation`,
+          `Discuss why basis choice matters for interpretation but not for geometry`,
+        ],
+        materials: `Worksheet with pre-computed word features`,
+        timeRequired: `8 min`,
+        outcomes: `Students understand basis transformations and their effect on vector representations.`,
+      },
+      {
+        title: `Inner Product Race`,
+        description: `Competitive game where students quickly compute inner products of word vectors.`,
+        steps: [
+          `Split into teams of 3-4`,
+          `Each team receives a set of word vector pairs`,
+          `Compute the inner product and classify as similar or dissimilar`,
+          `Fastest team with most correct answers wins`,
+        ],
+        materials: `Pre-printed word vector pairs, calculators`,
+        outcomes: `Students gain fluency with inner products and similarity interpretation.`,
+      },
+      {
+        title: `Vector Space Visualisation`,
+        description: `Using plotting tools to visualise word vectors and their geometric relationships.`,
+        steps: [
+          `Select 10 words and plot them in 2D using PCA`,
+          `Identify clusters of similar words`,
+          `Draw the basis vectors on the plot`,
+          `Show how a change of basis would reorient the axes`,
+        ],
+        outcomes: `Students connect abstract vector space concepts to visual intuition.`,
+      },
+    ],
+    project: {
+      scope: `Create an interactive vector space explorer that allows users to navigate word embeddings, change bases, and observe geometric relationships.`,
+      objectives: [
+        `Load word embeddings into a vector space structure`,
+        `Implement basis transformation functions`,
+        `Build an interactive 2D projection viewer`,
+        `Show inner product and distance metrics in real time`,
+      ],
+      timeline: [
+        { phase: `Data preparation`, duration: `2 min`, percent: 20 },
+        { phase: `Vector space class`, duration: `3 min`, percent: 30 },
+        { phase: `Basis transformations`, duration: `3 min`, percent: 30 },
+        { phase: `Visualisation layer`, duration: `2 min`, percent: 20 },
+      ],
+      teamRoles: [
+        { role: `Mathematician`, responsibility: `Implement vector space operations` },
+        { role: `Developer`, responsibility: `Build the interactive interface` },
+        { role: `Designer`, responsibility: `Create clear visual representations` },
+      ],
+      deliverables: [
+        `Working vector space explorer`,
+        `Documentation of basis transformation methods`,
+        `Screenshots showing different basis views`,
+      ],
+    },
+    questions: [
+      {
+        question: `What is the relationship between the inner product and cosine similarity?`,
+        answer: `Cosine similarity is the inner product of two unit vectors. It equals the cosine of the angle between them.`,
+        explanation: `When vectors are normalised to unit length, the inner product directly gives the cosine similarity. Without normalisation, the inner product also depends on vector magnitudes.`,
+        commonMistake: `Confusing the inner product with cosine similarity when vectors are not normalised`,
+        tip: `Always check whether your vectors are normalised before using the inner product as a similarity measure`,
+      },
+      {
+        question: `Why do quantum state vectors use complex numbers while classical word vectors use real numbers?`,
+        answer: `Complex numbers are required to represent quantum phenomena like phase interference and superposition, which have no classical analogue in word embedding spaces.`,
+        explanation: `The complex phase of a quantum amplitude encodes additional information that enables phenomena like interference — critical for quantum algorithms but absent in classical NLP.`,
+        commonMistake: `Assuming complex numbers are just "extra dimensions" — they add phase information, not just more real-valued dimensions`,
+        tip: `Think of complex amplitudes as having both magnitude (like classical) and phase (quantum-specific), giving richer representational power`,
+      },
+    ],
+    virtualLab: {
+      description: `Explore vector space concepts interactively — change bases, compute inner products, and visualise geometric relationships.`,
+      steps: [
+        `Select a set of word vectors to explore`,
+        `View them in the standard basis`,
+        `Apply a basis transformation and observe the change`,
+        `Compute inner products between selected pairs`,
+        `Visualise the space in 2D with PCA projection`,
+      ],
+      stepDetails: [
+        `Choose from 50 pre-loaded word vectors representing different semantic categories`,
+        `The default view shows vectors in the standard computational basis`,
+        `Rotate or scale the basis using the transformation matrix controls`,
+        `Click any two vectors to see their inner product, norm, and angle`,
+        `Toggle between different projection methods: PCA, t-SNE, or random projection`,
+      ],
+      completionMessage: `You have mastered the geometry of vector spaces and their role in word representation!`,
+      dataFlow: `flowchart LR
+        A[Word Vectors] --> B[Vector Space]
+        B --> C[Basis Transformation]
+        C --> D[Transformed Vectors]
+        B --> E[Inner Product]
+        E --> F[Similarity Matrix]
+        B --> G[Dimensionality Reduction]
+        G --> H[2D Visualisation]
+        D --> H`,
+    },
+    insights: {
+      advantages: [
+        `Provides rigorous mathematical foundation for word representations`,
+        `Enables geometric reasoning about semantic relationships`,
+        `Bridges classical NLP and quantum computing through shared mathematics`,
+        `Supports clear definitions of distance, angle, and transformation`,
+      ],
+      disadvantages: [
+        `Limited to linear relationships — cannot capture non-linear linguistic phenomena`,
+        `High-dimensional spaces suffer from the curse of dimensionality`,
+        `Choice of basis is often arbitrary and affects interpretability`,
+      ],
+      futureScope: `Quantum vector spaces (Hilbert spaces) extend classical vector spaces with complex amplitudes, superposition, and entanglement. This allows representing exponentially more information and capturing correlations that classical vector spaces cannot model efficiently.`,
+      industrialApplications: [
+        `Semantic search engines and information retrieval systems`,
+        `Knowledge graph embedding and reasoning`,
+        `Document clustering and topic modelling`,
+        `Cross-lingual alignment of word vector spaces`,
+      ],
+      careerRelevance: `Deep understanding of vector spaces is essential for roles in NLP, machine learning, data science, and quantum computing research. It forms the mathematical backbone of modern AI.`,
+    },
+  },
+
+  '6.3': {
+    topicId: '6.3',
+    learningObjective: `Understand quantum state vectors (qubits), their mathematical representation, and how they differ from classical word vectors.`,
+    nextPrep: `Review complex numbers and the postulates of quantum mechanics before the next session.`,
+    dependencyGraph: `flowchart LR
+      A[6.2 Vector Spaces] --> B[6.3 Quantum State Representation]
+      B --> C[6.4 Encoding Text into Quantum States]`,
+    storytelling: {
+      story: `Imagine you have a magic coin. While it is spinning in the air, it is neither heads nor tails — it is both at once. Only when you catch it does it decide. This is superposition. Now imagine two magic coins that are entangled: when you catch one, the other instantly becomes the opposite, even if they are on opposite sides of the universe. This is entanglement. A quantum state vector is the mathematical description of this magic: it tells you everything that can be known about the system before you measure it.`,
+      questions: [
+        `If a qubit can be both 0 and 1 at the same time, how much information does it really hold?`,
+        `What happens to superposition when you measure a quantum state?`,
+        `How is a quantum state vector different from a probability distribution?`,
+      ],
+      connection: `Just as a word vector is a list of numbers describing a word, a quantum state vector is a list of complex numbers describing a quantum system. The key difference: quantum vectors can be in superposition, entanglement, and exhibit interference — phenomena with no classical analogue.`,
+      technicalIntro: `A qubit is a two-level quantum system represented by a state vector |ψ⟩ = α|0⟩ + β|1⟩, where α and β are complex amplitudes satisfying |α|² + |β|² = 1. Unlike classical bits which are either 0 or 1, qubits exist in superposition. Multiple qubits form a tensor product space of dimension 2^n, giving exponential representational capacity. Quantum measurements collapse the superposition, producing a classical outcome with probabilities |α|² and |β|².`,
+      lifeSkills: `Quantum state representation teaches us that reality is not always binary. Embracing uncertainty, holding multiple possibilities in mind, and understanding that observation changes outcomes are profound lessons that apply to decision-making, innovation, and personal growth.`,
+    },
+    mathModelling: {
+      need: `A mathematical framework is needed to represent quantum information and process it using quantum operations.`,
+      motivation: `Classical probability distributions cannot capture quantum phenomena like interference and entanglement, which are essential for quantum advantage.`,
+      challenge: `Representing linguistic information as quantum states while preserving the phase and amplitude relationships that enable quantum computation.`,
+      equations: [
+        {
+          latex: `\\ket{\\psi} = \\alpha \\ket{0} + \\beta \\ket{1}`,
+          meaning: `A qubit state vector is a superposition of basis states |0⟩ and |1⟩ with complex amplitudes α and β.`,
+          interpretation: `Before measurement, the qubit coexists in both states simultaneously. The amplitudes determine the probability of each outcome upon measurement.`,
+        },
+        {
+          latex: `|\\alpha|^2 + |\\beta|^2 = 1`,
+          meaning: `The normalisation condition: probabilities must sum to 1.`,
+          interpretation: `This is the quantum analogue of normalising word vectors — both ensure consistent geometric properties, though the reasons differ (probability conservation vs similarity measurement).`,
+        },
+        {
+          latex: `\\ket{\\psi} = \\sum_{i=0}^{2^n - 1} a_i \\ket{i}`,
+          meaning: `An n-qubit system lives in a 2^n-dimensional Hilbert space.`,
+          interpretation: `With just 10 qubits, we can represent 1024 dimensions — matching or exceeding classical word vector dimensions. With 300 qubits, we represent more dimensions than atoms in the observable universe.`,
+        },
+      ],
+      variables: [
+        { symbol: `\\ket{\\psi}`, name: `Quantum State Vector`, description: `The state of a quantum system in Hilbert space` },
+        { symbol: `\\alpha, \\beta`, name: `Probability Amplitudes`, description: `Complex numbers determining measurement probabilities` },
+        { symbol: `\\ket{0}, \\ket{1}`, name: `Computational Basis States`, description: `The quantum analogue of classical 0 and 1` },
+        { symbol: `n`, name: `Number of Qubits`, description: `The number of qubits in the system` },
+      ],
+      interactive: {
+        equation: `\\ket{\\psi} = \\alpha \\ket{0} + \\beta \\ket{1}, \\quad |\\alpha|^2 + |\\beta|^2 = 1`,
+        description: `Adjust the amplitudes to see how the quantum state and measurement probabilities change:`,
+        variables: [
+          { symbol: `\\alpha`, name: `Amplitude of |0⟩`, description: `Complex amplitude (adjust real part)` },
+          { symbol: `\\beta`, name: `Amplitude of |1⟩`, description: `Complex amplitude (adjust real part)` },
+        ],
+        sliders: [
+          { name: `alpha_real`, label: `Re(α)`, min: -1, max: 1, step: 0.05, default: 0.8 },
+          { name: `beta_real`, label: `Re(β)`, min: -1, max: 1, step: 0.05, default: 0.6 },
+        ],
+      },
+      charts: [
+        {
+          title: `Classical Word Vector vs Quantum State Vector Comparison`,
+          type: `bar`,
+          data: [
+            { property: `Vector type`, classical: `Real-valued`, quantum: `Complex-valued` },
+            { property: `Normalisation`, classical: `Optional`, quantum: `Required` },
+            { property: `Superposition`, classical: `Not applicable`, quantum: `Fundamental` },
+            { property: `Entanglement`, classical: `Not applicable`, quantum: `Possible` },
+            { property: `Dimensions`, classical: `d (50-300)`, quantum: `2^n (exponential)` },
+            { property: `Measurement`, classical: `Direct read`, quantum: `Probabilistic collapse` },
+          ],
+        },
+        {
+          title: `Qubit State Visualisation on Bloch Sphere`,
+          type: `scatter`,
+          data: [
+            { state: `|0⟩`, x: 0, y: 0, z: 1 },
+            { state: `|1⟩`, x: 0, y: 0, z: -1 },
+            { state: `|+⟩`, x: 1, y: 0, z: 0 },
+            { state: `|-⟩`, x: -1, y: 0, z: 0 },
+            { state: `|R⟩`, x: 0, y: 1, z: 0 },
+            { state: `|L⟩`, x: 0, y: -1, z: 0 },
+          ],
+        },
+      ],
+      advantages: `Quantum state vectors can represent exponentially more information than classical vectors, support superposition (multiple states at once), and enable entanglement — correlations with no classical counterpart.`,
+      limitations: `Quantum states are fragile (decoherence), measurement is probabilistic and destroys superposition, and current hardware supports only a limited number of qubits with significant error rates.`,
+    },
+    activities: [
+      {
+        title: `Bloch Sphere Exploration`,
+        description: `Students interact with a Bloch sphere visualisation to understand single-qubit states.`,
+        steps: [
+          `Open the Bloch sphere interactive tool`,
+          `Place the state vector at different positions on the sphere`,
+          `Observe how the amplitudes and probabilities change`,
+          `Find states that give equal probability of |0⟩ and |1⟩`,
+        ],
+        materials: `Bloch sphere simulator (browser-based)`,
+        timeRequired: `10 min`,
+        outcomes: `Students develop intuition for single-qubit states and their geometric representation.`,
+      },
+      {
+        title: `Probability Amplitude Calculation`,
+        description: `Manual calculation of measurement probabilities from given quantum state vectors.`,
+        steps: [
+          `Given a quantum state |ψ⟩ = 0.6|0⟩ + 0.8|1⟩, compute |α|² and |β|²`,
+          `Verify normalisation: do the probabilities sum to 1?`,
+          `Now try |ψ⟩ = (1+i)/2 |0⟩ + (1-i)/2 |1⟩`,
+          `Discuss the role of complex phases in the second example`,
+        ],
+        materials: `Worksheet with quantum state exercises`,
+        outcomes: `Students become comfortable with complex amplitudes and probability calculations.`,
+      },
+      {
+        title: `Classical vs Quantum State Comparison`,
+        description: `Side-by-side comparison of classical probability vectors and quantum state vectors.`,
+        steps: [
+          `Create a classical probability vector [p, 1-p] for a coin flip`,
+          `Create a quantum state vector [α, β] with the same measurement probabilities`,
+          `Show that multiple quantum states (different phases) give the same probabilities`,
+          `Discuss why phase information matters even though it is not directly observable`,
+        ],
+        outcomes: `Students understand that quantum states carry more information than classical probabilities.`,
+      },
+    ],
+    project: {
+      scope: `Build a quantum state visualisation tool that displays single and multi-qubit states on the Bloch sphere and computes measurement probabilities.`,
+      objectives: [
+        `Implement a qubit state class with complex amplitudes`,
+        `Visualise single-qubit states on the Bloch sphere`,
+        `Compute and display measurement probabilities`,
+        `Show the effect of quantum gates on state vectors`,
+      ],
+      timeline: [
+        { phase: `Qubit state implementation`, duration: `3 min`, percent: 30 },
+        { phase: `Bloch sphere rendering`, duration: `4 min`, percent: 40 },
+        { phase: `Measurement simulation`, duration: `2 min`, percent: 20 },
+        { phase: `Gate operations`, duration: `1 min`, percent: 10 },
+      ],
+      teamRoles: [
+        { role: `Quantum Developer`, responsibility: `Implement state vector class` },
+        { role: `Visualisation Engineer`, responsibility: `Build Bloch sphere renderer` },
+        { role: `UX Designer`, responsibility: `Create interactive controls` },
+      ],
+      deliverables: [
+        `Quantum state visualiser with Bloch sphere`,
+        `Documentation of qubit states and their properties`,
+        `Demo of 5 different quantum states`,
+      ],
+    },
+    questions: [
+      {
+        question: `What is the key difference between a classical probability distribution and a quantum state vector?`,
+        answer: `A quantum state vector contains phase information (complex phases) that enables interference, while a classical probability distribution contains only non-negative real numbers.`,
+        explanation: `Two quantum states can give the same measurement probabilities but have different phases, leading to different interference behaviour. This extra information is what enables quantum algorithms.`,
+        commonMistake: `Equating |α|² with a classical probability — quantum amplitudes can be negative or complex`,
+        tip: `Always remember: the amplitude is NOT the probability — the squared magnitude of the amplitude is the probability`,
+      },
+      {
+        question: `How many classical bits of information can be stored in n qubits?`,
+        answer: `Describing the state of n qubits requires 2^n complex numbers, but measuring them yields only n classical bits. The power of qubits lies in processing, not storage.`,
+        explanation: `The exponential number of amplitudes exists in superposition, but measurement collapses them to n bits. Quantum advantage comes from manipulating these amplitudes through interference.`,
+        commonMistake: `Assuming qubits can store exponentially more information than classical bits — they cannot, due to the measurement problem`,
+        tip: `Think of qubits as having exponential representational capacity but only linear readout capacity. The advantage is in computation, not memory.`,
+      },
+    ],
+    virtualLab: {
+      description: `Explore quantum state vectors interactively — create arbitrary qubit states, see them on the Bloch sphere, and measure them.`,
+      steps: [
+        `Create a single qubit state by setting α and β amplitudes`,
+        `View the state on the Bloch sphere`,
+        `Apply quantum gates (X, H, Z) and observe changes`,
+        `Measure the qubit multiple times and record statistics`,
+        `Scale up to 2-qubit states and observe entanglement`,
+      ],
+      stepDetails: [
+        `Use sliders to set both real and imaginary parts of α and β — the lab automatically normalises`,
+        `The Bloch sphere renders in 3D with the state vector as an arrow from centre to surface`,
+        `Click gate buttons to apply operations: X (NOT), H (Hadamard), Z (phase flip)`,
+        `The measurement panel runs 1000 shots and shows the distribution of |0⟩ vs |1⟩ outcomes`,
+        `In 2-qubit mode, explore Bell states and see how entanglement creates correlations that classical probability cannot explain`,
+      ],
+      completionMessage: `You have mastered the fundamentals of quantum state representation!`,
+      dataFlow: `flowchart LR
+        A[Qubit Parameters] --> B[State Vector]
+        B --> C[Bloch Sphere Display]
+        B --> D[Gate Operations]
+        D --> B
+        B --> E[Measurement]
+        E --> F[Probability Distribution]
+        B --> G[Tensor Product]
+        G --> H[Multi-Qubit State]`,
+    },
+    insights: {
+      advantages: [
+        `Exponential representational capacity with linear number of qubits`,
+        `Superposition enables parallel exploration of multiple states`,
+        `Entanglement enables correlations impossible in classical systems`,
+        `Interference allows constructive/destructive combination of amplitudes`,
+      ],
+      disadvantages: [
+        `Fragile — decoherence destroys quantum information rapidly`,
+        `Measurement is destructive and collapses the state`,
+        `Current hardware limited to noisy intermediate-scale quantum (NISQ) devices`,
+        `Error correction requires significant overhead in physical qubits`,
+      ],
+      futureScope: `As quantum hardware improves, we will represent increasingly complex linguistic structures in quantum states. Fault-tolerant quantum computers will enable encoding entire sentences and documents into multi-qubit states for processing.`,
+      industrialApplications: [
+        `Quantum chemistry and molecular simulation`,
+        `Cryptography and secure communication`,
+        `Optimisation problems in logistics and finance`,
+        `Quantum machine learning for pattern recognition`,
+      ],
+      careerRelevance: `Understanding quantum state representation is the gateway to careers in quantum computing, quantum algorithm design, and quantum NLP research. It is the foundational skill for the quantum workforce.`,
+    },
+  },
+
+  '6.4': {
+    topicId: '6.4',
+    learningObjective: `Learn how to encode classical text data into quantum state representations for quantum NLP processing.`,
+    nextPrep: `Review tensor products and how to decompose words into their constituent characters or subwords before the next session.`,
+    dependencyGraph: `flowchart LR
+      A[6.3 Quantum State Representation] --> B[6.4 Encoding Text into Quantum States]
+      B --> C[6.5 Feature Mapping Techniques]
+      B --> D[6.6 Hands-On Lab]`,
+    storytelling: {
+      story: `Imagine you are a translator tasked with converting a beautiful poem into a language that uses only coloured lights. Each word becomes a specific hue and brightness. "Love" might be a warm crimson glow, "ocean" a deep cerulean pulse. Now imagine you can mix these colours together — not on a palette, but by shining them through the same point in space so they combine into a single, richer colour. This is exactly what encoding text into quantum states does: it maps linguistic meaning into the language of quantum amplitudes, where words can coexist in superposition.`,
+      questions: [
+        `If you could assign any quantum property to represent a word, what would you choose and why?`,
+        `How would you encode a sentence so that the meaning of the whole is more than the sum of its parts?`,
+        `What information is inevitably lost when encoding language into quantum states?`,
+      ],
+      connection: `Encoding text into quantum states is the critical bridge between classical NLP and quantum computing. It transforms linguistic data into the language of quantum mechanics — complex vectors in Hilbert space — making it accessible to quantum algorithms.`,
+      technicalIntro: `Text encoding for QNLP involves mapping each word to a quantum state (typically a qubit or set of qubits) through a feature map. Common approaches include: basis encoding (word identity maps to a computational basis state), amplitude encoding (word vector components become probability amplitudes), and angle encoding (features encoded as rotation angles of qubits). The encoding must preserve linguistic structure while respecting quantum mechanical constraints like unitarity and normalisation.`,
+      lifeSkills: `Encoding is fundamentally about translation — taking meaning from one representation to another without losing essential information. This skill applies to communication (explaining complex ideas simply), data visualisation (choosing the right chart), and cross-cultural work (preserving meaning across languages).`,
+    },
+    mathModelling: {
+      need: `Classical text data must be converted into quantum states that can be processed by quantum circuits.`,
+      motivation: `The choice of encoding scheme directly affects the power and efficiency of subsequent quantum NLP algorithms. Poor encoding wastes qubits or loses information.`,
+      challenge: `Designing encoding schemes that preserve semantic information, respect quantum constraints (normalisation, unitarity), and are efficient in terms of qubit count and circuit depth.`,
+      equations: [
+        {
+          latex: `\\ket{\\text{word}} = \\frac{1}{\\|\\vec{v}\\|} \\sum_{i=1}^{d} v_i \\ket{i}`,
+          meaning: `Amplitude encoding: word vector components v_i are encoded as amplitudes of computational basis states.`,
+          interpretation: `Each dimension of the original word vector becomes the amplitude of a basis state. The normalisation factor ensures the quantum state is valid. This requires O(log d) qubits for d-dimensional vectors.`,
+        },
+        {
+          latex: `\\ket{\\text{word}} = \\bigotimes_{i=1}^{n} \\left( \\cos\\left(\\frac{\\theta_i}{2}\\right) \\ket{0} + e^{i\\phi_i} \\sin\\left(\\frac{\\theta_i}{2}\\right) \\ket{1} \\right)`,
+          meaning: `Angle encoding: each word feature is encoded as a rotation angle on a separate qubit.`,
+          interpretation: `Each dimension maps to a qubit. The feature value determines the rotation angle θ_i. While requiring more qubits, this approach uses simpler circuits and is more robust to noise.`,
+        },
+        {
+          latex: `\\ket{\\text{sentence}} = \\sum_{w_1, ..., w_n} a_{w_1, ..., w_n} \\ket{w_1} \\otimes ... \\otimes \\ket{w_n}`,
+          meaning: `A sentence is encoded as a tensor product of individual word states, or a superposition of possible word sequences.`,
+          interpretation: `The sentence state lives in a 2^(n·log d)-dimensional space, capturing both word meanings and their compositional relationships through entanglement.`,
+        },
+      ],
+      variables: [
+        { symbol: `\\ket{\\text{word}}`, name: `Word Quantum State`, description: `Quantum state encoding a single word` },
+        { symbol: `v_i`, name: `Word Vector Component`, description: `i-th dimension of the classical word embedding` },
+        { symbol: `\\theta_i, \\phi_i`, name: `Angle Parameters`, description: `Rotation angles encoding feature values` },
+        { symbol: `n`, name: `Number of Qubits`, description: `Total qubits used in the encoding` },
+      ],
+      interactive: {
+        equation: `\\ket{\\psi_{\\text{word}}} = \\frac{1}{\\sqrt{\\sum v_i^2}} \\left( v_0 \\ket{00} + v_1 \\ket{01} + v_2 \\ket{10} + v_3 \\ket{11} \\right)`,
+        description: `Encode a 4-dimensional word vector into a 2-qubit state by adjusting the components:`,
+        variables: [
+          { symbol: `v_0`, name: `Component 0`, description: `Word vector value for 1st basis state` },
+          { symbol: `v_1`, name: `Component 1`, description: `Word vector value for 2nd basis state` },
+          { symbol: `v_2`, name: `Component 2`, description: `Word vector value for 3rd basis state` },
+          { symbol: `v_3`, name: `Component 3`, description: `Word vector value for 4th basis state` },
+        ],
+        sliders: [
+          { name: `v0`, label: `v₀`, min: 0, max: 5, step: 0.1, default: 3 },
+          { name: `v1`, label: `v₁`, min: 0, max: 5, step: 0.1, default: 1 },
+          { name: `v2`, label: `v₂`, min: 0, max: 5, step: 0.1, default: 2 },
+          { name: `v3`, label: `v₃`, min: 0, max: 5, step: 0.1, default: 4 },
+        ],
+      },
+      charts: [
+        {
+          title: `Encoding Scheme Comparison`,
+          type: `radar`,
+          data: [
+            { criteria: `Qubit Efficiency`, basis: 5, amplitude: 4, angle: 2 },
+            { criteria: `Circuit Depth`, basis: 5, amplitude: 2, angle: 4 },
+            { criteria: `Noise Robustness`, basis: 3, amplitude: 2, angle: 4 },
+            { criteria: `Expressivity`, basis: 2, amplitude: 5, angle: 3 },
+            { criteria: `Semantic Preservation`, basis: 2, amplitude: 4, angle: 3 },
+            { criteria: `Ease of Implementation`, basis: 5, amplitude: 2, angle: 4 },
+          ],
+        },
+        {
+          title: `Qubit Requirements for Different Vocabularies`,
+          type: `bar`,
+          data: [
+            { vocabulary: `10 words`, basis: 4, amplitude: 4, angle: 10 },
+            { vocabulary: `100 words`, basis: 7, amplitude: 7, angle: 100 },
+            { vocabulary: `1000 words`, basis: 10, amplitude: 10, angle: 1000 },
+            { vocabulary: `10000 words`, basis: 14, amplitude: 14, angle: 10000 },
+            { vocabulary: `100000 words`, basis: 17, amplitude: 17, angle: 100000 },
+          ],
+        },
+      ],
+      advantages: `Quantum encoding enables exponential compression of word vectors via amplitude encoding, preserves quantum properties like superposition for simultaneous processing, and provides a natural framework for compositional meaning through tensor products.`,
+      limitations: `Encoding classical data into quantum states is not trivial — it requires carefully designed quantum circuits. The normalisation constraint can distort relative magnitudes. Amplitude encoding requires exponentially precise state preparation, which is challenging on NISQ hardware.`,
+    },
+    activities: [
+      {
+        title: `Encoding Scheme Implementation`,
+        description: `Students implement three different encoding schemes for the same word.`,
+        steps: [
+          `Take a word vector (e.g., "king": [0.8, 0.3, 0.6, 0.9])`,
+          `Encode it using basis encoding (one-hot on closest basis state)`,
+          `Encode it using amplitude encoding (normalise and set as amplitudes)`,
+          `Encode it using angle encoding (use features as rotation angles)`,
+        ],
+        materials: `Python notebook with Qiskit or Cirq, word vector data`,
+        timeRequired: `12 min`,
+        outcomes: `Students understand the practical differences between encoding schemes.`,
+      },
+      {
+        title: `Normalisation Challenge`,
+        description: `Students normalise word vectors and observe how relative magnitudes change.`,
+        steps: [
+          `Take 5 word vectors of different magnitudes`,
+          `Normalise them all to unit length`,
+          `Compare the similarity matrix before and after normalisation`,
+          `Discuss what information is preserved and what is lost`,
+        ],
+        materials: `Worksheet with pre-computed word vectors`,
+        outcomes: `Students understand the implications of the quantum normalisation constraint.`,
+      },
+      {
+        title: `Encoding Quality Comparison`,
+        description: `Compare how well different encoding schemes preserve semantic similarity.`,
+        steps: [
+          `Compute pairwise cosine similarities for 10 words using classical vectors`,
+          `Encode each word using amplitude and angle encoding`,
+          `Compute inner products between quantum states`,
+          `Compare the similarity matrices and identify the best encoding`,
+        ],
+        outcomes: `Students evaluate encoding schemes based on semantic preservation.`,
+      },
+    ],
+    project: {
+      scope: `Build a text-to-quantum-state encoder that converts words and short phrases into valid quantum state vectors using multiple encoding schemes.`,
+      objectives: [
+        `Load classical word embeddings`,
+        `Implement amplitude and angle encoding`,
+        `Verify normalisation constraints`,
+        `Compare encoding fidelity across schemes`,
+      ],
+      timeline: [
+        { phase: `Embedding loader`, duration: `2 min`, percent: 20 },
+        { phase: `Amplitude encoding`, duration: `3 min`, percent: 30 },
+        { phase: `Angle encoding`, duration: `3 min`, percent: 30 },
+        { phase: `Fidelity analysis`, duration: `2 min`, percent: 20 },
+      ],
+      teamRoles: [
+        { role: `NLP Specialist`, responsibility: `Load and preprocess embeddings` },
+        { role: `Quantum Engineer`, responsibility: `Implement encoding circuits` },
+        { role: `Analyst`, responsibility: `Compare and evaluate encodings` },
+      ],
+      deliverables: [
+        `Text-to-quantum-state encoding library`,
+        `Fidelity comparison report across encoding schemes`,
+        `Example encodings for 10 sample words`,
+      ],
+    },
+    questions: [
+      {
+        question: `What is the main disadvantage of basis encoding for word representation?`,
+        answer: `Basis encoding requires one unique basis state per word and does not capture semantic relationships between words — orthogonal basis states have zero inner product regardless of meaning.`,
+        explanation: `Basis encoding treats each word as a completely distinct quantum state, losing all similarity information. It is the quantum analogue of one-hot encoding.`,
+        commonMistake: `Assuming basis encoding preserves semantic similarity because different words use different basis states`,
+        tip: `Use amplitude or angle encoding to preserve the geometric relationships between word meanings`,
+      },
+      {
+        question: `How does amplitude encoding achieve exponential compression of word vectors?`,
+        answer: `A d-dimensional word vector can be encoded using only log₂(d) qubits, because the amplitudes of all 2^n basis states encode the vector components.`,
+        explanation: `With n qubits, we have 2^n amplitude slots. A 300-dimensional word vector requires only about 9 qubits (2⁹ = 512) for amplitude encoding.`,
+        commonMistake: `Thinking that fewer qubits means simpler circuits — amplitude encoding requires complex state preparation circuits`,
+        tip: `Amplitude encoding trades qubit count for circuit depth — fewer qubits but more gates`,
+      },
+    ],
+    virtualLab: {
+      description: `Encode text into quantum states interactively — choose a word, pick an encoding scheme, and see the resulting quantum circuit and state vector.`,
+      steps: [
+        `Enter a word to encode (e.g., "king", "ocean", "quantum")`,
+        `Select an encoding scheme: basis, amplitude, or angle`,
+        `View the generated quantum circuit`,
+        `Inspect the resulting quantum state vector`,
+        `Compare with the classical word vector for fidelity`,
+      ],
+      stepDetails: [
+        `Type any word — the lab looks up its pre-trained GloVe embedding (300 dimensions)`,
+        `Each encoding scheme generates a different quantum circuit — explore how each works`,
+        `The circuit diagram shows every gate applied to each qubit, with colour-coded operations`,
+        `The state vector panel shows the complex amplitudes of the resulting quantum state`,
+        `Fidelity score measures how well the quantum state preserves the original word relationships`,
+      ],
+      completionMessage: `You have successfully encoded text into quantum states!`,
+      dataFlow: `flowchart LR
+        A[Input Text] --> B[Word Embedding]
+        B --> C{Encoding Scheme}
+        C --> D[Basis Encoding]
+        C --> E[Amplitude Encoding]
+        C --> F[Angle Encoding]
+        D --> G[Quantum Circuit]
+        E --> G
+        F --> G
+        G --> H[Quantum State]
+        H --> I[State Visualisation]
+        H --> J[Fidelity Check]
+        J --> K[Compare with Classical]`,
+    },
+    insights: {
+      advantages: [
+        `Exponential compression via amplitude encoding`,
+        `Preservation of semantic relationships with appropriate encoding`,
+        `Natural compositionality through tensor products`,
+        `Multiple encoding schemes for different trade-offs`,
+      ],
+      disadvantages: [
+        `Normalisation constraint distorts relative magnitudes`,
+        `Amplitude encoding requires deep state preparation circuits`,
+        `Current hardware limits the size of encodable vocabulary`,
+        `Fidelity loss due to encoding approximations and hardware noise`,
+      ],
+      futureScope: `Adaptive encoding schemes that learn optimal mappings from text to quantum states will become standard. Hybrid approaches combining classical embeddings with quantum encoding will bridge the gap until fault-tolerant quantum computers are available.`,
+      industrialApplications: [
+        `Quantum-enhanced semantic search`,
+        `Quantum machine learning for text classification`,
+        `Secure quantum communication of linguistic data`,
+        `Quantum natural language interfaces`,
+      ],
+      careerRelevance: `Expertise in quantum encoding of classical data is critical for roles in quantum algorithm design, quantum machine learning engineering, and QNLP research. It is a key differentiator in the quantum computing job market.`,
+    },
+  },
+
+  '6.5': {
+    topicId: '6.5',
+    learningObjective: `Master feature mapping techniques that transform classical word features into quantum-ready representations.`,
+    nextPrep: `Read about quantum feature maps in the Qiskit documentation, focusing on ZZFeatureMap and PauliFeatureMap.`,
+    dependencyGraph: `flowchart LR
+      A[6.4 Encoding Text] --> B[6.5 Feature Mapping Techniques]
+      B --> C[6.6 Hands-On Lab]`,
+    storytelling: {
+      story: `Imagine you are a cartographer in the age of exploration. You have reports from sailors about a new land, but they describe it in terms of "wind direction," "water depth," and "star positions." To create a useful map, you need to decide how to project these features onto paper. A Mercator projection preserves direction but distorts size. A Peters projection preserves area but distorts shape. Feature mapping is the same idea: choosing how to project word features into quantum states, with each projection preserving different properties and enabling different operations.`,
+      questions: [
+        `What properties of a feature map matter most for NLP tasks?`,
+        `How does the choice of feature map affect what a quantum model can learn?`,
+        `Can a poor feature map be compensated by a more powerful quantum circuit?`,
+      ],
+      connection: `Feature mapping is the quantum analogue of choosing the right representation for classical machine learning. Just as kernel methods map data into higher-dimensional spaces to make problems linearly separable, quantum feature maps map classical data into Hilbert space for quantum processing.`,
+      technicalIntro: `Quantum feature maps are parameterised quantum circuits that encode classical data into quantum states. They are the quantum equivalent of classical feature engineering. Common maps include: PauliFeatureMap (encodes data as Pauli rotation angles), ZZFeatureMap (adds entangling ZZ interactions between features), and custom maps tailored to specific data structures. The choice of feature map determines the expressivity of the quantum model and its ability to capture feature interactions.`,
+      lifeSkills: `Feature mapping teaches us that how we represent a problem determines how easily we can solve it. This principle applies everywhere: choosing the right framework for a business challenge, the right metaphor for an explanation, or the right lens for analysing a situation. The map is not the territory, but it determines what you can see.`,
+    },
+    mathModelling: {
+      need: `Classical data must be mapped into a quantum Hilbert space where quantum algorithms can process it, and the mapping must preserve task-relevant information.`,
+      motivation: `The expressivity and performance of quantum machine learning models are fundamentally limited by the choice of feature map. A well-designed feature map captures important patterns before any learning occurs.`,
+      challenge: `Designing feature maps that are expressive enough to capture complex linguistic patterns while being shallow enough to run on NISQ devices with limited coherence time.`,
+      equations: [
+        {
+          latex: `U_\\Phi(\\vec{x}) = \\prod_{j} U_\\Phi(\\vec{x})_j`,
+          meaning: `A quantum feature map is a unitary operation U_Φ parameterised by classical data x.`,
+          interpretation: `The feature map applies a sequence of parameterised gates, where the parameters are derived from the input word features. The result is a quantum state that encodes the input.`,
+        },
+        {
+          latex: `\\text{ZZFeatureMap}: \\quad U(\\vec{x}) = \\left( \\bigotimes_{i=1}^{n} R_X(x_i) \\right) \\left( \\bigotimes_{i<j} e^{i \\, x_i x_j \\, Z_i Z_j} \\right)`,
+          meaning: `The ZZFeatureMap applies single-qubit X-rotations based on individual features and ZZ interactions based on feature pairs.`,
+          interpretation: `Single-qubit gates encode individual word features, while ZZ gates encode pairwise feature interactions — crucial for capturing relationships between different aspects of word meaning.`,
+        },
+        {
+          latex: `\\mathcal{H}_\\Phi = \\text{span}\\{ \\ket{\\Phi(\\vec{x})} \\mid \\vec{x} \\in \\mathcal{X} \\}`,
+          meaning: `The feature map induces a quantum Hilbert space H_Φ that is the span of all encoded data points.`,
+          interpretation: `The quantum model operates in this induced feature space. The dimensionality and structure of H_Φ determine what functions the quantum model can learn.`,
+        },
+      ],
+      variables: [
+        { symbol: `U_\\Phi`, name: `Feature Map Unitary`, description: `Parameterised quantum circuit encoding classical data` },
+        { symbol: `\\vec{x}`, name: `Input Feature Vector`, description: `Classical word features to be encoded` },
+        { symbol: `R_X`, name: `X Rotation Gate`, description: `Single-qubit rotation around the X axis` },
+        { symbol: `Z_i Z_j`, name: `ZZ Interaction`, description: `Two-qubit entangling gate capturing feature interactions` },
+      ],
+      interactive: {
+        equation: `U(\\vec{x}) = \\exp\\left( i \\sum_{i} x_i Z_i + i \\sum_{i<j} x_i x_j Z_i Z_j \\right)`,
+        description: `Adjust feature values to see how the ZZFeatureMap circuit changes:`,
+        variables: [
+          { symbol: `x_1`, name: `Feature 1`, description: `First word feature value` },
+          { symbol: `x_2`, name: `Feature 2`, description: `Second word feature value` },
+          { symbol: `x_3`, name: `Feature 3`, description: `Third word feature value` },
+        ],
+        sliders: [
+          { name: `x1`, label: `Feature x₁`, min: -π, max: π, step: 0.1, default: 0.5 },
+          { name: `x2`, label: `Feature x₂`, min: -π, max: π, step: 0.1, default: 1.2 },
+          { name: `x3`, label: `Feature x₃`, min: -π, max: π, step: 0.1, default: -0.8 },
+        ],
+      },
+      charts: [
+        {
+          title: `Feature Map Comparison for NLP Tasks`,
+          type: `radar`,
+          data: [
+            { criteria: `Expressivity`, Pauli: 3, ZZ: 4, custom: 5 },
+            { criteria: `Circuit Depth`, Pauli: 5, ZZ: 3, custom: 2 },
+            { criteria: `Feature Interactions`, Pauli: 2, ZZ: 4, custom: 5 },
+            { criteria: `NISQ Suitability`, Pauli: 5, ZZ: 3, custom: 2 },
+            { criteria: `Semantic Capture`, Pauli: 2, ZZ: 4, custom: 4 },
+            { criteria: `Trainability`, Pauli: 4, ZZ: 3, custom: 3 },
+          ],
+        },
+        {
+          title: `Feature Map Expressivity vs Circuit Depth`,
+          type: `scatter`,
+          data: [
+            { map: `PauliFeatureMap`, depth: 2, expressivity: 3 },
+            { map: `ZZFeatureMap`, depth: 4, expressivity: 5 },
+            { map: `ZFeatureMap`, depth: 1, expressivity: 2 },
+            { map: `Custom NLP Map`, depth: 6, expressivity: 5 },
+            { map: `IQPEmbedding`, depth: 3, expressivity: 4 },
+          ],
+        },
+      ],
+      advantages: `Feature maps enable the quantum model to access a high-dimensional Hilbert space where complex linguistic patterns become linearly separable. The ZZFeatureMap naturally captures pairwise feature interactions crucial for semantic relationships.`,
+      limitations: `Feature maps must be shallow enough for NISQ hardware but expressive enough for the task. There is a fundamental trade-off between circuit depth and expressivity. Poorly designed feature maps can lead to barren plateaus in training.`,
+    },
+    activities: [
+      {
+        title: `Feature Map Circuit Construction`,
+        description: `Students manually construct feature map circuits for simple word vectors.`,
+        steps: [
+          `Take a 3-dimensional word vector [0.5, 1.2, -0.8]`,
+          `Construct the PauliFeatureMap using RX gates`,
+          `Add ZZ interactions between features 1-2, 2-3, and 1-3`,
+          `Draw the complete circuit diagram`,
+        ],
+        materials: `Quantum circuit design worksheet, gate reference card`,
+        timeRequired: `10 min`,
+        outcomes: `Students understand how feature maps are constructed gate by gate.`,
+      },
+      {
+        title: `Feature Map Expressivity Comparison`,
+        description: `Compare different feature maps on a simple word classification task.`,
+        steps: [
+          `Define two word classes: "animals" and "vehicles" with 5 words each`,
+          `Encode all words using PauliFeatureMap`,
+          `Train a quantum classifier and measure accuracy`,
+          `Repeat with ZZFeatureMap and compare results`,
+        ],
+        materials: `Quantum simulator notebook, word embeddings`,
+        outcomes: `Students observe that more expressive feature maps lead to better classification.`,
+      },
+      {
+        title: `Barren Plateau Investigation`,
+        description: `Investigate how feature map depth affects gradient variance during training.`,
+        steps: [
+          `Create feature maps with increasing depth (2, 4, 8, 16 layers)`,
+          `Compute gradient magnitudes for random parameters`,
+          `Plot gradient variance vs circuit depth`,
+          `Identify the depth at which barren plateaus appear`,
+        ],
+        outcomes: `Students understand the practical limitations of deep feature maps on NISQ devices.`,
+      },
+    ],
+    project: {
+      scope: `Design and evaluate a custom feature map optimised for word-level NLP tasks, comparing its performance against standard feature maps.`,
+      objectives: [
+        `Implement PauliFeatureMap, ZZFeatureMap, and a custom map`,
+        `Compare expressivity using kernel alignment`,
+        `Evaluate classification accuracy on a word task`,
+        `Analyse circuit depth and gate counts`,
+      ],
+      timeline: [
+        { phase: `Implement standard maps`, duration: `3 min`, percent: 25 },
+        { phase: `Design custom map`, duration: `3 min`, percent: 25 },
+        { phase: `Expressivity evaluation`, duration: `3 min`, percent: 25 },
+        { phase: `Performance analysis`, duration: `3 min`, percent: 25 },
+      ],
+      teamRoles: [
+        { role: `Circuit Designer`, responsibility: `Implement feature map circuits` },
+        { role: `Data Scientist`, responsibility: `Prepare word classification task` },
+        { role: `Analyst`, responsibility: `Evaluate and compare performance` },
+      ],
+      deliverables: [
+        `Feature map implementation library`,
+        `Comparative performance report`,
+        `Recommendation for NLP-optimised feature map`,
+      ],
+    },
+    questions: [
+      {
+        question: `Why does the ZZFeatureMap include entangling gates between feature qubits?`,
+        answer: `The ZZ entangling gates capture interactions between features, allowing the model to learn relationships between different dimensions of the word vector.`,
+        explanation: `Pure single-qubit gates process each feature independently. Entangling gates create correlations between qubits, enabling the model to capture that, for example, the combination of "royalty" and "masculinity" features jointly determines similarity to "king".`,
+        commonMistake: `Thinking that single-qubit gates alone are sufficient — without entanglement, the model cannot capture feature interactions`,
+        tip: `Feature interactions are essential for NLP because word meaning arises from the combination of all features, not individual features in isolation`,
+      },
+      {
+        question: `What is the relationship between quantum feature maps and classical kernel methods?`,
+        answer: `A quantum feature map defines a quantum kernel: K(x_i, x_j) = |⟨Φ(x_i)|Φ(x_j)⟩|², which measures similarity in the quantum Hilbert space just as a classical kernel function measures similarity in a feature space.`,
+        explanation: `The inner product between encoded quantum states defines a similarity measure. This quantum kernel can be used in kernel-based ML algorithms, potentially accessing feature spaces that are exponentially large relative to classical kernels.`,
+        commonMistake: `Assuming quantum feature maps always outperform classical kernels — the advantage depends on the data distribution and task`,
+        tip: `Think of quantum feature maps as a way to compute inner products in a Hilbert space that is hard to simulate classically`,
+      },
+    ],
+    virtualLab: {
+      description: `Explore quantum feature maps interactively — choose a feature map type, adjust parameters, and see the resulting circuit and kernel matrix.`,
+      steps: [
+        `Select a feature map type (Pauli, ZZ, or custom)`,
+        `Adjust the feature map parameters (depth, features)`,
+        `View the generated quantum circuit`,
+        `Compute the quantum kernel matrix for sample words`,
+        `Compare kernel matrices across feature maps`,
+      ],
+      stepDetails: [
+        `Choose from pre-built feature maps or design your own by combining gate blocks`,
+        `Depth controls how many times the encoding layer is repeated — deeper maps are more expressive but harder to run`,
+        `The circuit diagram updates in real time as you change parameters, colour-coded by gate type`,
+        `The kernel matrix visualises similarity between all pairs of encoded words — brighter means more similar`,
+        `Side-by-side comparison mode shows two feature maps simultaneously for easy contrast`,
+      ],
+      completionMessage: `You have mastered quantum feature mapping techniques for NLP!`,
+      dataFlow: `flowchart LR
+        A[Word Features] --> B[Feature Map Selection]
+        B --> C[Circuit Generation]
+        C --> D[Quantum State Encoding]
+        D --> E[Kernel Matrix Computation]
+        E --> F[Similarity Visualisation]
+        C --> G[Circuit Depth Analysis]
+        B --> H[Expressivity Score]
+        F --> I[Model Training]
+        H --> I`,
+    },
+    insights: {
+      advantages: [
+        `Enables access to exponentially large Hilbert spaces for data representation`,
+        `Naturally captures feature interactions through entangling gates`,
+        `Provides a principled framework for quantum model design`,
+        `Quantum kernels can be computed even on near-term quantum devices`,
+      ],
+      disadvantages: [
+        `Deep feature maps required for complex patterns cause barren plateaus`,
+        `Limited by NISQ hardware coherence times and gate fidelities`,
+        `Designing optimal feature maps for specific tasks remains an open problem`,
+        `Quantum kernel methods scale poorly with dataset size`,
+      ],
+      futureScope: `Adaptive feature maps that learn optimal encoding strategies through meta-learning will emerge. Hardware-aware feature maps co-designed with quantum device topology will improve NISQ-era performance. Integration with classical deep learning will produce hybrid models that leverage the best of both paradigms.`,
+      industrialApplications: [
+        `Quantum-enhanced document classification`,
+        `Fraud detection using quantum kernels on transaction data`,
+        `Drug discovery with quantum feature maps for molecular data`,
+        `Financial time series analysis with quantum embeddings`,
+      ],
+      careerRelevance: `Feature map design is a core competency for quantum machine learning engineers and researchers. It combines deep knowledge of quantum computing, classical ML, and domain-specific data understanding — a highly valued multidisciplinary skill set.`,
+    },
+  },
+
+  '6.6': {
+    topicId: '6.6',
+    learningObjective: `Build hands-on experience encoding words into quantum circuits using a quantum computing framework.`,
+    nextPrep: `Review the lab worksheet and ensure Qiskit or Cirq is installed on your machine. Bring your laptop with the quantum SDK ready.`,
+    dependencyGraph: `flowchart LR
+      A[6.4 Encoding Text] --> B[6.5 Feature Mapping]
+      B --> C[6.6 Hands-On Lab: Words to Circuits]
+      C --> D[M7: QNLP Introduction]`,
+    storytelling: {
+      story: `Think of the Wright brothers at Kitty Hawk. They had studied aerodynamics, built wind tunnels, and designed wing shapes. But the true test came when they had to build a machine that actually flew. Today, you are the Wright brothers of QNLP. You have studied word vectors, quantum states, and feature maps. Now it is time to build — to wire up actual quantum gates that encode real words into circuits. Your first flight may be short, but it will prove that words can indeed fly in the quantum realm.`,
+      questions: [
+        `What do you expect to see when you run a quantum circuit that encodes a word?`,
+        `How will you verify that the encoding is correct?`,
+        `What challenges do you anticipate in moving from theory to practice?`,
+      ],
+      connection: `This lab brings together everything from Module 6: word vectors from 6.1, vector spaces from 6.2, quantum states from 6.3, encoding from 6.4, and feature maps from 6.5. You will implement the full pipeline from text to quantum circuit, seeing each concept in action.`,
+      technicalIntro: `In this hands-on lab, you will use a quantum computing SDK (Qiskit or Cirq) to build circuits that encode words into quantum states. You will implement amplitude and angle encoding schemes, construct feature map circuits, and execute them on a simulator. You will measure the output states and verify that the encoded states preserve semantic relationships. This is your first practical step in QNLP programming.`,
+      lifeSkills: `This lab teaches the value of integrating theory and practice. The gap between knowing the concepts and making them work in code is where real learning happens. Persistence, debugging, and systematic testing are skills that transfer to any technical endeavour.`,
+    },
+    mathModelling: {
+      need: `Theoretical encoding schemes must be translated into executable quantum circuits using real quantum programming frameworks.`,
+      motivation: `Understanding the implementation details reveals practical constraints (gate noise, qubit connectivity, circuit depth) that theory alone cannot capture.`,
+      challenge: `Translating mathematical encoding formulas into sequences of quantum gates that respect hardware constraints while faithfully representing the original word vectors.`,
+      equations: [
+        {
+          latex: `\\ket{\\psi_{\\text{word}}} = \\text{Circuit}(\\vec{v}) \\ket{0}^{\\otimes n}`,
+          meaning: `A quantum circuit parameterised by word vector v prepares the encoded quantum state starting from the all-zero state.`,
+          interpretation: `The circuit is a sequence of gates that transforms the initial state |0...0⟩ into the target word-encoding state. The gate parameters are derived from the word vector components.`,
+        },
+        {
+          latex: `\\text{Circuit}_{\\text{angle}}(\\vec{v}) = \\bigotimes_{i=1}^{n} R_Y(v_i)`,
+          meaning: `Angle encoding circuit: each feature v_i becomes a Y-rotation on its own qubit.`,
+          interpretation: `This is the simplest encoding to implement: one qubit per feature, one rotation gate per qubit. The circuit depth is O(1) and requires no entanglement.`,
+        },
+        {
+          latex: `\\text{Circuit}_{\\text{amplitude}}(\\vec{v}) = U_{\\text{prep}}(\\vec{v})`,
+          meaning: `Amplitude encoding requires a state preparation circuit U_prep that loads normalised word vector components into the 2^n amplitudes.`,
+          interpretation: `State preparation is more complex, involving a series of controlled rotations and entangling gates. Qiskit provides initialize() and StatePreparation for this purpose.`,
+        },
+      ],
+      variables: [
+        { symbol: `\\text{Circuit}`, name: `Quantum Circuit`, description: `Sequence of quantum gates implementing the encoding` },
+        { symbol: `R_Y(\\theta)`, name: `Y Rotation Gate`, description: `Rotation around the Y-axis by angle θ` },
+        { symbol: `U_{\\text{prep}}`, name: `State Preparation Circuit`, description: `Arbitrary unitary that prepares a target quantum state` },
+        { symbol: `\\ket{0}^{\\otimes n}`, name: `Initial State`, description: `All qubits start in the |0⟩ state` },
+      ],
+      interactive: {
+        equation: `\\ket{\\psi} = R_Y(v_1) R_Y(v_2) \\ket{00}`,
+        description: `Build an angle-encoding circuit for a 2-feature word vector and see the resulting state:`,
+        variables: [
+          { symbol: `v_1`, name: `Feature 1`, description: `First word feature as rotation angle` },
+          { symbol: `v_2`, name: `Feature 2`, description: `Second word feature as rotation angle` },
+        ],
+        sliders: [
+          { name: `v1`, label: `Feature 1 (θ₁)`, min: 0, max: 2, step: 0.1, default: 0.8 },
+          { name: `v2`, label: `Feature 2 (θ₂)`, min: 0, max: 2, step: 0.1, default: 1.3 },
+        ],
+      },
+      charts: [
+        {
+          title: `Circuit Metrics for Different Encoding Schemes`,
+          type: `bar`,
+          data: [
+            { metric: `Gate Count`, angle: 300, amplitude: 1500, basis: 1 },
+            { metric: `Circuit Depth`, angle: 1, amplitude: 50, basis: 1 },
+            { metric: `Qubit Count`, angle: 300, amplitude: 9, basis: 10 },
+            { metric: `Semantic Fidelity (%)`, angle: 85, amplitude: 95, basis: 20 },
+          ],
+        },
+        {
+          title: `Lab Execution Times for Different Word Counts`,
+          type: `line`,
+          data: [
+            { words: 1, angle: 0.5, amplitude: 2.0 },
+            { words: 5, angle: 1.2, amplitude: 8.5 },
+            { words: 10, angle: 2.1, amplitude: 18.0 },
+            { words: 20, angle: 4.0, amplitude: 40.0 },
+            { words: 50, angle: 9.5, amplitude: 110.0 },
+          ],
+        },
+      ],
+      advantages: `Hands-on implementation solidifies theoretical understanding, reveals practical constraints, and builds programming skills essential for QNLP research and development. Angle encoding is trivial to implement; amplitude encoding offers better fidelity.`,
+      limitations: `Simulators cannot capture hardware noise, decoherence, or gate errors. Real hardware runs will differ from simulation. Current hardware supports only a limited number of qubits, restricting vocabulary size.`,
+    },
+    activities: [
+      {
+        title: `Lab Setup and SDK Installation`,
+        description: `Students set up their quantum computing environment.`,
+        steps: [
+          `Install Qiskit (pip install qiskit)`,
+          `Verify installation with a hello-world circuit`,
+          `Set up the Jupyter notebook environment`,
+          `Clone the lab repository with starter code`,
+        ],
+        materials: `Installation guide, terminal access, requirements.txt`,
+        timeRequired: `5 min`,
+        outcomes: `Working quantum computing environment on each student's machine.`,
+      },
+      {
+        title: `Angle Encoding Implementation`,
+        description: `Students implement angle encoding for a single word and verify the output.`,
+        steps: [
+          `Load a 5-dimensional word vector for "king"`,
+          `Create a 5-qubit circuit`,
+          `Apply RY gates with word vector components as angles`,
+          `Execute on simulator and print the state vector`,
+        ],
+        materials: `Jupyter notebook with starter code, word vector data`,
+        outcomes: `Students successfully encode a word into a quantum circuit.`,
+      },
+      {
+        title: `Semantic Similarity Verification`,
+        description: `Students verify that encoded quantum states preserve semantic relationships.`,
+        steps: [
+          `Encode the words "king", "queen", "man", "woman", "apple"`,
+          `Compute inner products between all pairs of encoded states`,
+          `Compare with classical cosine similarities`,
+          `Calculate the correlation between classical and quantum similarity matrices`,
+        ],
+        outcomes: `Students quantitatively evaluate encoding quality.`,
+      },
+      {
+        title: `Amplitude Encoding Extension`,
+        description: `Advanced: Students implement amplitude encoding for higher-dimensional word vectors.`,
+        steps: [
+          `Take a 16-dimensional word vector (requires 4 qubits)`,
+          `Normalise the vector to unit length`,
+          `Use Qiskit's initialize() to prepare the state`,
+          `Compare circuit depth with angle encoding`,
+        ],
+        materials: `Extension notebook, 16-dimensional word vectors`,
+        outcomes: `Students compare encoding schemes and understand trade-offs.`,
+      },
+    ],
+    project: {
+      scope: `Build a complete word-to-quantum-circuit pipeline that takes any word, looks up its embedding, and produces a quantum circuit ready for execution on a simulator or quantum hardware.`,
+      objectives: [
+        `Implement angle encoding and amplitude encoding as reusable functions`,
+        `Build a word lookup system with pre-trained embeddings`,
+        `Include circuit visualisation and state vector analysis`,
+        `Compare encoding fidelity across different word categories`,
+      ],
+      timeline: [
+        { phase: `Embedding integration`, duration: `3 min`, percent: 20 },
+        { phase: `Circuit builders`, duration: `5 min`, percent: 35 },
+        { phase: `Execution and analysis`, duration: `4 min`, percent: 30 },
+        { phase: `Documentation`, duration: `2 min`, percent: 15 },
+      ],
+      teamRoles: [
+        { role: `Backend Developer`, responsibility: `Build circuit generation modules` },
+        { role: `Frontend Developer`, responsibility: `Create interactive interface` },
+        { role: `QA Engineer`, responsibility: `Verify correctness and fidelity` },
+      ],
+      deliverables: [
+        `Word-to-quantum-circuit Python package`,
+        `Interactive demo notebook`,
+        `Fidelity analysis report across 50 test words`,
+      ],
+    },
+    questions: [
+      {
+        question: `Why does the angle encoding circuit use R_Y gates instead of R_X or R_Z?`,
+        answer: `R_Y gates map the feature values to rotations around the Y-axis, which produces real-valued quantum state amplitudes — matching the real-valued nature of classical word vectors.`,
+        explanation: `R_X and R_Z gates introduce complex phases that are not present in classical word embeddings. R_Y keeps the state vector real, making it easier to interpret and compare with classical representations.`,
+        commonMistake: `Using R_Z gates and wondering why the resulting state vectors have complex components that do not match the original word vector`,
+        tip: `Choose the rotation axis based on the properties you want to preserve — use R_Y for real-valued embeddings`,
+      },
+      {
+        question: `How do you verify that a quantum circuit correctly encodes a word?`,
+        answer: `Execute the circuit on a simulator, extract the state vector, and compare it to the expected normalised word vector using fidelity (|⟨ψ_computed|ψ_expected⟩|²).`,
+        explanation: `Fidelity of 1.0 means perfect encoding. In practice, numerical precision limits fidelity to >0.9999 for simulation. On hardware, noise reduces fidelity significantly.`,
+        commonMistake: `Only checking bitstring measurement probabilities without comparing the full state vector — measurement discards phase information`,
+        tip: `Always verify the full state vector on a simulator before running on hardware. Measurement gives only probabilities, not the complete state.`,
+      },
+    ],
+    virtualLab: {
+      description: `Interactive word-to-quantum-circuit lab — enter a word, select encoding, and see the circuit, state vector, and similarity comparisons in real time.`,
+      steps: [
+        `Enter a word or select from a predefined list`,
+        `Choose encoding scheme: angle or amplitude`,
+        `View the generated quantum circuit`,
+        `Run the circuit on a simulator`,
+        `Inspect the resulting quantum state and compare with the original word vector`,
+      ],
+      stepDetails: [
+        `Start by typing "king" or clicking a sample word — the lab uses 300-dimensional GloVe embeddings behind the scenes`,
+        `Angle encoding: one qubit per dimension (limited to first 8 dimensions for visualisation). Amplitude encoding: log₂(d) qubits`,
+        `The circuit diagram renders with colour-coded gates — hover over any gate to see its matrix representation`,
+        `The simulator runs 8192 shots by default — switch to statevector simulation for exact amplitudes`,
+        `The comparison panel shows classical word vector, encoded quantum state, and fidelity score. A heatmap shows similarity to other encoded words`,
+      ],
+      completionMessage: `Congratulations! You have successfully built quantum circuits that encode real words. You are now a QNLP programmer!`,
+      dataFlow: `flowchart LR
+        A[Word Input] --> B[Embedding Lookup]
+        B --> C[Encoding Selection]
+        C --> D[Circuit Generation]
+        D --> E[Gate Assembly]
+        E --> F[Circuit Transpilation]
+        F --> G[Simulator Execution]
+        G --> H[State Vector]
+        H --> I[Fidelity Check]
+        I --> J[Classical Comparison]
+        F --> K[Hardware Deployment]
+        K --> L[Measurement Results]`,
+    },
+    insights: {
+      advantages: [
+        `Practical implementation skills for QNLP`,
+        `Direct experience with quantum circuit design and execution`,
+        `Understanding of real-world constraints and trade-offs`,
+        `Portfolio-ready code for quantum NLP projects`,
+      ],
+      disadvantages: [
+        `Simulator-only experience misses hardware noise realities`,
+        `Limited to small vocabulary sizes due to qubit constraints`,
+        `Current SDKs have limited QNLP-specific abstractions`,
+        `Requires careful management of classical-quantum interface`,
+      ],
+      futureScope: `This lab provides the foundation for building full QNLP pipelines. In subsequent modules, you will extend these techniques to sentence-level encoding, trainable encoding circuits, and hybrid quantum-classical models for real NLP tasks.`,
+      industrialApplications: [
+        `Prototyping quantum NLP algorithms`,
+        `Benchmarking encoding schemes for production systems`,
+        `Educational platforms for quantum computing training`,
+        `Research and development of novel quantum embeddings`,
+      ],
+      careerRelevance: `Hands-on quantum programming with real SDKs is the most sought-after skill in the quantum computing job market. Combining this with NLP knowledge makes you uniquely valuable for the emerging QNLP industry.`,
+    },
+  },
+}

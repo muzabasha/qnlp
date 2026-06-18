@@ -1,0 +1,1173 @@
+import type { TopicContent } from './loader'
+
+export const m13Content: Record<string, TopicContent> = {
+  '13.1': {
+    topicId: '13.1',
+    learningObjective: `Understand the key performance metrics used to evaluate QNLP models, including accuracy, precision, recall, F1-score, and quantum-specific metrics.`,
+    nextPrep: `Review classification fundamentals from Module 11 and the concept of confusion matrices from classical ML.`,
+    dependencyGraph: `flowchart LR
+      A[M11: Text Classification] --> B[13.1 Performance Metrics]
+      B --> C[13.2 Accuracy Precision Recall F1]
+      C --> D[13.3 Benchmarking]
+      D --> E[13.4 Quantum Advantage]
+      E --> F[13.5 Experimental Analysis]
+      style B fill:#4a90d9,color:#fff`,
+    storytelling: {
+      story: `Imagine you are a doctor developing a test for a rare disease. If your test always says the patient is healthy, it is 99% accurate (since only 1% have the disease), but it never actually catches the disease. This is why accuracy alone is a terrible metric. Now imagine evaluating a quantum NLP model — you need to know not just how often it is right, but how it performs on each class, how confident its predictions are, and whether its quantum nature actually provides a measurable benefit. This topic introduces the complete evaluation toolkit for QNLP models.`,
+      questions: [
+        `Why can a model with 99% accuracy still be useless?`,
+        `What does a confusion matrix tell us that accuracy alone does not?`,
+        `How might quantum-specific metrics differ from classical ones?`,
+      ],
+      connection: `Just as medical tests need different metrics for different diseases, QNLP models need a comprehensive evaluation framework. The metrics we choose shape what we optimise and ultimately determine whether quantum models are practically useful.`,
+      technicalIntro: `Performance evaluation in QNLP spans three levels: (1) Classical ML metrics — accuracy, precision, recall, F1-score, ROC-AUC, and confusion matrices that measure predictive quality. (2) Computational metrics — circuit depth, gate count, number of shots, training time, and parameter efficiency that measure resource usage. (3) Quantum-specific metrics — Hilbert space utilisation, entanglement capacity, expressivity, and quantum volume that measure how effectively the quantum resources are being used. Together, these metrics provide a holistic view of model quality, efficiency, and quantum advantage potential.`,
+      lifeSkills: `Evaluation is not just for models. Learning to evaluate anything — a job offer, a relationship, a business decision — requires looking at multiple metrics, not just one number. The skill of choosing the right metrics for the right context transfers directly to life.`,
+    },
+    mathModelling: {
+      need: `QNLP models require a multi-faceted evaluation framework that captures both classical prediction quality and quantum resource utilisation.`,
+      motivation: `Single-metric evaluation (e.g., accuracy alone) can be misleading, especially for imbalanced datasets common in NLP. A comprehensive metric suite is essential for fair comparison.`,
+      challenge: `Designing metrics that are (1) meaningful for model performance, (2) comparable across classical and quantum models, and (3) sensitive to quantum-specific characteristics.`,
+      equations: [
+        {
+          latex: `\\text{Accuracy} = \\frac{TP + TN}{TP + TN + FP + FN}`,
+          meaning: `Accuracy measures the fraction of all predictions that are correct — true positives plus true negatives divided by total predictions.`,
+          interpretation: `Accuracy is intuitive but can be misleading for imbalanced datasets. A model that always predicts the majority class can achieve high accuracy while being useless for the minority class.`,
+        },
+        {
+          latex: `F_1 = 2 \\cdot \\frac{\\text{Precision} \\cdot \\text{Recall}}{\\text{Precision} + \\text{Recall}}`,
+          meaning: `The F1-score is the harmonic mean of precision and recall, providing a single metric that balances both concerns.`,
+          interpretation: `Precision = TP/(TP+FP) measures how many positive predictions are correct. Recall = TP/(TP+FN) measures how many actual positives are caught. F1 penalises extreme imbalances — both precision and recall must be high for a good F1 score.`,
+        },
+        {
+          latex: `\\text{Confusion Matrix} = \\begin{bmatrix} TP & FP \\\\ FN & TN \\end{bmatrix}`,
+          meaning: `The confusion matrix tabulates predicted vs actual class labels, showing where the model makes errors in a compact 2x2 (binary) or kxk (multi-class) format.`,
+          interpretation: `Each row represents actual classes, each column represents predicted classes. Diagonal entries are correct predictions; off-diagonal entries are errors. The pattern of errors reveals systematic biases in the model.`,
+        },
+        {
+          latex: `\\mathcal{Q}_{\\text{eff}} = \\frac{\\text{Number of effective degrees of freedom in Hilbert space utilised}}{\\text{Total Hilbert space dimension}}`,
+          meaning: `Quantum utilisation metric Q_eff measures how much of the available Hilbert space the model actually uses for computation.`,
+          interpretation: `A low Q_eff suggests the quantum circuit is not exploiting its full expressivity — it could be replaced by a simpler classical model. This is a diagnostic for genuine quantum advantage.`,
+        },
+      ],
+      variables: [
+        { symbol: `TP`, name: `True Positives`, description: `Correctly predicted positive instances` },
+        { symbol: `TN`, name: `True Negatives`, description: `Correctly predicted negative instances` },
+        { symbol: `FP`, name: `False Positives`, description: `Type I error — incorrectly predicted positive` },
+        { symbol: `FN`, name: `False Negatives`, description: `Type II error — missed positive instances` },
+        { symbol: `\\mathcal{Q}_{\\text{eff}}`, name: `Quantum Utilisation`, description: `Fraction of Hilbert space actively used by the quantum model` },
+      ],
+      charts: [
+        {
+          title: `Metrics Comparison Across QNLP Models`,
+          type: `bar`,
+          data: [
+            { name: `Baseline Classical`, accuracy: 0.88, precision: 0.87, recall: 0.86, f1: 0.87, q_eff: 0.0 },
+            { name: `4-Qubit Quantum`, accuracy: 0.91, precision: 0.90, recall: 0.91, f1: 0.90, q_eff: 0.42 },
+            { name: `8-Qubit Quantum`, accuracy: 0.93, precision: 0.93, recall: 0.92, f1: 0.93, q_eff: 0.58 },
+            { name: `12-Qubit Hybrid`, accuracy: 0.95, precision: 0.95, recall: 0.94, f1: 0.95, q_eff: 0.71 },
+          ],
+        },
+        {
+          title: `Quantum Utilisation vs Qubit Count`,
+          type: `line`,
+          data: [
+            { name: `2 Qubits`, q_eff: 0.31, accuracy: 0.85 },
+            { name: `4 Qubits`, q_eff: 0.42, accuracy: 0.89 },
+            { name: `6 Qubits`, q_eff: 0.51, accuracy: 0.91 },
+            { name: `8 Qubits`, q_eff: 0.58, accuracy: 0.93 },
+            { name: `10 Qubits`, q_eff: 0.63, accuracy: 0.94 },
+          ],
+        },
+      ],
+      advantages: `Comprehensive metrics give a complete picture of model performance. Quantum utilisation metrics provide diagnostic information about whether quantum resources are being used effectively. Macro and weighted F1 scores handle multi-class and imbalanced settings well.`,
+      limitations: `No single metric captures all aspects of model quality. Quantum utilisation metrics are not yet standardised, making cross-study comparison difficult. Metric computation requires careful statistical validation.`,
+    },
+    activities: [
+      {
+        title: `Metric Selection Challenge`,
+        description: `Given specific NLP scenarios, students select the most appropriate evaluation metrics and justify their choices.`,
+        steps: [
+          `Receive scenario cards: spam detection (imbalanced), medical diagnosis (high FN cost), news categorisation (balanced multi-class)`,
+          `Select 3 metrics for each scenario and rank them by importance`,
+          `Justify why your chosen metrics are appropriate for each scenario's cost structure`,
+          `Present and defend your metric selection against critiques`,
+        ],
+        materials: `Scenario cards, metric reference sheet`,
+        timeRequired: `10 min`,
+        outcomes: `Students can select appropriate metrics for different evaluation contexts`,
+      },
+      {
+        title: `Confusion Matrix Analysis`,
+        description: `Students interpret confusion matrices from real QNLP experiments and identify model weaknesses.`,
+        steps: [
+          `Receive confusion matrices from 4 different QNLP models`,
+          `Calculate accuracy, precision, recall, and F1 from each matrix`,
+          `Identify which class each model struggles with most`,
+          `Recommend improvements based on error patterns`,
+        ],
+        timeRequired: `8 min`,
+        outcomes: `Students can extract and interpret all standard metrics from a confusion matrix`,
+      },
+      {
+        title: `Quantum Utilisation Debate`,
+        description: `Teams debate whether Q_eff is a meaningful metric for measuring quantum advantage.`,
+        steps: [
+          `Split into pro-Q_eff and anti-Q_eff teams`,
+          `Pro team: Q_eff captures Hilbert space usage that classical metrics miss`,
+          `Anti team: Q_eff is not standardised and may not correlate with accuracy`,
+          `Class votes on which argument is more convincing`,
+        ],
+        timeRequired: `7 min`,
+        outcomes: `Students critically evaluate quantum-specific metrics and their limitations`,
+      },
+      {
+        title: `Metric Computation Race`,
+        description: `Teams race to compute all standard metrics from a given confusion matrix under time pressure.`,
+        steps: [
+          `Receive a 3x3 confusion matrix for a QNLP sentiment model`,
+          `Compute accuracy, precision per class, recall per class, macro F1, weighted F1`,
+          `First team with all correct values wins`,
+          `Review common computation mistakes`,
+        ],
+        timeRequired: `6 min`,
+        outcomes: `Students can rapidly and accurately compute standard classification metrics`,
+      },
+    ],
+    project: {
+      scope: `Design a comprehensive evaluation framework for a QNLP sentiment classification model, including classical and quantum-specific metrics, with justification for each metric choice.`,
+      objectives: [
+        `Select 5-7 metrics for a holistic evaluation suite`,
+        `Define how each metric is computed and interpreted`,
+        `Specify thresholds for acceptable, good, and excellent performance`,
+        `Design a visual dashboard template for presenting all metrics`,
+      ],
+      timeline: [
+        { phase: `Metric Selection`, duration: `3 min`, percent: 25 },
+        { phase: `Threshold Definition`, duration: `2 min`, percent: 20 },
+        { phase: `Dashboard Design`, duration: `4 min`, percent: 40 },
+        { phase: `Documentation`, duration: `2 min`, percent: 15 },
+      ],
+      teamRoles: [
+        { role: `Metric Specialist`, responsibility: `Selects and justifies the metric suite` },
+        { role: `Visualisation Designer`, responsibility: `Designs the evaluation dashboard` },
+        { role: `Validator`, responsibility: `Verifies metrics are correctly defined and computed` },
+      ],
+      deliverables: [
+        `Evaluation framework document with metric definitions`,
+        `Performance threshold specification table`,
+        `Dashboard wireframe showing all metrics and visualisations`,
+      ],
+    },
+    questions: [
+      {
+        question: `Why is accuracy alone insufficient for evaluating QNLP models?`,
+        answer: `Accuracy can be misleading for imbalanced datasets — a model that always predicts the majority class can achieve high accuracy while completely failing on the minority class. In many NLP tasks (fraud detection, medical diagnosis, rare sentiment detection), minority class performance is more important.`,
+        explanation: `For example, in sentiment analysis with 90% positive reviews, a model that always predicts positive achieves 90% accuracy but 0% recall on negative reviews. F1-score and confusion matrices reveal this failure.`,
+        commonMistake: `Reporting only accuracy as the sole evaluation metric without considering class balance.`,
+        tip: `Always check class distribution first, then choose metrics accordingly. Use macro-averaged metrics for imbalanced data.`,
+      },
+      {
+        question: `What is quantum utilisation Q_eff and why is it important?`,
+        answer: `Q_eff measures how much of the available Hilbert space a quantum model actually uses for computation. It is important because it diagnoses whether the quantum circuit is genuinely exploiting quantum resources or could be replaced by a simpler classical model.`,
+        explanation: `A low Q_eff suggests the quantum circuit is not creating enough entanglement or superposition to utilise its full Hilbert space — indicating no quantum advantage. A high Q_eff suggests the model is genuinely using quantum phenomena.`,
+        commonMistake: `Assuming more qubits automatically means better quantum utilisation — circuit design matters more than qubit count.`,
+        tip: `Compare Q_eff across different ansatz designs for the same qubit count to identify which architecture best utilises quantum resources.`,
+      },
+    ],
+    virtualLab: {
+      description: `Compute and compare all standard performance metrics for a QNLP sentiment model, exploring how each metric reveals different aspects of model quality.`,
+      steps: [
+        `Load a trained QNLP model and test dataset`,
+        `Generate predictions and build the confusion matrix`,
+        `Compute accuracy, precision, recall, and F1-score automatically`,
+        `Toggle between macro, micro, and weighted averaging for multi-class metrics`,
+        `Explore the ROC curve and AUC score for binary classification`,
+        `Compute Q_eff and see how it correlates with predictive performance`,
+      ],
+      stepDetails: [
+        `Confusion matrix is displayed as an interactive heatmap with row and column percentages`,
+        `Metric panel shows all computed values with colour-coded thresholds (red/yellow/green)`,
+        `Averaging method selector switches between macro, micro, and weighted with explanation`,
+        `ROC curve updates in real-time as you adjust classification threshold`,
+        `Q_eff gauge shows how much Hilbert space the current model utilises`,
+        `Side-by-side comparison mode lets you evaluate multiple models simultaneously`,
+      ],
+      completionMessage: `You have mastered the complete evaluation framework for QNLP models!`,
+      dataFlow: `flowchart LR
+        A[Trained QNLP Model] --> B[Generate Predictions]
+        B --> C[Confusion Matrix]
+        C --> D[Compute Metrics]
+        D --> E{Accuracy}
+        D --> F{Precision}
+        D --> G{Recall}
+        D --> H{F1 Score}
+        D --> I{Q_eff}
+        E --> J[Evaluation Dashboard]
+        F --> J
+        G --> J
+        H --> J
+        I --> J`,
+    },
+    insights: {
+      advantages: [
+        `Comprehensive metrics prevent over-reliance on any single evaluation measure`,
+        `Confusion matrices reveal systematic model biases and error patterns`,
+        `Quantum utilisation metrics provide diagnostic insight into genuine quantum advantage`,
+        `Standardised metrics enable fair comparison across classical and quantum models`,
+      ],
+      disadvantages: [
+        `No universal metric suite exists for QNLP — choices are task-dependent`,
+        `Quantum utilisation metrics are not yet standardised across the field`,
+        `Metric computation requires careful statistical validation for small datasets`,
+        `Over-optimising on any single metric can degrade performance on other dimensions`,
+      ],
+      futureScope: `Research is converging on standardised QNLP evaluation benchmarks similar to GLUE/SuperGLUE for classical NLP. Quantum-specific metrics like Q_eff will become standardised as the field matures. Automated metric selection tools will help practitioners choose the right evaluation framework for their task.`,
+      industrialApplications: [
+        `Model evaluation dashboards for enterprise QNLP deployments`,
+        `Automated model comparison tools for quantum cloud services`,
+        `Regulatory compliance reporting using standardised evaluation frameworks`,
+        `Benchmarking suites for QNLP hardware and software procurement decisions`,
+      ],
+      careerRelevance: `Expertise in model evaluation is critical for any ML role. Understanding quantum-specific metrics positions you as a specialist capable of bridging classical evaluation practices with emerging quantum paradigms.`,
+    },
+  },
+
+  '13.2': {
+    topicId: '13.2',
+    learningObjective: `Understand the mathematical definitions of accuracy, precision, recall, and F1-score, their relationships, and their interpretation in the context of QNLP model evaluation.`,
+    nextPrep: `Review the confusion matrix construction from 13.1 and ensure comfort with basic probability concepts.`,
+    dependencyGraph: `flowchart LR
+      A[13.1 Performance Metrics] --> B[13.2 Accuracy Precision Recall F1]
+      B --> C[13.3 Benchmarking]
+      B --> D[Confusion Matrix]
+      B --> E[Trade-off Analysis]
+      style B fill:#6a0dad,color:#fff`,
+    storytelling: {
+      story: `You are a goalie in a football match. Your coach evaluates you: "You stopped 90% of shots" (accuracy). But wait — 100 shots came your way, you stopped 90, but 9 of the 10 goals were from penalty kicks, and you only blocked 1 out of 10 penalties. Your precision on penalties is 10%, and your recall is 10%. The coach needs to know: are you good at stopping regular shots but bad at penalties? This is exactly why we need multiple metrics — each tells a different part of the performance story. In QNLP, the same model might be excellent at detecting positive sentiment but terrible at detecting sarcasm — and only a breakdown of precision and recall by class reveals this.`,
+      questions: [
+        `What does it mean when precision is high but recall is low?`,
+        `Can a model have perfect accuracy but zero recall on a specific class?`,
+        `How would you trade off precision and recall for a medical QNLP application?`,
+      ],
+      connection: `Precision measures how trustworthy a positive prediction is; recall measures how thoroughly the model finds positive instances. Together with the F1-score, they provide a nuanced view of model quality that accuracy alone cannot. In QNLP, these metrics help us understand whether a quantum model's performance is consistent across all linguistic patterns or biased toward specific ones.`,
+      technicalIntro: `Precision = TP/(TP+FP) answers: "Of all instances predicted as positive, what fraction is actually positive?" It measures prediction reliability. Recall = TP/(TP+FN) answers: "Of all actual positive instances, what fraction did we catch?" It measures coverage. The F1-score = 2·(P·R)/(P+R) is the harmonic mean — it penalises extreme imbalance between precision and recall. For multi-class problems, macro-averaging computes each metric per class then averages (treating all classes equally), while micro-averaging aggregates counts globally (favouring larger classes). Weighted averaging weights each class by its support size.`,
+      lifeSkills: `The precision-recall trade-off appears everywhere: a strict friend (high precision — they rarely praise, but when they do it means something) vs a generous friend (high recall — they always praise, but their praise is less meaningful). Understanding this trade-off helps you calibrate your own feedback style.`,
+    },
+    mathModelling: {
+      need: `Mathematically precise definitions of metrics are essential for correct computation, comparison, and interpretation across different models and datasets.`,
+      motivation: `Without precise mathematical definitions, metrics can be computed inconsistently, leading to incorrect conclusions about model quality and unfair comparisons.`,
+      challenge: `Handling multi-class, multi-label, and imbalanced settings while maintaining interpretability and comparability of metrics.`,
+      equations: [
+        {
+          latex: `\\text{Precision} = \\frac{TP}{TP + FP}`,
+          meaning: `Precision measures the fraction of positive predictions that are correct — how trustworthy a positive classification is.`,
+          interpretation: `A precision of 1.0 means every positive prediction is correct (no false positives). A low precision means the model is triggering on many false alarms. In QNLP, low precision on a sentiment class means the model is incorrectly labelling neutral text as that sentiment.`,
+        },
+        {
+          latex: `\\text{Recall} = \\frac{TP}{TP + FN}`,
+          meaning: `Recall measures the fraction of actual positive instances that were correctly identified — how thoroughly the model catches positive examples.`,
+          interpretation: `A recall of 1.0 means every positive instance is caught (no false negatives). Low recall means the model misses many true positives. In QNLP, low recall on hate speech detection means many hateful comments go undetected.`,
+        },
+        {
+          latex: `F_\\beta = (1 + \\beta^2) \\cdot \\frac{\\text{Precision} \\cdot \\text{Recall}}{(\\beta^2 \\cdot \\text{Precision}) + \\text{Recall}}`,
+          meaning: `The generalised F-beta score weights recall beta times more than precision. F1 (beta=1) balances them equally; F2 (beta=2) weights recall double; F0.5 (beta=0.5) weights precision double.`,
+          interpretation: `Choosing beta depends on the cost structure of errors. For medical screening (missed diagnosis is worse than false alarm), use F2. For spam detection (false alarm is worse than missed spam), use F0.5.`,
+        },
+        {
+          latex: `F_{1,\\text{macro}} = \\frac{1}{k} \\sum_{i=1}^{k} F_1^{(i)}`,
+          meaning: `Macro-averaged F1 computes F1 per class independently then takes the arithmetic mean, treating all classes equally regardless of size.`,
+          interpretation: `Macro F1 is appropriate when minority class performance is as important as majority class performance. A high macro F1 requires good performance on every class.`,
+        },
+      ],
+      variables: [
+        { symbol: `TP`, name: `True Positives`, description: `Positive instances correctly identified by the model` },
+        { symbol: `FP`, name: `False Positives`, description: `Negative instances incorrectly labelled as positive` },
+        { symbol: `FN`, name: `False Negatives`, description: `Positive instances missed by the model (labelled negative)` },
+        { symbol: `\\beta`, name: `Beta Parameter`, description: `Controls the trade-off between precision and recall in F-beta` },
+        { symbol: `k`, name: `Number of Classes`, description: `Total number of classes in a multi-class classification task` },
+      ],
+      interactive: {
+        equation: `F_1 = 2 \\cdot \\frac{P \\cdot R}{P + R}`,
+        description: `Adjust precision and recall to see how F1 changes — notice it is always closer to the smaller value:`,
+        variables: [
+          { symbol: `P`, name: `Precision`, description: `Precision value between 0 and 1` },
+          { symbol: `R`, name: `Recall`, description: `Recall value between 0 and 1` },
+        ],
+        sliders: [
+          { name: `precision`, label: `Precision`, min: 0, max: 1, step: 0.05, default: 0.85 },
+          { name: `recall`, label: `Recall`, min: 0, max: 1, step: 0.05, default: 0.75 },
+        ],
+      },
+      charts: [
+        {
+          title: `Precision-Recall Trade-off: Classical vs Quantum QNLP`,
+          type: `line`,
+          data: [
+            { name: `Threshold 0.1`, classical_precision: 0.55, classical_recall: 0.95, quantum_precision: 0.62, quantum_recall: 0.97 },
+            { name: `Threshold 0.3`, classical_precision: 0.68, classical_recall: 0.88, quantum_precision: 0.75, quantum_recall: 0.91 },
+            { name: `Threshold 0.5`, classical_precision: 0.82, classical_recall: 0.74, quantum_precision: 0.87, quantum_recall: 0.82 },
+            { name: `Threshold 0.7`, classical_precision: 0.90, classical_recall: 0.55, quantum_precision: 0.94, quantum_recall: 0.68 },
+            { name: `Threshold 0.9`, classical_precision: 0.96, classical_recall: 0.30, quantum_precision: 0.98, quantum_recall: 0.48 },
+          ],
+        },
+        {
+          title: `F1 Score by Class: Imbalanced Sentiment Dataset`,
+          type: `bar`,
+          data: [
+            { name: `Positive (60%)`, classical_f1: 0.91, quantum_f1: 0.94 },
+            { name: `Neutral (30%)`, classical_f1: 0.72, quantum_f1: 0.80 },
+            { name: `Negative (10%)`, classical_f1: 0.45, quantum_f1: 0.62 },
+          ],
+        },
+      ],
+      advantages: `Precision, recall, and F1 provide a nuanced view of model performance that accuracy alone cannot. The F-beta family allows customising metrics to task-specific cost structures. Macro and weighted variants handle multi-class settings appropriately.`,
+      limitations: `These metrics assume a fixed classification threshold — they do not capture the full range of model behaviour across thresholds (ROC-AUC handles that). They are also sensitive to class distribution shifts between training and deployment.`,
+    },
+    activities: [
+      {
+        title: `Precision-Recall Calculator`,
+        description: `Students manually compute precision, recall, and F1 from raw prediction data and explore different trade-off scenarios.`,
+        steps: [
+          `Receive raw counts of TP, FP, FN, TN from a QNLP experiment`,
+          `Compute precision, recall, and F1 using the formulas`,
+          `Vary the classification threshold and recompute all three`,
+          `Plot the precision-recall curve and identify the optimal operating point`,
+        ],
+        materials: `Calculator, graph paper, threshold scenarios`,
+        timeRequired: `10 min`,
+        outcomes: `Students can compute all standard metrics from first principles`,
+      },
+      {
+        title: `Beta Selection Debate`,
+        description: `Teams argue for different F-beta values for specific QNLP applications and justify their choice.`,
+        steps: [
+          `Receive application cards: hate speech detection, medical QNLP, spam filter, legal document classifier`,
+          `Each team is assigned a beta value (0.5, 1.0, 2.0)`,
+          `Argue why your beta is most appropriate for each application`,
+          `Class votes on the best beta for each application`,
+        ],
+        timeRequired: `8 min`,
+        outcomes: `Students understand how error costs determine the appropriate F-beta choice`,
+      },
+      {
+        title: `Imbalanced Analysis Exercise`,
+        description: `Students analyse how class imbalance affects metric interpretation and learn correction strategies.`,
+        steps: [
+          `Generate a synthetic QNLP dataset with 95% class A and 5% class B`,
+          `Train a dummy classifier that always predicts class A — compute metrics`,
+          `Train a real QNLP model — compute metrics and compare`,
+          `Discuss: how do precision, recall, and F1 reveal the dummy's failure?`,
+        ],
+        timeRequired: `7 min`,
+        outcomes: `Students understand the dangers of class imbalance and how metrics reveal it`,
+      },
+      {
+        title: `Macro vs Micro F1 Comparison`,
+        description: `Students compute macro and micro F1 for the same multi-class QNLP results and discuss the differences.`,
+        steps: [
+          `Receive a 3-class confusion matrix from a QNLP topic classifier`,
+          `Compute per-class precision, recall, and F1`,
+          `Compute macro F1 (unweighted average) and weighted F1`,
+          `Discuss: when would macro and weighted F1 tell different stories?`,
+        ],
+        timeRequired: `6 min`,
+        outcomes: `Students can compute and interpret macro and weighted variants of F1`,
+      },
+    ],
+    project: {
+      scope: `Build a comprehensive evaluation report for a multi-class QNLP sentiment model, computing all standard metrics with proper averaging and interpretation.`,
+      objectives: [
+        `Compute per-class precision, recall, and F1 from model predictions`,
+        `Calculate macro, micro, and weighted F1 scores`,
+        `Plot precision-recall curves for each class`,
+        `Write an interpretation report highlighting model strengths and weaknesses`,
+      ],
+      timeline: [
+        { phase: `Metric Computation`, duration: `4 min`, percent: 35 },
+        { phase: `Visualisation`, duration: `3 min`, percent: 30 },
+        { phase: `Interpretation`, duration: `4 min`, percent: 35 },
+      ],
+      teamRoles: [
+        { role: `Metric Analyst`, responsibility: `Computes all metrics correctly` },
+        { role: `Visualisation Lead`, responsibility: `Creates precision-recall curves and metric tables` },
+        { role: `Interpreter`, responsibility: `Writes the analysis and recommendations` },
+      ],
+      deliverables: [
+        `Complete metric computation table with all values`,
+        `Precision-recall curves for each class`,
+        `Interpretation report with identified weaknesses and improvement suggestions`,
+      ],
+    },
+    questions: [
+      {
+        question: `What is the difference between macro and weighted F1, and when should each be used?`,
+        answer: `Macro F1 computes the F1 per class and averages them equally, treating all classes the same regardless of size. Weighted F1 computes F1 per class and averages weighted by each class's support (number of instances). Use macro F1 when minority class performance is as important as majority; use weighted F1 when overall performance across the actual data distribution matters more.`,
+        explanation: `In an imbalanced dataset with 90% class A and 10% class B, macro F1 reveals poor performance on B, while weighted F1 is dominated by performance on A. The choice depends on whether you care equally about rare classes.`,
+        commonMistake: `Reporting only accuracy or only macro F1 without understanding how class distribution affects the interpretation.`,
+        tip: `Always report both macro and weighted F1. If they differ significantly, your model has a class-specific weakness that needs investigation.`,
+      },
+      {
+        question: `How does the classification threshold affect precision and recall?`,
+        answer: `Lowering the threshold increases recall (more positives are predicted, catching more true positives) but decreases precision (more false positives are generated). Raising the threshold increases precision but decreases recall. The optimal threshold depends on the relative costs of false positives and false negatives.`,
+        explanation: `The threshold controls the precision-recall trade-off. The precision-recall curve shows all possible operating points. The F1-score helps find the optimal balance when precision and recall are equally important.`,
+        commonMistake: `Using the default threshold (0.5) without considering the task's error costs.`,
+        tip: `Plot the precision-recall curve and choose the threshold that maximises your chosen F-beta score based on the actual error costs in your application.`,
+      },
+    ],
+    virtualLab: {
+      description: `Explore the precision-recall trade-off interactively, adjusting thresholds and observing how each metric changes for a QNLP sentiment model.`,
+      steps: [
+        `Load the QNLP sentiment model and test predictions with probability scores`,
+        `Set the classification threshold and observe the confusion matrix update`,
+        `Watch precision, recall, and F1 change in real-time as you adjust`,
+        `Find the threshold that maximises F1 for your chosen class`,
+        `Compare macro and weighted F1 across different threshold settings`,
+        `Export the precision-recall curve for your report`,
+      ],
+      stepDetails: [
+        `Threshold slider ranges from 0.0 to 1.0 with 0.01 increments`,
+        `Confusion matrix updates instantly as threshold changes`,
+        `Metric dashboard shows precision, recall, F1, F2, and F0.5 simultaneously`,
+        `Precision-recall curve traces all operating points with current position highlighted`,
+        `Class selector lets you focus on any single class in a multi-class setting`,
+        `Averaging mode toggle switches between macro, micro, and weighted views`,
+      ],
+      completionMessage: `You have mastered the precision-recall-F1 evaluation framework and can now choose optimal operating points for any QNLP task!`,
+      dataFlow: `flowchart LR
+        A[Model Predictions] --> B[Probability Scores]
+        B --> C[Threshold T]
+        C --> D[Predicted Labels]
+        D --> E[Confusion Matrix]
+        E --> F[Precision Calculator]
+        E --> G[Recall Calculator]
+        F --> H[F1 = 2PR/(P+R)]
+        G --> H
+        H --> I[Optimal Threshold?]
+        I --> C`,
+    },
+    insights: {
+      advantages: [
+        `Precision, recall, and F1 reveal class-specific performance that accuracy misses`,
+        `The F-beta family allows customising metrics to application-specific error costs`,
+        `Macro and weighted variants handle multi-class and imbalanced settings appropriately`,
+        `Precision-recall curves show the full range of possible model operating points`,
+      ],
+      disadvantages: [
+        `These metrics are threshold-dependent — they do not capture the full model behaviour`,
+        `F1 is less interpretable to non-technical stakeholders than accuracy`,
+        `Macro F1 can be overly pessimistic for highly imbalanced datasets`,
+        `Metrics assume predictions are independent, which may not hold for sequential NLP tasks`,
+      ],
+      futureScope: `Research into threshold-free metrics (AUC-PR, expected calibration error) and quantum-aware evaluation frameworks will complement classical metrics. Automated threshold optimisation for quantum models is an active research area.`,
+      industrialApplications: [
+        `Sentiment monitoring dashboards with class-specific precision targets`,
+        `Content moderation systems optimised for F-beta with custom error costs`,
+        `Customer support ticket routing evaluated on per-category recall`,
+        `Medical NLP systems using F2 to prioritise catching all positive cases`,
+      ],
+      careerRelevance: `Deep understanding of classification metrics is essential for any ML practitioner. The ability to choose, compute, and interpret these metrics correctly is a core skill evaluated in data science and ML engineering interviews.`,
+    },
+  },
+
+  '13.3': {
+    topicId: '13.3',
+    learningObjective: `Understand the methodology of benchmarking QNLP models against classical baselines, including experimental design, statistical significance, and fair comparison.`,
+    nextPrep: `Review classical NLP model architectures (from Module 11) and the metrics from 13.1-13.2.`,
+    dependencyGraph: `flowchart LR
+      A[13.2 Precision Recall F1] --> B[13.3 Benchmarking]
+      B --> C[13.4 Quantum Advantage]
+      B --> D[Baseline Selection]
+      B --> E[Statistical Testing]
+      B --> F[Fair Comparison]
+      style B fill:#4a90d9,color:#fff`,
+    storytelling: {
+      story: `You are the coach of a basketball team that just recruited a player who claims to be the best in the world. To test this claim, you cannot just watch them play alone — you need to see them in games against the best opponents, under the same conditions, with the same rules. If they score 40 points against a weak team but only 10 against a strong team, the 40-point game was not a fair test. Benchmarking QNLP models works the same way: we must compare quantum models against the best classical models on the same datasets, with the same preprocessing, under the same computational constraints. Only then can we claim quantum advantage.`,
+      questions: [
+        `What makes a benchmark comparison fair between classical and quantum models?`,
+        `How do you account for hardware and software differences in comparisons?`,
+        `What statistical methods confirm that one model is genuinely better than another?`,
+      ],
+      connection: `Benchmarking is the bridge between claiming a model works and proving it works better than alternatives. Without rigorous benchmarking, QNLP risks making exaggerated claims that do not hold up under scrutiny. This topic provides the methodology for credible evaluation.`,
+      technicalIntro: `Benchmarking QNLP against classical models requires: (1) Baseline selection — choosing appropriate classical models (logistic regression, SVM, BERT, etc.) that represent the state of the art. (2) Dataset standardisation — using established NLP benchmarks (SST, IMDB, AG News, TREC) with fixed train/test splits. (3) Fair comparison — controlling for model size, training data, preprocessing, and compute resources. (4) Statistical significance — using paired bootstrap tests or McNemar's test to verify that observed differences are not due to chance. (5) Multi-metric evaluation — reporting accuracy, F1, training time, inference time, parameter count, and memory usage together. A benchmarking study should also include ablation studies isolating the quantum component's contribution.`,
+      lifeSkills: `Fair comparison is a life skill, not just a research methodology. When comparing job offers, universities, or even relationships, you must identify the right comparison dimensions, control for confounding factors, and recognise when differences are meaningful versus coincidental.`,
+    },
+    mathModelling: {
+      need: `Rigorous benchmarking requires statistical tests to determine whether observed performance differences are significant or due to random variation.`,
+      motivation: `Without statistical significance testing, reported improvements may be meaningless noise. Small dataset sizes and random initialisation can produce misleading results.`,
+      challenge: `Designing experiments that control for all confounding variables while measuring the genuine contribution of quantum components to model performance.`,
+      equations: [
+        {
+          latex: `\\chi^2 = \\frac{(|n_{01} - n_{10}| - 1)^2}{n_{01} + n_{10}}`,
+          meaning: `McNemar's chi-squared test compares the performance of two models on paired predictions by counting discordant pairs (n_01: model A correct, model B wrong; n_10: model A wrong, model B correct).`,
+          interpretation: `A large chi-squared value indicates the observed difference in performance is unlikely under the null hypothesis that both models have the same error rate. This test is appropriate for paired classification results.`,
+        },
+        {
+          latex: `\\Delta_{\\text{quantum}} = \\text{Metric}_{\\text{quantum}} - \\text{Metric}_{\\text{classical}}`,
+          meaning: `The quantum delta measures the raw performance difference between quantum and classical models on the same metric.`,
+          interpretation: `A positive delta suggests quantum advantage for that metric, but the delta must be statistically significant and practically meaningful. A delta of 0.01 on accuracy may be significant with enough data but worthless in practice.`,
+        },
+        {
+          latex: `\\text{Effect Size} = \\frac{\\bar{x}_q - \\bar{x}_c}{\\sqrt{(s_q^2 + s_c^2)/2}}`,
+          meaning: `Cohen's d effect size measures the standardised difference between quantum and classical model performance, accounting for variance in both.`,
+          interpretation: `Effect size is more informative than p-values alone. d = 0.2 is small, d = 0.5 is medium, d = 0.8 is large. A statistically significant result with a tiny effect size may not be practically important.`,
+        },
+        {
+          latex: `\\text{Quantum Advantage Ratio} = \\frac{\\text{Accuracy}_{\\text{quantum}} / \\text{Parameters}_{\\text{quantum}}}{\\text{Accuracy}_{\\text{classical}} / \\text{Parameters}_{\\text{classical}}}`,
+          meaning: `The quantum advantage ratio measures accuracy per parameter, normalising for model size to compare parameter efficiency.`,
+          interpretation: `A ratio > 1 means the quantum model achieves better accuracy per parameter than the classical model, suggesting the quantum model uses its parameters more efficiently. This is a practical measure of quantum advantage.`,
+        },
+      ],
+      variables: [
+        { symbol: `n_{01}`, name: `Discordant Pair Count A`, description: `Number of instances where model A is correct and model B is wrong` },
+        { symbol: `n_{10}`, name: `Discordant Pair Count B`, description: `Number of instances where model A is wrong and model B is correct` },
+        { symbol: `\\Delta_{\\text{quantum}}`, name: `Quantum Delta`, description: `Raw performance difference between quantum and classical models` },
+        { symbol: `d`, name: `Cohen's d`, description: `Standardised effect size measuring the magnitude of performance difference` },
+      ],
+      charts: [
+        {
+          title: `Quantum vs Classical: Accuracy on NLP Benchmarks`,
+          type: `bar`,
+          data: [
+            { name: `SST-2`, classical: 0.935, quantum: 0.947, delta: 0.012 },
+            { name: `SST-5`, classical: 0.543, quantum: 0.571, delta: 0.028 },
+            { name: `IMDB`, classical: 0.912, quantum: 0.931, delta: 0.019 },
+            { name: `AG News`, classical: 0.938, quantum: 0.949, delta: 0.011 },
+            { name: `TREC`, classical: 0.962, quantum: 0.968, delta: 0.006 },
+            { name: `BoolQ`, classical: 0.821, quantum: 0.839, delta: 0.018 },
+          ],
+        },
+        {
+          title: `Parameter Efficiency: Quantum Advantage Ratio`,
+          type: `bar`,
+          data: [
+            { name: `SST-2`, ratio: 1.42 },
+            { name: `SST-5`, ratio: 1.38 },
+            { name: `IMDB`, ratio: 1.51 },
+            { name: `AG News`, ratio: 1.33 },
+            { name: `TREC`, ratio: 1.27 },
+            { name: `BoolQ`, ratio: 1.44 },
+          ],
+        },
+      ],
+      advantages: `Rigorous benchmarking provides credible evidence of quantum advantage. Statistical significance testing prevents false claims. Effect size measures ensure practical as well as statistical significance. Parameter efficiency metrics capture genuine quantum advantages.`,
+      limitations: `Benchmarking is computationally expensive, requiring many runs for statistical significance. Results may not generalise beyond the specific benchmarks tested. Hardware differences (simulator vs real device) complicate comparisons. Quantum advantage on small benchmarks may not scale.`,
+    },
+    activities: [
+      {
+        title: `Benchmark Design Challenge`,
+        description: `Teams design a benchmarking protocol for comparing a new QNLP model against classical baselines, specifying all controls and statistical tests.`,
+        steps: [
+          `Define the research question and hypothesis`,
+          `Select appropriate classical baselines (at least 3)`,
+          `Specify datasets, preprocessing, and evaluation metrics`,
+          `Design the statistical significance testing protocol`,
+          `Identify potential confounding factors and how to control them`,
+        ],
+        materials: `Benchmark design template`,
+        timeRequired: `10 min`,
+        outcomes: `Students can design rigorous benchmarking experiments`,
+      },
+      {
+        title: `Statistical Significance Simulation`,
+        description: `Using a simulation tool, students explore how sample size and effect size affect statistical significance.`,
+        steps: [
+          `Simulate two classifiers with a known performance difference`,
+          `Run McNemar's test on varying dataset sizes (100, 500, 1000, 5000)`,
+          `Observe how p-values change with sample size`,
+          `Determine the minimum dataset size needed to detect a given effect size`,
+        ],
+        timeRequired: `8 min`,
+        outcomes: `Students understand the relationship between sample size, effect size, and statistical significance`,
+      },
+      {
+        title: `Baseline Selection Workshop`,
+        description: `Groups identify appropriate classical baselines for different QNLP tasks and justify their choices.`,
+        steps: [
+          `Receive QNLP task cards: sentiment, QA, NER, topic classification, entailment`,
+          `Research state-of-the-art classical models for each task`,
+          `Select 3 baselines per task with justification`,
+          `Present baseline choices and discuss potential issues`,
+        ],
+        materials: `Literature survey summaries for each task`,
+        timeRequired: `7 min`,
+        outcomes: `Students can select appropriate and challenging classical baselines`,
+      },
+      {
+        title: `Delta Analysis Exercise`,
+        description: `Students analyse benchmarking results from a published QNLP paper and evaluate the claims.`,
+        steps: [
+          `Receive a table of benchmarking results (quantum vs classical models)`,
+          `Check if differences are reported with confidence intervals`,
+          `Evaluate: are the claims of quantum advantage justified?`,
+          `Identify missing baselines or uncontrolled variables`,
+          `Write a critical review paragraph`,
+        ],
+        timeRequired: `8 min`,
+        outcomes: `Students can critically evaluate benchmarking claims in QNLP research`,
+      },
+    ],
+    project: {
+      scope: `Design and partially execute a benchmarking study comparing a QNLP model against at least three classical baselines on two NLP benchmarks, with proper statistical testing.`,
+      objectives: [
+        `Select two NLP benchmarks and three classical baselines`,
+        `Define the evaluation protocol with all controls`,
+        `Run the comparison and collect metrics`,
+        `Perform statistical significance testing`,
+        `Write a benchmark report with conclusions and limitations`,
+      ],
+      timeline: [
+        { phase: `Study Design`, duration: `3 min`, percent: 25 },
+        { phase: `Implementation`, duration: `5 min`, percent: 40 },
+        { phase: `Analysis`, duration: `3 min`, percent: 25 },
+        { phase: `Reporting`, duration: `2 min`, percent: 10 },
+      ],
+      teamRoles: [
+        { role: `Study Designer`, responsibility: `Designs the benchmarking protocol` },
+        { role: `Implementer`, responsibility: `Runs all models and collects results` },
+        { role: `Statistician`, responsibility: `Performs statistical significance testing` },
+      ],
+      deliverables: [
+        `Benchmarking protocol document`,
+        `Results table with all metrics and confidence intervals`,
+        `Statistical significance report with p-values and effect sizes`,
+        `Critical analysis of findings and limitations`,
+      ],
+    },
+    questions: [
+      {
+        question: `What is McNemar's test and why is it appropriate for comparing classification models?`,
+        answer: `McNemar's test is a paired statistical test that compares the performance of two models on the same test instances by analysing discordant pairs — cases where one model is correct and the other is wrong. It is appropriate because it directly tests whether the error patterns differ significantly.`,
+        explanation: `Unlike unpaired tests (t-test), McNemar accounts for the paired nature of model evaluations on a shared test set. It is more powerful for detecting differences because it focuses on the cases that distinguish the models.`,
+        commonMistake: `Using unpaired tests (t-test, Mann-Whitney) for comparing models evaluated on the same test set — these ignore the paired structure.`,
+        tip: `Always use paired tests (McNemar for classification, paired bootstrap for any metric) when comparing models on the same test instances.`,
+      },
+      {
+        question: `Why is parameter efficiency an important metric for quantum advantage?`,
+        answer: `Parameter efficiency (accuracy per parameter) captures whether the quantum model achieves better performance with fewer parameters than classical alternatives. This is one of the most theoretically promising forms of quantum advantage — exponential compression of model size.`,
+        explanation: `If a quantum model with 100 parameters matches a classical model with 10,000 parameters, that is a genuine practical advantage, even if raw accuracy is similar. It implies the quantum model can achieve the same function with exponentially fewer degrees of freedom.`,
+        commonMistake: `Only comparing raw accuracy without considering model size, training cost, or inference cost.`,
+        tip: `Always report at least accuracy vs parameter count, and ideally accuracy vs total training time, to give a complete picture of efficiency.`,
+      },
+    ],
+    virtualLab: {
+      description: `Design and run a complete benchmarking experiment comparing QNLP models against classical baselines with full statistical analysis.`,
+      steps: [
+        `Select 2-3 NLP benchmarks from the available dataset library`,
+        `Choose 3 classical baselines and configure them`,
+        `Configure your QNLP model (qubits, ansatz, encoding)`,
+        `Run all models on all benchmarks with 5 random seeds each`,
+        `Compute all metrics and generate comparison tables`,
+        `Run statistical significance tests and produce a benchmark report`,
+      ],
+      stepDetails: [
+        `Dataset library includes SST-2, SST-5, IMDB, AG News, TREC, and BoolQ`,
+        `Classical baselines include logistic regression, SVM, DistilBERT, and BERT-mini`,
+        `QNLP model is configurable from 2-12 qubits with multiple ansatz options`,
+        `All models are trained with identical preprocessing and batch sizes for fairness`,
+        `Results table shows mean and std across 5 seeds for all metrics`,
+        `Automated McNemar test and effect size computation with interpretation`,
+      ],
+      completionMessage: `You have completed a rigorous benchmarking study with full statistical analysis!`,
+      dataFlow: `flowchart TD
+        A[Select Benchmarks] --> B[Configure Models]
+        B --> C[Classical Baselines]
+        B --> D[QNLP Model]
+        C --> E[Train & Evaluate]
+        D --> E
+        E --> F{Metrics Collection}
+        F --> G[Accuracy Table]
+        F --> H[Parameter Count]
+        F --> I[Time & Memory]
+        G --> J[Statistical Tests]
+        H --> J
+        I --> J
+        J --> K[Benchmark Report]`,
+    },
+    insights: {
+      advantages: [
+        `Rigorous benchmarking provides credible, reproducible evidence of model performance`,
+        `Statistical significance testing prevents over-interpretation of random variation`,
+        `Effect size measures ensure practical as well as statistical significance`,
+        `Multi-metric evaluation gives a complete picture of model quality and efficiency`,
+      ],
+      disadvantages: [
+        `Benchmarking is computationally expensive, especially with many random seeds`,
+        `Results may not generalise beyond the specific benchmarks and settings tested`,
+        `Hardware differences (simulator vs real quantum device) complicate comparisons`,
+        `Quantum advantage on small benchmarks may not scale to practical problem sizes`,
+      ],
+      futureScope: `Standardised QNLP benchmark suites (analogous to GLUE/SuperGLUE) are being developed. Automated benchmarking pipelines will reduce human effort and improve reproducibility. Cross-platform benchmarking tools will enable fair comparisons across different quantum hardware providers.`,
+      industrialApplications: [
+        `Vendor evaluation: comparing quantum NLP solutions from different providers`,
+        `Technology transition: benchmarking current vs quantum-enhanced systems before deployment`,
+        `Performance monitoring: continuous benchmarking to track model degradation over time`,
+        `Research validation: independent verification of published quantum advantage claims`,
+      ],
+      careerRelevance: `Benchmarking and evaluation skills are fundamental to all ML roles. The ability to design fair comparisons and interpret statistical results distinguishes senior practitioners from beginners and is essential for research positions.`,
+    },
+  },
+
+  '13.4': {
+    topicId: '13.4',
+    learningObjective: `Understand the formal definition of quantum advantage, when it can be expected in NLP tasks, and how to identify genuine quantum advantage versus experimental artefacts.`,
+    nextPrep: `Review the benchmarking methodology from 13.3 and revisit Hilbert space concepts from Module 5.`,
+    dependencyGraph: `flowchart LR
+      A[13.3 Benchmarking] --> B[13.4 Quantum Advantage]
+      B --> C[13.5 Experimental Analysis]
+      B --> D[Provable Advantage]
+      B --> E[Heuristic Advantage]
+      B --> F[NISQ Limitations]
+      style B fill:#6a0dad,color:#fff`,
+    storytelling: {
+      story: `Imagine two chefs competing to create the best soup. Chef A has a traditional kitchen with excellent knives, precise stoves, and years of classical training. Chef B has a strange new device that can cook all possible flavour combinations simultaneously — but it breaks down frequently, requires constant calibration, and only works for small batches. Chef B's soup is sometimes better, sometimes worse, and takes three times as long. Is Chef B's device an advantage? The answer depends on whether the occasional brilliance justifies the cost and unreliability. This is exactly the question of quantum advantage in NLP: do the theoretical benefits of quantum computing translate into practically useful improvements, given the current hardware limitations?`,
+      questions: [
+        `What would constitute undeniable proof that a quantum model is genuinely better?`,
+        `How do we distinguish quantum advantage from better engineering of the quantum model?`,
+        `Is quantum advantage possible on noisy near-term hardware, or do we need fault-tolerant machines?`,
+      ],
+      connection: `Quantum advantage is the central question of our field. Without a clear framework for identifying genuine quantum advantage, we risk wasting resources on approaches that happen to work well on simulators but offer no fundamental benefit. Understanding when and why quantum models outperform classical ones guides research priorities and investment decisions.`,
+      technicalIntro: `Quantum advantage in NLP can be categorised into three levels: (1) Provable advantage — a theoretical proof that quantum models require asymptotically fewer resources (queries, parameters, or time) than any classical model for a specific task. This exists for certain restricted problems (e.g., learning certain Boolean functions) but not yet for practical NLP. (2) Heuristic advantage — empirical evidence that quantum models outperform classical models on specific benchmarks, without a formal proof. This is the current state of QNLP research. (3) Practical advantage — quantum models provide a meaningful practical benefit (cost savings, speed, accuracy) in deployed systems, even without theoretical proof. Key indicators of genuine heuristic advantage include: the quantum model uses fewer total parameters, the advantage grows with problem size, the advantage persists across multiple datasets, and ablation studies show the quantum component is responsible for the improvement. Common pitfalls that produce false signals of quantum advantage include: using weak classical baselines, overfitting to small datasets, exploiting random seed variance, and confounding quantum effects with better hyperparameter tuning.`,
+      lifeSkills: `The concept of "genuine advantage" applies far beyond quantum computing. When evaluating any new tool, method, or approach, ask: is this genuinely better, or is it just different? Does the advantage persist when we control for all other factors? Is the improvement practically meaningful or just statistically significant?`,
+    },
+    mathModelling: {
+      need: `Quantum advantage requires a rigorous mathematical framework to distinguish genuine quantum benefits from experimental artefacts and confounding factors.`,
+      motivation: `Without formal definitions and diagnostic tools, quantum advantage claims are difficult to verify and compare across studies.`,
+      challenge: `Proving that no classical algorithm can achieve the same performance as a quantum model on a given NLP task — this requires either computational complexity arguments or exhaustive empirical comparison.`,
+      equations: [
+        {
+          latex: `\\text{Quantum Advantage} \\iff \\exists \\, \\epsilon > 0 \\; \\text{s.t.} \\; \\forall \\, C \\in \\mathcal{C}: \\text{Metric}_Q > \\text{Metric}_C + \\epsilon`,
+          meaning: `Quantum advantage is demonstrated if there exists a non-trivial margin epsilon such that the quantum model Q outperforms every classical model C in a well-defined comparison class on the given metric.`,
+          interpretation: `This formal definition highlights the challenge: quantum advantage must be against all reasonable classical models, not just one weak baseline. The comparison class C must include state-of-the-art classical approaches.`,
+        },
+        {
+          latex: `\\text{Expressivity Gap} = \\left| \\mathcal{F}_{\\text{quantum}} \\setminus \\mathcal{F}_{\\text{classical}} \\right|`,
+          meaning: `The expressivity gap measures the set of functions that quantum models can represent but classical models of comparable size cannot.`,
+          interpretation: `A positive expressivity gap is necessary but not sufficient for quantum advantage. The quantum model must also be trainable (avoid barren plateaus) and the extra expressivity must translate to better performance on real data.`,
+        },
+        {
+          latex: `\\text{Ablation Gain} = \\text{Metric}_{\\text{hybrid}} - \\text{Metric}_{\\text{classical only}}`,
+          meaning: `The ablation gain measures the contribution of the quantum component by comparing the full hybrid model against a version where the quantum layer is replaced by a classical layer of similar size.`,
+          interpretation: `This is one of the most practical diagnostic tests. If removing the quantum component (replacing it with a classical alternative) does not degrade performance, then the quantum component is not providing advantage.`,
+        },
+        {
+          latex: `\\mathcal{L}_{\\text{convergence}}(t) = \\frac{1}{N} \\sum_{i=1}^{N} \\| \\nabla_{\\theta} L_i(t) \\|^2`,
+          meaning: `The convergence landscape measures the average squared gradient norm over the parameter space, diagnosing barren plateaus that would prevent quantum models from realising their theoretical advantage.`,
+          interpretation: `If the gradient norm decays exponentially with qubit count or circuit depth, the quantum model suffers from barren plateaus. Quantum advantage is impossible in this regime because the model cannot be trained effectively.`,
+        },
+      ],
+      variables: [
+        { symbol: `\\mathcal{C}`, name: `Classical Model Class`, description: `The set of classical models used as comparison baselines` },
+        { symbol: `\\mathcal{F}_{\\text{quantum}}`, name: `Quantum Hypothesis Space`, description: `Set of functions representable by the quantum model` },
+        { symbol: `\\mathcal{F}_{\\text{classical}}`, name: `Classical Hypothesis Space`, description: `Set of functions representable by comparable classical models` },
+        { symbol: `\\epsilon`, name: `Advantage Margin`, description: `Minimum meaningful performance difference for practical advantage` },
+      ],
+      charts: [
+        {
+          title: `Quantum Advantage Indicators Across Tasks`,
+          type: `radar`,
+          data: [
+            { metric: `Expressivity Gap`, binary_sentiment: 7, topic_classification: 5, question_answering: 8, natural_lang_inference: 6 },
+            { metric: `Trainability`, binary_sentiment: 8, topic_classification: 7, question_answering: 4, natural_lang_inference: 5 },
+            { metric: `Parameter Efficiency`, binary_sentiment: 9, topic_classification: 7, question_answering: 6, natural_lang_inference: 6 },
+            { metric: `Empirical Delta`, binary_sentiment: 7, topic_classification: 5, question_answering: 4, natural_lang_inference: 3 },
+            { metric: `Hardware Feasibility`, binary_sentiment: 8, topic_classification: 8, question_answering: 3, natural_lang_inference: 2 },
+          ],
+        },
+        {
+          title: `Classical vs Quantum: Scaling with Dataset Size`,
+          type: `line`,
+          data: [
+            { name: `100`, classical_accuracy: 0.72, quantum_accuracy: 0.74, quantum_advantage: false },
+            { name: `500`, classical_accuracy: 0.82, quantum_accuracy: 0.85, quantum_advantage: false },
+            { name: `1000`, classical_accuracy: 0.86, quantum_accuracy: 0.90, quantum_advantage: true },
+            { name: `5000`, classical_accuracy: 0.90, quantum_accuracy: 0.94, quantum_advantage: true },
+            { name: `10000`, classical_accuracy: 0.92, quantum_accuracy: 0.96, quantum_advantage: true },
+          ],
+        },
+      ],
+      advantages: `The quantum advantage framework provides rigorous criteria for evaluating claims. Ablation studies isolate the quantum contribution. Expressivity analysis identifies tasks most likely to benefit. Convergence analysis prevents wasted effort on untrainable models.`,
+      limitations: `Provable advantage for practical NLP tasks is currently out of reach. Heuristic advantage may not generalise to different datasets or hardware. The definition of "comparable" classical models is subjective. Hardware limitations may mask genuine advantages.`,
+    },
+    activities: [
+      {
+        title: `Quantum Advantage Classification`,
+        description: `Students categorise published quantum advantage claims into provable, heuristic, or artefact, using a structured rubric.`,
+        steps: [
+          `Receive 5 summaries of published quantum advantage claims in NLP`,
+          `For each claim, evaluate: baseline strength, statistical significance, ablation studies, and reproducibility`,
+          `Categorise each as provable, heuristic, or artefact`,
+          `Justify each categorisation with specific evidence from the claim`,
+        ],
+        materials: `Claim summaries, evaluation rubric`,
+        timeRequired: `12 min`,
+        outcomes: `Students can critically evaluate quantum advantage claims using a structured framework`,
+      },
+      {
+        title: `Ablation Study Design`,
+        description: `Teams design ablation studies to isolate the quantum contribution in a hybrid model.`,
+        steps: [
+          `Given a hybrid QNLP architecture, identify the quantum component`,
+          `Design a classical replacement for the quantum layer with similar parameter count`,
+          `Specify which metrics to compare and what constitutes a positive result`,
+          `Propose additional control experiments to rule out confounding factors`,
+        ],
+        timeRequired: `8 min`,
+        outcomes: `Students can design ablation studies that isolate quantum contributions`,
+      },
+      {
+        title: `Barren Plateau Diagnosis`,
+        description: `Students analyse gradient landscapes of different quantum circuits to identify barren plateau conditions.`,
+        steps: [
+          `Receive gradient norm data for circuits with varying qubit counts and depths`,
+          `Plot gradient norm vs circuit depth for each qubit count`,
+          `Identify the depth at which gradient norms decay below the training threshold`,
+          `Recommend maximum feasible circuit depth for each qubit count`,
+        ],
+        timeRequired: `7 min`,
+        outcomes: `Students can diagnose barren plateaus from empirical gradient data`,
+      },
+      {
+        title: `Baseline Strength Evaluation`,
+        description: `Students evaluate whether classical baselines in published studies are strong enough to make the quantum advantage claim credible.`,
+        steps: [
+          `Receive tables from published QNLP papers comparing quantum vs classical performance`,
+          `Research whether the classical baselines are state-of-the-art or weak`,
+          `Check if hyperparameter tuning was comparable for both models`,
+          `Redo the comparison with stronger baselines if needed`,
+        ],
+        timeRequired: `8 min`,
+        outcomes: `Students understand why weak baselines produce false quantum advantage signals`,
+      },
+    ],
+    project: {
+      scope: `Conduct a systematic analysis of whether a given QNLP model demonstrates genuine quantum advantage, using all diagnostic tools: ablation studies, expressivity analysis, baseline comparison, and convergence landscape analysis.`,
+      objectives: [
+        `Select a QNLP model and a classical baseline model`,
+        `Perform ablation studies to isolate the quantum component's contribution`,
+        `Analyse expressivity and convergence landscapes`,
+        `Compare performance across multiple NLP benchmarks`,
+        `Write a conclusion: does this model demonstrate quantum advantage?`,
+      ],
+      timeline: [
+        { phase: `Model Selection`, duration: `2 min`, percent: 15 },
+        { phase: `Ablation Studies`, duration: `5 min`, percent: 40 },
+        { phase: `Expressivity Analysis`, duration: `3 min`, percent: 25 },
+        { phase: `Conclusion`, duration: `2 min`, percent: 20 },
+      ],
+      teamRoles: [
+        { role: `Experiment Lead`, responsibility: `Designs and runs ablation studies` },
+        { role: `Theorist`, responsibility: `Analyses expressivity and convergence properties` },
+        { role: `Evaluator`, responsibility: `Compares results and draws conclusions` },
+      ],
+      deliverables: [
+        `Ablation study results showing quantum vs classical component contribution`,
+        `Expressivity and gradient landscape analysis report`,
+        `Final conclusion with evidence for or against quantum advantage`,
+      ],
+    },
+    questions: [
+      {
+        question: `What is the difference between provable, heuristic, and practical quantum advantage?`,
+        answer: `Provable advantage has a mathematical proof that quantum models are asymptotically better (e.g., require fewer queries or parameters). Heuristic advantage is empirical — quantum models perform better in experiments without a formal proof. Practical advantage means the quantum model provides a real-world benefit (cost savings, speed, accuracy) in deployed systems.`,
+        explanation: `Most current QNLP research claims heuristic advantage on specific benchmarks. Provable advantage for practical NLP tasks does not yet exist. Practical advantage requires the quantum model to work reliably on real hardware, which current NISQ devices cannot provide consistently.`,
+        commonMistake: `Claiming quantum advantage based on a single benchmark with a weak classical baseline and no statistical significance testing.`,
+        tip: `Always ask: are we comparing against the best classical approach, with proper statistical testing, on multiple datasets, with ablation studies? If any answer is no, the advantage claim is provisional.`,
+      },
+      {
+        question: `What is an ablation study and why is it important for quantum advantage claims?`,
+        answer: `An ablation study removes or replaces the quantum component of a hybrid model (e.g., replacing the quantum layer with a classical layer of similar parameter count) and measures the performance difference. It is important because it directly tests whether the quantum component is responsible for any observed performance gain.`,
+        explanation: `If performance does not degrade when the quantum layer is replaced by a classical layer, then the quantum component is not providing advantage — the benefit comes from other aspects of the architecture (e.g., better preprocessing, additional parameters).`,
+        commonMistake: `Comparing the full hybrid model against a purely classical model with fewer total parameters — this confounds the quantum effect with the parameter count effect.`,
+        tip: `The ablation replacement should match the quantum layer in parameter count and computational cost to isolate the quantum effect properly.`,
+      },
+    ],
+    virtualLab: {
+      description: `Explore the conditions for quantum advantage interactively, running experiments that test different indicators and identify genuine vs spurious advantage.`,
+      steps: [
+        `Select a QNLP model configuration and a classical baseline`,
+        `Run the full hybrid model and measure performance`,
+        `Run the ablation model (quantum layer replaced by classical)`,
+        `Compute the expressivity gap between quantum and classical models`,
+        `Analyse the gradient landscape for barren plateaus`,
+        `Receive a quantum advantage diagnosis with evidence`,
+      ],
+      stepDetails: [
+        `Model configuration includes qubit count, ansatz type, circuit depth, and encoding scheme`,
+        `Classical baseline selector includes logistic regression, SVM, and BERT-mini`,
+        `Ablation study automatically replaces the quantum layer with a classical dense layer of matching parameter count`,
+        `Expressivity analyser computes the effective dimension of each model's hypothesis space`,
+        `Gradient landscape visualiser shows gradient norm across the parameter space`,
+        `Diagnosis report summarises: advantage level, key evidence, and caveats`,
+      ],
+      completionMessage: `You have mastered the framework for identifying genuine quantum advantage in QNLP models!`,
+      dataFlow: `flowchart TD
+        A[QNLP Model Config] --> B[Full Hybrid Model]
+        A --> C[Ablation Model]
+        B --> D[Performance Metrics]
+        C --> D
+        D --> E{Comparison}
+        E --> F[Expressivity Analysis]
+        E --> G[Gradient Analysis]
+        F --> H[Diagnosis]
+        G --> H
+        H --> I[Quantum Advantage Report]`,
+    },
+    insights: {
+      advantages: [
+        `Clear framework for distinguishing genuine from spurious quantum advantage`,
+        `Ablation studies provide direct evidence of quantum component contribution`,
+        `Expressivity analysis identifies tasks most likely to benefit from quantum models`,
+        `Convergence analysis prevents wasted effort on untrainable quantum architectures`,
+      ],
+      disadvantages: [
+        `Provable advantage for practical NLP tasks is currently out of reach`,
+        `Heuristic advantage is task-specific and may not generalise`,
+        `Hardware noise can mask genuine quantum advantages`,
+        `The definition of "comparable" classical models remains subjective`,
+      ],
+      futureScope: `As quantum hardware improves, the focus will shift from heuristic to practical advantage. Fault-tolerant quantum computers may finally deliver provable advantage for certain NLP subroutines. The development of quantum advantage verification tools will become a standard part of the QNLP research pipeline.`,
+      industrialApplications: [
+        `Investment decisions: identifying which NLP tasks justify quantum hardware investment`,
+        `Vendor evaluation: verifying quantum advantage claims from solution providers`,
+        `Research prioritisation: focusing resources on tasks with highest quantum advantage potential`,
+        `Risk assessment: evaluating whether quantum advantage claims are robust enough for production deployment`,
+      ],
+      careerRelevance: `The ability to critically evaluate quantum advantage claims is one of the most valuable skills in the field. It protects against hype, guides research direction, and informs strategic decisions about quantum technology investment.`,
+    },
+  },
+
+  '13.5': {
+    topicId: '13.5',
+    learningObjective: `Understand the experimental methodology for QNLP research, including experimental design, data collection, analysis, interpretation, and reporting of results.`,
+    nextPrep: `Review all previous topics in Module 13 and ensure familiarity with the complete evaluation toolkit.`,
+    dependencyGraph: `flowchart LR
+      A[13.4 Quantum Advantage] --> B[13.5 Experimental Analysis]
+      B --> C[Experimental Design]
+      B --> D[Data Collection]
+      B --> E[Result Interpretation]
+      B --> F[Reporting Standards]
+      style B fill:#4a90d9,color:#fff`,
+    storytelling: {
+      story: `You are a detective investigating a case. You have evidence (data), forensic tools (quantum models), and comparison samples (classical models). But the case is not solved just by running tests — you must design the investigation carefully (experimental design), collect evidence without contamination (data collection), interpret what the evidence means in context (analysis), and write a report that holds up in court (reporting). A poorly designed experiment is like a detective who contaminates the crime scene — the results are useless no matter how sophisticated the forensic tools. This topic transforms you from a QNLP practitioner into a QNLP scientist.`,
+      questions: [
+        `How do you design an experiment that can convincingly demonstrate a new finding?`,
+        `What are the most common sources of error in QNLP experiments?`,
+        `How should negative results be reported and interpreted?`,
+      ],
+      connection: `Experimental analysis is the discipline that transforms model building into scientific research. Without rigorous experimental methodology, QNLP risks being a collection of anecdotes rather than a reliable science. The framework here applies not just to QNLP but to any empirical computer science research.`,
+      technicalIntro: `Experimental analysis in QNLP follows the established ML research methodology: (1) Hypothesis formulation — state precisely what claim you are testing (e.g., "A 6-qubit quantum circuit achieves higher F1 than a classical neural network with equivalent parameters on SST-2 sentiment analysis"). (2) Experimental design — specify datasets, preprocessing, model architectures, hyperparameters, training procedure, and evaluation protocol before running experiments. Pre-register the design to prevent p-hacking. (3) Data collection — run experiments with multiple random seeds (at least 5), collect all metrics, and log all hyperparameters. Save model checkpoints and predictions for reproducibility. (4) Analysis — compute central tendency and variance, run statistical tests, perform ablation studies, and check for confounding factors. (5) Interpretation — distinguish statistically significant from practically meaningful results, identify failure modes, and discuss limitations. (6) Reporting — follow established checklists (e.g., the QNLP Reproducibility Checklist) to ensure complete and transparent reporting.`,
+      lifeSkills: `The scientific method — hypothesis, experiment, analysis, interpretation, reporting — is a framework for reliable knowledge generation that applies to any domain. From A/B testing in marketing to personal life experiments, this methodology helps you learn from experience systematically rather than relying on intuition and anecdotes.`,
+    },
+    mathModelling: {
+      need: `Rigorous experimental analysis requires statistical models for hypothesis testing, effect size estimation, and result interpretation.`,
+      motivation: `Without proper statistical methodology, experimental results in QNLP can be misleading. Small sample sizes, multiple comparisons, and publication bias distort the scientific record.`,
+      challenge: `Designing experiments that are simultaneously rigorous (statistically valid), practical (feasible with limited quantum resources), and fair (comparing appropriately matched models).`,
+      equations: [
+        {
+          latex: `H_0: \\mu_Q = \\mu_C \\quad \\text{vs} \\quad H_1: \\mu_Q \\neq \\mu_C`,
+          meaning: `The null hypothesis H_0 states that the quantum model Q and classical model C have equal mean performance. The alternative H_1 states they differ.`,
+          interpretation: `We use paired statistical tests to decide whether to reject H_0. Rejecting H_0 means the observed difference is unlikely under random variation. Failing to reject H_0 does not mean the models are equal — it means we lack evidence to conclude they differ.`,
+        },
+        {
+          latex: `p\\text{-value} = P(\\text{observed or more extreme difference} \\mid H_0)`,
+          meaning: `The p-value is the probability of observing the obtained result (or a more extreme one) if the null hypothesis were true.`,
+          interpretation: `A small p-value (< 0.05) suggests the null hypothesis is unlikely. However, p-values are often misinterpreted — they do not tell us the probability that H_0 is true, nor the magnitude of the effect. Always report effect sizes alongside p-values.`,
+        },
+        {
+          latex: `\\text{CI}_{95\\%} = \\bar{\\Delta} \\pm t_{0.025, \\, df} \\cdot \\frac{s_{\\Delta}}{\\sqrt{n}}`,
+          meaning: `The 95% confidence interval for the mean performance difference Δ between quantum and classical models.`,
+          interpretation: `If we repeated the experiment many times, 95% of confidence intervals would contain the true mean difference. A confidence interval that does not include zero suggests a statistically significant difference at the 0.05 level. The width of the interval indicates the precision of our estimate.`,
+        },
+        {
+          latex: `\\text{Reproducibility Score} = \\frac{\\text{Number of successful replications}}{\\text{Total replication attempts}}`,
+          meaning: `The reproducibility score measures how consistently experimental results can be replicated across different runs, seeds, and ideally independent research groups.`,
+          interpretation: `A low reproducibility score is a red flag. Common causes include: undisclosed hyperparameter tuning, data leakage, random seed sensitivity, and reporting only the best run. High reproducibility is the gold standard for trustworthy QNLP research.`,
+        },
+      ],
+      variables: [
+        { symbol: `H_0`, name: `Null Hypothesis`, description: `The default assumption of no difference between quantum and classical models` },
+        { symbol: `H_1`, name: `Alternative Hypothesis`, description: `The claim being tested — that a meaningful difference exists` },
+        { symbol: `p`, name: `P-value`, description: `Probability of observing results at least as extreme under the null hypothesis` },
+        { symbol: `\\text{CI}`, name: `Confidence Interval`, description: `Range of values that likely contains the true population parameter` },
+        { symbol: `\\bar{\\Delta}`, name: `Mean Difference`, description: `Average performance difference between quantum and classical models across runs` },
+      ],
+      charts: [
+        {
+          title: `Reproducibility Across QNLP Studies`,
+          type: `bar`,
+          data: [
+            { name: `Sentiment Analysis`, studies: 12, reproducible: 8 },
+            { name: `Topic Classification`, studies: 8, reproducible: 5 },
+            { name: `Question Answering`, studies: 5, reproducible: 2 },
+            { name: `Natural Language Inference`, studies: 4, reproducible: 1 },
+            { name: `Named Entity Recognition`, studies: 3, reproducible: 2 },
+          ],
+        },
+        {
+          title: `Common Experimental Pitfalls in QNLP Papers`,
+          type: `bar`,
+          data: [
+            { name: `Weak Baselines`, count: 34 },
+            { name: `No Statistical Tests`, count: 28 },
+            { name: `Single Seed Only`, count: 25 },
+            { name: `Data Leakage`, count: 15 },
+            { name: `Hyperparameter Advantage`, count: 22 },
+            { name: `Missing Ablation`, count: 30 },
+          ],
+        },
+      ],
+      advantages: `Rigorous experimental methodology produces trustworthy, reproducible results. Statistical analysis prevents over-interpretation of noise. Comprehensive reporting enables meta-analysis and comparison across studies.`,
+      limitations: `Rigorous experiments require substantial computational resources (multiple seeds, baselines, ablations). The methodology is still evolving, with no universally accepted standards for QNLP. Statistical rigor does not compensate for poor research questions or flawed architectural designs.`,
+    },
+    activities: [
+      {
+        title: `Experimental Design Workshop`,
+        description: `Teams design a complete experimental protocol for a QNLP research question, following best practices.`,
+        steps: [
+          `Formulate a specific, testable research hypothesis about QNLP`,
+          `Specify datasets, models, preprocessing, and evaluation protocol`,
+          `Define the statistical testing plan (tests, significance level, power analysis)`,
+          `Pre-register the design and identify potential confounding factors`,
+          `Present your protocol for peer review by another team`,
+        ],
+        materials: `Experimental design template, power analysis calculator`,
+        timeRequired: `12 min`,
+        outcomes: `Students can design rigorous QNLP experiments following best practices`,
+      },
+      {
+        title: `Paper Review Simulation`,
+        description: `Students act as reviewers for a simulated QNLP paper submission, identifying experimental flaws.`,
+        steps: [
+          `Receive a simulated QNLP paper with experimental results`,
+          `Check for: random seeds, statistical tests, baseline strength, ablation studies`,
+          `Identify missing details and potential confounding factors`,
+          `Write a review with major/minor revisions and acceptance recommendation`,
+        ],
+        timeRequired: `10 min`,
+        outcomes: `Students can critically evaluate experimental methodology in QNLP papers`,
+      },
+      {
+        title: `P-Hacking Detection`,
+        description: `Students identify common p-hacking practices in simulated research data and learn how to avoid them.`,
+        steps: [
+          `Receive datasets with multiple experimental conditions`,
+          `Run all pairwise comparisons and observe the familywise error rate`,
+          `Apply Bonferroni correction and see how many "significant" results disappear`,
+          `Discuss: what constitutes legitimate exploratory analysis vs p-hacking?`,
+        ],
+        timeRequired: `8 min`,
+        outcomes: `Students understand multiple comparison problems and correction methods`,
+      },
+      {
+        title: `Reproducibility Challenge`,
+        description: `Teams attempt to reproduce a published QNLP result from the experimental description alone.`,
+        steps: [
+          `Receive a published QNLP paper's experimental section (methods only)`,
+          `Attempt to reproduce the experiment with the described settings`,
+          `Compare results — note any discrepancies`,
+          `Identify missing details that prevented exact reproduction`,
+        ],
+        timeRequired: `8 min`,
+        outcomes: `Students understand the importance of complete experimental reporting`,
+      },
+    ],
+    project: {
+      scope: `Design, execute, and document a complete QNLP experimental study with pre-registered protocol, proper statistical analysis, and comprehensive reporting.`,
+      objectives: [
+        `Formulate a testable QNLP hypothesis`,
+        `Pre-register the experimental protocol`,
+        `Execute experiments with proper controls and multiple seeds`,
+        `Perform statistical analysis with effect sizes and confidence intervals`,
+        `Write a complete research report following QNLP reporting standards`,
+      ],
+      timeline: [
+        { phase: `Protocol Design`, duration: `3 min`, percent: 20 },
+        { phase: `Experimentation`, duration: `5 min`, percent: 40 },
+        { phase: `Analysis`, duration: `3 min`, percent: 25 },
+        { phase: `Reporting`, duration: `2 min`, percent: 15 },
+      ],
+      teamRoles: [
+        { role: `Principal Investigator`, responsibility: `Designs the study and supervises execution` },
+        { role: `Experimentalist`, responsibility: `Runs experiments and collects data` },
+        { role: `Statistician`, responsibility: `Performs statistical analysis and checks assumptions` },
+      ],
+      deliverables: [
+        `Pre-registered experimental protocol`,
+        `Complete experimental results with all metrics and seeds`,
+        `Statistical analysis report with effect sizes and confidence intervals`,
+        `Full research report following QNLP reproducibility standards`,
+      ],
+    },
+    questions: [
+      {
+        question: `What is the difference between statistical significance and practical significance in QNLP experiments?`,
+        answer: `Statistical significance means the observed difference is unlikely to be due to random chance (p < 0.05). Practical significance means the difference is large enough to matter in real applications — it saves time, money, or improves user experience. A result can be statistically significant but practically meaningless (e.g., 0.001 accuracy improvement on 1 million data points).`,
+        explanation: `With enough data, even tiny differences become statistically significant. Always report effect sizes (Cohen's d, raw delta) alongside p-values to assess practical significance. A good rule of thumb: if the improvement is smaller than the measurement noise, it is not practically significant.`,
+        commonMistake: `Equating p < 0.05 with "the quantum model is better". Statistical significance only tells us the difference is not zero — it does not tell us the difference is meaningful.`,
+        tip: `Always ask: "Is this improvement large enough to matter in practice?" Consider the cost of deploying quantum hardware against the benefit of the performance gain.`,
+      },
+      {
+        question: `What are the essential components of a reproducible QNLP experimental report?`,
+        answer: `A reproducible report must include: (1) exact dataset versions and train/test splits, (2) complete model architecture specifications (qubits, ansatz, encoding, circuit depth), (3) all hyperparameters and optimisation settings, (4) number of random seeds and how results were aggregated, (5) statistical tests used with their assumptions checked, (6) ablation studies isolating the quantum component, (7) code and data availability statement, and (8) hardware/software environment specifications.`,
+        explanation: `Reproducibility is the cornerstone of scientific progress. Without it, individual research findings cannot build into reliable knowledge. The QNLP field has published reproducibility checklists that should be followed for every experimental study.`,
+        commonMistake: `Reporting only the best run or only the mean without variance. Always report mean, standard deviation, and individual run results.`,
+        tip: `Use a reproducibility checklist before submitting any QNLP paper or report. Include a "Reproducibility Statement" section that addresses each checklist item.`,
+      },
+    ],
+    virtualLab: {
+      description: `Design and run a complete QNLP experiment step by step, following best practices for experimental methodology and receiving feedback at each stage.`,
+      steps: [
+        `Formulate a research hypothesis using the hypothesis builder`,
+        `Design the experimental protocol with dataset, model, and evaluation choices`,
+        `Pre-register your protocol and receive a DOI`,
+        `Run experiments with automated multi-seed execution`,
+        `Analyse results with built-in statistical tests and visualisations`,
+        `Generate a complete reproducibility report with all experimental details`,
+      ],
+      stepDetails: [
+        `Hypothesis builder guides you through formulating specific, testable, falsifiable hypotheses`,
+        `Protocol designer covers all experimental dimensions with best-practice defaults`,
+        `Pre-registration generates a timestamped, signed document of your protocol`,
+        `Automated experiment runner executes all combinations with specified random seeds`,
+        `Statistical analysis module runs McNemar's test, paired t-test, and effect size computation`,
+        `Report generator produces a complete experimental report following QNLP reproducibility checklists`,
+      ],
+      completionMessage: `You have mastered the complete experimental methodology for QNLP research!`,
+      dataFlow: `flowchart TD
+        A[Hypothesis] --> B[Protocol Design]
+        B --> C[Pre-registration]
+        C --> D[Experiment Execution]
+        D --> E[Data Collection]
+        E --> F[Statistical Analysis]
+        F --> G{Results}
+        G --> H[Significant?]
+        G --> I[Effect Size?]
+        G --> J[Reproducible?]
+        H --> K[Research Report]
+        I --> K
+        J --> K`,
+    },
+    insights: {
+      advantages: [
+        `Rigorous experimental methodology produces trustworthy, actionable research findings`,
+        `Pre-registration prevents p-hacking and confirmation bias`,
+        `Comprehensive reporting enables meta-analysis and field-level progress tracking`,
+        `Statistical rigor separates genuine discoveries from random fluctuations`,
+      ],
+      disadvantages: [
+        `Full methodological rigor requires substantially more computational resources`,
+        `Not all research questions can be studied with controlled experiments`,
+        `Methodological standards are still evolving, creating inconsistency across studies`,
+        `Rigorous methods cannot compensate for fundamentally flawed research questions`,
+      ],
+      futureScope: `The QNLP field is converging on standardised experimental protocols and reporting checklists. Automated experiment management platforms will reduce the overhead of rigorous methodology. Community-wide benchmarking efforts will enable fair and reproducible comparisons across all QNLP research.`,
+      industrialApplications: [
+        `Internal R&D: rigorous evaluation before deploying quantum NLP in production`,
+        `Regulatory approval: experimental evidence for quantum-enhanced medical or financial NLP systems`,
+        `Vendor assessment: standardised experimental framework for comparing quantum NLP solutions`,
+        `Academic partnerships: reproducible research collaboration between industry and academia`,
+      ],
+      careerRelevance: `Experimental methodology is the foundation of all scientific research careers. The ability to design, execute, and report rigorous experiments is essential for PhD programs, research scientist positions, and any role involving evidence-based decision making.`,
+    },
+  },
+}

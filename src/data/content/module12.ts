@@ -1,0 +1,1236 @@
+import type { TopicContent } from './loader'
+
+export const m12Content: Record<string, TopicContent> = {
+  '12.1': {
+    topicId: '12.1',
+    learningObjective: `Understand why hybrid quantum-classical models are necessary, their architectural principles, and the problems they solve.`,
+    nextPrep: `Review Module 11 on quantum text classification and refresh your knowledge of classical neural network architectures.`,
+    dependencyGraph: `flowchart LR
+      A[M11: Quantum Classification] --> B[12.1 Why Hybrid Models?]
+      B --> C[12.2 Variational Quantum Circuits]
+      C --> D[12.3 Hybrid Architecture]
+      D --> E[12.4 Quantum Feature Extraction]
+      E --> F[12.5 Integration with Classical Nets]
+      F --> G[12.6 Hybrid NLP Lab]
+      style B fill:#4a90d9,color:#fff`,
+    storytelling: {
+      story: `Imagine you are building the ultimate chef. A classical chef is incredible at following precise recipes, measuring ingredients, and timing dishes perfectly. A quantum chef can taste all possible flavour combinations simultaneously but struggles with precise measurements. The best restaurant in the world would not hire one or the other — they would hire both. The classical chef prepares the ingredients and handles the precise execution, while the quantum chef explores creative flavour combinations that no classical chef would ever discover. This is the hybrid quantum-classical model: classical computers handle what they are good at (preprocessing, optimisation, structured computation), while quantum computers handle what they are good at (exploring high-dimensional spaces, superposition of possibilities).`,
+      questions: [
+        `What tasks are classical computers better at than quantum computers?`,
+        `What tasks might quantum computers be uniquely suited for?`,
+        `How would you divide an NLP pipeline between classical and quantum components?`,
+      ],
+      connection: `Hybrid models recognise that current quantum computers are not ready to replace classical computers entirely. Instead, they augment classical systems with quantum components that handle specific sub-tasks where quantum advantage is most promising — like feature extraction in exponentially large Hilbert spaces.`,
+      technicalIntro: `Hybrid quantum-classical models combine classical neural network layers (for structured data processing, embedding, and final classification) with quantum circuit layers (for high-dimensional feature transformation and representation learning). The quantum layer acts as a drop-in replacement for a classical hidden layer, receiving classical inputs and producing classical outputs via measurement. Training uses gradient-based optimisation where gradients through the quantum layer are computed via the parameter shift rule. This architecture has three key advantages: (1) it requires fewer qubits than a fully quantum model, (2) it leverages mature classical infrastructure, and (3) it allows incremental adoption as quantum hardware improves.`,
+      lifeSkills: `Hybrid thinking — combining the best of two different approaches — is a valuable life skill. Whether you are cooking (combining traditional techniques with modern equipment), managing (blending hierarchical and flat structures), or problem-solving (mixing analytical and creative thinking), hybrid approaches often outperform pure strategies.`,
+    },
+    mathModelling: {
+      need: `Hybrid models require a mathematical framework for integrating quantum circuit layers into classical neural network architectures with end-to-end differentiability.`,
+      motivation: `Neither pure classical nor pure quantum approaches are optimal for near-term NLP tasks. Hybrid models leverage the strengths of both paradigms.`,
+      challenge: `Designing the interface between classical and quantum components such that gradients flow correctly through the quantum layer for end-to-end training.`,
+      equations: [
+        {
+          latex: `\\mathbf{h}_{\\text{quantum}} = f_{\\text{q}}(\\mathbf{x}; \\theta) = \\left[ \\langle Z_1 \\rangle, \\langle Z_2 \\rangle, \\ldots, \\langle Z_k \\rangle \\right]^T`,
+          meaning: `The quantum layer maps a classical input vector x to a k-dimensional output vector of Pauli Z expectation values measured on k qubits.`,
+          interpretation: `The quantum layer transforms classical input through encoding, unitary evolution, and measurement into a new feature vector. This output can be fed directly into subsequent classical layers.`,
+        },
+        {
+          latex: `\\mathbf{h}_{\\text{total}} = g_{\\phi}\\left(f_{\\theta}(\\mathbf{x})\\right) = \\text{ClassicalNN}_{\\phi}\\left(\\text{QuantumCircuit}_{\\theta}(\\mathbf{x})\\right)`,
+          meaning: `The full hybrid model is a composition of a quantum circuit f_? followed by a classical neural network g_f.`,
+          interpretation: `The quantum circuit acts as a feature extractor or transformer, and the classical network handles the final classification or regression. Both sets of parameters (? and f) are trained jointly end-to-end.`,
+        },
+        {
+          latex: `\\frac{\\partial L}{\\partial \\theta_i} = \\sum_{j=1}^k \\frac{\\partial L}{\\partial h_j} \\cdot \\frac{\\partial h_j}{\\partial \\theta_i}`,
+          meaning: `The gradient of the loss with respect to quantum parameters ?_i is computed by backpropagating through the classical network to the quantum outputs h_j, then applying the parameter shift rule to compute ?h_j/??_i.`,
+          interpretation: `This is the key insight for hybrid training: classical backpropagation handles the classical layers, while the parameter shift rule handles the quantum layer. The chain rule connects them seamlessly.`,
+        },
+      ],
+      variables: [
+        { symbol: `_{\\theta}`, name: `Quantum Circuit Layer`, description: `Parameterised quantum circuit that transforms classical input to quantum measurement outputs` },
+        { symbol: `g_{\\phi}`, name: `Classical Neural Network`, description: `Standard classical network (dense, convolutional, or Transformer layers)` },
+        { symbol: `\\mathbf{h}_{\\text{quantum}}`, name: `Quantum Layer Output`, description: `Vector of expectation values from the quantum circuit` },
+        { symbol: `\\langle Z_j \\rangle`, name: `Z Expectation Value`, description: `Expectation value of Pauli Z on qubit j, ranging from -1 to +1` },
+        { symbol: `k`, name: `Output Dimension`, description: `Number of measured qubits determining the quantum layer's output dimension` },
+      ],
+      charts: [
+        {
+          title: `Hybrid vs Pure Models: Accuracy on NLP Benchmarks`,
+          type: `bar`,
+          data: [
+            { name: `SST-2`, 'PureClassical': 0.91, 'PureQuantum': 0.82, 'Hybrid': 0.94 },
+            { name: `SST-5`, 'PureClassical': 0.50, 'PureQuantum': 0.42, 'Hybrid': 0.55 },
+            { name: `IMDB`, 'PureClassical': 0.88, 'PureQuantum': 0.79, 'Hybrid': 0.92 },
+            { name: `AG News`, 'PureClassical': 0.93, 'PureQuantum': 0.85, 'Hybrid': 0.95 },
+            { name: `TREC`, 'PureClassical': 0.95, 'PureQuantum': 0.88, 'Hybrid': 0.96 },
+          ],
+        },
+        {
+          title: `Parameter Efficiency: Hybrid vs Classical`,
+          type: `bar`,
+          data: [
+            { name: `Total Parameters`, 'Classical': 100000, 'Hybrid': 65000 },
+            { name: `Training Epochs`, 'Classical': 50, 'Hybrid': 35 },
+            { name: `Inference Time (ms)`, 'Classical': 2.0, 'Hybrid': 3.5 },
+            { name: `Memory (MB)`, 'Classical': 400, 'Hybrid': 280 },
+          ],
+        },
+      ],
+      advantages: `Hybrid models require fewer total parameters, train faster, and achieve higher accuracy than pure classical or pure quantum models on several NLP benchmarks. They are also more practical for near-term hardware.`,
+      limitations: `Hybrid models add latency due to the classical-quantum interface overhead. The quantum component is still limited by hardware noise and qubit count. Training requires careful co-optimisation of classical and quantum parameters.`,
+    },
+    activities: [
+      {
+        title: `Hybrid vs Pure Debate`,
+        description: `Teams debate the merits of pure quantum, pure classical, and hybrid approaches for different NLP tasks.`,
+        steps: [
+          `Split into three teams: Pure Classical, Pure Quantum, Hybrid`,
+          `Each team receives an NLP task (sentiment, NER, translation, summarisation)`,
+          `Teams prepare arguments for why their approach is best for their assigned task`,
+          `Present arguments and take questions from other teams`,
+        ],
+        materials: `Task description cards`,
+        timeRequired: `10 min`,
+        outcomes: `Students understand the trade-offs between different architectural paradigms`,
+      },
+      {
+        title: `Architecture Design Exercise`,
+        description: `Students design a hybrid architecture for a specific NLP task, specifying where the quantum layer fits.`,
+        steps: [
+          `Choose an NLP task: sentiment analysis, topic classification, or question answering`,
+          `Design a classical baseline architecture`,
+          `Identify one layer to replace with a quantum circuit`,
+          `Explain why that specific layer benefits from quantum enhancement`,
+        ],
+        timeRequired: `8 min`,
+        outcomes: `Students can identify suitable integration points for quantum layers in classical architectures`,
+      },
+    ],
+    project: {
+      scope: `Design a hybrid quantum-classical architecture for a text classification task, specifying all components and the training strategy.`,
+      objectives: [
+        `Select an appropriate NLP task for hybrid enhancement`,
+        `Design the classical preprocessing and postprocessing components`,
+        `Design the quantum circuit layer with encoding and measurement`,
+        `Specify the end-to-end training procedure`,
+      ],
+      timeline: [
+        { phase: `Task Selection`, duration: `2 min`, percent: 15 },
+        { phase: `Architecture Design`, duration: `5 min`, percent: 50 },
+        { phase: `Training Strategy`, duration: `3 min`, percent: 35 },
+      ],
+      teamRoles: [
+        { role: `Architect`, responsibility: `Designs the overall hybrid architecture` },
+        { role: `Quantum Designer`, responsibility: `Designs the quantum circuit layer` },
+        { role: `Training Lead`, responsibility: `Specifies the training and optimisation strategy` },
+      ],
+      deliverables: [
+        `Hybrid architecture diagram showing classical and quantum components`,
+        `Quantum circuit specification (qubits, gates, encoding, measurement)`,
+        `Training strategy document with loss function and optimiser details`,
+      ],
+    },
+    questions: [
+      {
+        question: `What are the main motivations for using hybrid quantum-classical models?`,
+        answer: `Hybrid models leverage classical strengths (preprocessing, structured computation, optimisation) while using quantum circuits for high-dimensional feature transformation where quantum advantage is most promising. They are also more practical for near-term NISQ hardware.`,
+        explanation: `Current quantum computers cannot handle end-to-end NLP pipelines. Hybrid models allow incremental adoption of quantum components, requiring fewer qubits and less coherence time than fully quantum alternatives.`,
+        commonMistake: `Assuming the quantum component must be the majority of the model — in most hybrid architectures, the quantum layer is small (4-12 qubits) and handles a specific sub-task.`,
+        tip: `Think of the quantum layer as a specialised coprocessor that handles high-dimensional transformations while the classical CPU handles everything else.`,
+      },
+      {
+        question: `How do gradients flow through a hybrid model containing a quantum layer?`,
+        answer: `Gradients flow through the classical part via standard backpropagation. At the quantum-classical interface, the parameter shift rule computes ?h?/??? for each quantum output h? with respect to each quantum parameter ??. The chain rule combines these with gradients from the classical network.`,
+        explanation: `The quantum layer receives classical inputs and produces classical outputs (expectation values). Classical backpropagation works up to the outputs, then the parameter shift rule handles the quantum parameters. This makes the hybrid model end-to-end differentiable.`,
+        commonMistake: `Assuming backpropagation works through the quantum circuit — the parameter shift rule is the correct quantum analogue.`,
+        tip: `Each quantum parameter contributes to multiple output dimensions, so the gradient computation requires careful accounting of all paths through the chain rule.`,
+      },
+    ],
+    virtualLab: {
+      description: `Compare pure classical, pure quantum, and hybrid models on a simple sentiment classification task to understand their relative strengths.`,
+      steps: [
+        `Load the sentiment dataset and preprocess`,
+        `Train a pure classical neural network baseline`,
+        `Train a pure quantum classifier on the same data`,
+        `Train a hybrid model with a 4-qubit quantum layer and 2 classical layers`,
+        `Compare accuracy, training time, and parameter count across all three`,
+      ],
+      stepDetails: [
+        `Dataset: 200 IMDB reviews with binary sentiment labels`,
+        `Classical: 3-layer feed-forward network with 256, 128, 64 hidden units`,
+        `Quantum: 4-qubit, 3-layer ansatz with angle encoding`,
+        `Hybrid: 2 classical layers (128, 64) ? 4-qubit quantum layer ? 2 classical layers (32, 2)`,
+        `Comparison dashboard shows all metrics side-by-side with visualisations`,
+      ],
+      completionMessage: `You have empirically compared pure classical, pure quantum, and hybrid architectures!`,
+      dataFlow: `flowchart LR
+        A[Input Text] --> B[Classical Embedding]
+        B --> C{Architecture}
+        C --> D[Pure Classical NN]
+        C --> E[Pure Quantum Circuit]
+        C --> F[Hybrid: Classical + Quantum + Classical]
+        D --> G[Predictions]
+        E --> G
+        F --> G
+        G --> H[Comparison Dashboard]`,
+    },
+    insights: {
+      advantages: [
+        `Hybrid models are practical for near-term NISQ hardware`,
+        `Lower qubit requirements than fully quantum alternatives`,
+        `End-to-end differentiable via chain rule + parameter shift`,
+        `Leverages mature classical ML infrastructure and tools`,
+        `Provides clear path for incremental quantum adoption`,
+      ],
+      disadvantages: [
+        `Classical-quantum interface adds latency and complexity`,
+        `Quantum layer remains limited by hardware noise and qubit count`,
+        `Co-optimisation of classical and quantum parameters is challenging`,
+        `Theoretical advantage of hybrid over pure classical is not yet proven for most tasks`,
+      ],
+      futureScope: `As quantum hardware improves, hybrid architectures will evolve toward deeper quantum layers and eventually transition to fully quantum models. Research into automated architecture search for hybrid models is an active area.`,
+      industrialApplications: [
+        `Hybrid NLP systems for enterprise document processing`,
+        `Quantum-enhanced sentiment analysis in customer experience platforms`,
+        `Hybrid models for medical NLP and clinical text analysis`,
+        `Financial NLP applications combining quantum feature extraction with classical risk modelling`,
+      ],
+      careerRelevance: `Hybrid quantum-classical modelling is the most employable skill in current quantum ML. Most industry quantum roles require expertise in both classical ML and quantum circuit design.`,
+    },
+  },
+
+  '12.2': {
+    topicId: '12.2',
+    learningObjective: `Understand Variational Quantum Circuits (VQCs): their structure, expressivity, training, and role as the quantum workhorse in hybrid models.`,
+    nextPrep: `Review parameterised quantum gates from Module 5 and the concept of unitary evolution.`,
+    dependencyGraph: `flowchart LR
+      A[12.1 Why Hybrid?] --> B[12.2 Variational Quantum Circuits]
+      B --> C[12.3 Hybrid Architecture]
+      B --> D[Ansatz Design]
+      B --> E[Expressivity Analysis]
+      style B fill:#6a0dad,color:#fff`,
+    storytelling: {
+      story: `A variational quantum circuit is like a Swiss Army knife for quantum computing. It is a flexible, reusable tool that can be configured for many different tasks by simply turning its knobs (parameters). Imagine a musical synthesiser — with the same hardware, you can produce any sound by adjusting the sliders. A VQC is the same: a fixed circuit structure with adjustable rotation angles that can learn to perform classification, regression, feature extraction, or generation. It is the most important architectural pattern in near-term quantum ML.`,
+      questions: [
+        `What makes a circuit "variational" versus fixed?`,
+        `How does adjusting parameters in a quantum circuit compare to adjusting weights in a neural network?`,
+        `What is the minimum circuit structure needed to solve a given problem?`,
+      ],
+      connection: `VQCs are the quantum analogue of neural network layers. Just as a dense layer with adjustable weights can learn any linear transformation, a VQC with adjustable rotation angles can learn any unitary transformation within its structural constraints. The parameterised gates act like trainable weights.`,
+      technicalIntro: `A Variational Quantum Circuit (VQC) consists of three components: (1) A fixed entangling layer that creates correlations between qubits (typically CNOT or CZ gates arranged in a specific pattern). (2) Parameterised single-qubit rotation gates (Rx, Ry, Rz) placed at specific positions in the circuit. (3) A measurement layer that extracts classical information. The pattern of entangling gates and rotation gates is called the "ansatz". Common ansätze include the hardware-efficient ansatz (minimising depth for a given connectivity graph), the tensor-product ansatz (layers of rotations + nearest-neighbour CNOTs), and problem-specific ansätze designed for particular tasks. The expressivity of a VQC — its ability to represent different functions — depends on the number of parameters, the circuit depth, and the entangling pattern.`,
+      lifeSkills: `The idea of a flexible, reusable template that can be specialised through adjustable parameters is powerful beyond computing. A good recipe, a workout routine, or a business process all follow this pattern: a fixed structure with adjustable levers that you tune for different outcomes.`,
+    },
+    mathModelling: {
+      need: `Understanding VQCs requires modelling their expressivity, trainability, and the trade-offs between circuit depth, parameter count, and representational power.`,
+      motivation: `VQCs are the fundamental building block of all near-term quantum ML applications. Mastering their design is essential for building effective hybrid models.`,
+      challenge: `Designing an ansatz that is expressive enough to solve the task but shallow enough to run on noisy hardware without encountering barren plateaus.`,
+      equations: [
+        {
+          latex: `U(\\theta) = \\prod_{l=1}^{L} \\left[ \\left(\\bigotimes_{i=1}^{n} R_{\\alpha_i}^{(i)}(\\theta_{i,l})\\right) U_{\\text{ent}} \\right]`,
+          meaning: `A VQC with L layers: each layer consists of single-qubit rotations on all qubits followed by a fixed entangling operation U_ent.`,
+          interpretation: `The rotations are parameterised and trainable. The entangling layer is fixed and creates quantum correlations. Deeper circuits (more layers) can represent more complex functions but are harder to train and more susceptible to noise.`,
+        },
+        {
+          latex: `\\mathcal{E}(U(\\theta)) = \\int_{\\Psi} \\left| U(\\theta)\\ket{\\Psi} - U_{\\text{target}}\\ket{\\Psi} \\right|^2 d\\Psi`,
+          meaning: `Expressivity E measures how well the VQC can approximate arbitrary unitary transformations over the space of input states ?.`,
+          interpretation: `A more expressive circuit can represent a wider range of functions but may be harder to train due to increased likelihood of barren plateaus. There is a fundamental trade-off between expressivity and trainability.`,
+        },
+        {
+          latex: `C(\\theta) = \\frac{1}{N} \\sum_{i=1}^{N} L\\left(y_i, \\langle 0^{\\otimes n} | U^\\dagger(\\theta) U_{\\text{enc}}(\\mathbf{x}_i) Z_1 U_{\\text{enc}}^\\dagger(\\mathbf{x}_i) U(\\theta) | 0^{\\otimes n} \\rangle \\right)`,
+          meaning: `The cost function C(?) averages the loss L over the dataset, where the quantum circuit output is the expectation value of Z1 on the first qubit after applying encoding and the VQC.`,
+          interpretation: `This is the objective function that the VQC parameters ? are trained to minimise. The encoding circuit incorporates the data, and the VQC learns to transform the encoded state to produce correct classifications.`,
+        },
+      ],
+      variables: [
+        { symbol: `L`, name: `Circuit Depth`, description: `Number of layers in the VQC, each containing rotations and entangling gates` },
+        { symbol: `R_{\\alpha}^{(i)}`, name: `Rotation Gate`, description: `Single-qubit rotation around axis a (X, Y, or Z) on qubit i` },
+        { symbol: `U_{\\text{ent}}`, name: `Entangling Operation`, description: `Fixed unitary that creates entanglement between qubits (typically CNOT or CZ gates)` },
+        { symbol: `\\mathcal{E}`, name: `Expressivity`, description: `Measure of how well the VQC can approximate arbitrary unitaries` },
+        { symbol: `C(\\theta)`, name: `Cost Function`, description: `Training objective to be minimised over circuit parameters` },
+      ],
+      interactive: {
+        equation: `U(\\theta) = R_y(\\theta_2) \\text{CNOT} \\, R_y(\\theta_1)`,
+        description: `Build a simple 2-qubit VQC and see how parameter changes affect the output:`,
+        variables: [
+          { symbol: `\\theta_1`, name: `First Rotation`, description: `Rotation angle for the first Ry gate on qubit 0` },
+          { symbol: `\\theta_2`, name: `Second Rotation`, description: `Rotation angle for the second Ry gate on qubit 1` },
+        ],
+        sliders: [
+          { name: `theta1`, label: `?1 (Qubit 0 Rotation)`, min: 0, max: 6.28, step: 0.1, default: 0.78 },
+          { name: `theta2`, label: `?2 (Qubit 1 Rotation)`, min: 0, max: 6.28, step: 0.1, default: 2.36 },
+        ],
+      },
+      charts: [
+        {
+          title: `Expressivity vs Trainability Trade-off`,
+          type: `line`,
+          data: [
+            { name: `1 Layer`, Expressivity: 0.20, Trainability: 0.95 },
+            { name: `2 Layers`, Expressivity: 0.40, Trainability: 0.85 },
+            { name: `3 Layers`, Expressivity: 0.60, Trainability: 0.70 },
+            { name: `5 Layers`, Expressivity: 0.80, Trainability: 0.45 },
+            { name: `8 Layers`, Expressivity: 0.90, Trainability: 0.20 },
+            { name: `12 Layers`, Expressivity: 0.95, Trainability: 0.08 },
+          ],
+        },
+        {
+          title: `VQC Expressivity by Ansatz Type`,
+          type: `radar`,
+          data: [
+            { name: `Hardware-Efficient`, Expressivity: 7, Trainability: 8, 'NoiseRobustness': 9 },
+            { name: `Tensor-Product`, Expressivity: 8, Trainability: 7, 'NoiseRobustness': 6 },
+            { name: `Problem-Specific`, Expressivity: 9, Trainability: 5, 'NoiseRobustness': 5 },
+            { name: `Alternating`, Expressivity: 6, Trainability: 9, 'NoiseRobustness': 8 },
+          ],
+        },
+      ],
+      advantages: `VQCs are flexible, reusable, and compatible with gradient-based optimisation. They can represent complex functions with relatively few parameters and can be tailored to specific hardware connectivity graphs.`,
+      limitations: `VQCs suffer from barren plateaus as depth and qubit count increase. Fixed entangling patterns may limit expressivity for certain tasks. Circuit depth is constrained by hardware noise and decoherence.`,
+    },
+    activities: [
+      {
+        title: `Ansatz Design Challenge`,
+        description: `Groups design VQC ansätze for different hardware connectivity graphs and compare expressivity.`,
+        steps: [
+          `Receive a hardware connectivity graph (linear, ring, grid, all-to-all)`,
+          `Design a 4-qubit VQC with 3 layers that respects the connectivity constraints`,
+          `Count the number of trainable parameters in your design`,
+          `Present your ansatz and explain why it is appropriate for the given connectivity`,
+        ],
+        materials: `Paper, pens, connectivity graph diagrams`,
+        timeRequired: `10 min`,
+        outcomes: `Students can design hardware-aware VQC ansätze`,
+      },
+      {
+        title: `Expressivity Exploration`,
+        description: `Using a simulator, students vary VQC depth and observe the range of functions the circuit can represent.`,
+        steps: [
+          `Implement a 2-qubit VQC with 1 layer and random parameters`,
+          `Compute the output for 100 random input states`,
+          `Increase to 3 layers and repeat`,
+          `Compare the distribution of outputs — deeper circuits produce more varied outputs`,
+        ],
+        timeRequired: `8 min`,
+        outcomes: `Students empirically observe how circuit depth affects expressivity`,
+      },
+    ],
+    project: {
+      scope: `Design a VQC ansatz optimised for a 5-qubit quantum device with linear connectivity, targeting a text classification task.`,
+      objectives: [
+        `Design a hardware-efficient ansatz respecting linear connectivity`,
+        `Maximise expressivity while minimising circuit depth`,
+        `Ensure the circuit has sufficient trainable parameters for the task`,
+        `Document the design decisions and trade-offs`,
+      ],
+      timeline: [
+        { phase: `Connectivity Analysis`, duration: `3 min`, percent: 25 },
+        { phase: `Ansatz Design`, duration: `5 min`, percent: 50 },
+        { phase: `Documentation`, duration: `2 min`, percent: 25 },
+      ],
+      teamRoles: [
+        { role: `Hardware Analyst`, responsibility: `Analyses device connectivity and gate set` },
+        { role: `Circuit Designer`, responsibility: `Designs the VQC ansatz` },
+        { role: `Validator`, responsibility: `Verifies circuit depth and parameter count` },
+      ],
+      deliverables: [
+        `VQC circuit diagram with gate annotations`,
+        `Parameter count and circuit depth analysis`,
+        `Design rationale document`,
+      ],
+    },
+    questions: [
+      {
+        question: `What are the three components of a Variational Quantum Circuit?`,
+        answer: `(1) Fixed entangling gates that create correlations between qubits, (2) parameterised single-qubit rotation gates that are trainable, and (3) a measurement layer that extracts classical information from the quantum state.`,
+        explanation: `The entangling gates provide the circuit's structure, the rotation gates provide the adjustable parameters, and measurement converts the quantum state back to classical data for loss computation.`,
+        commonMistake: `Making all gates parameterised — entangling gates are typically fixed because parameterised two-qubit gates are harder to implement on hardware and increase the optimisation complexity.`,
+        tip: `The standard pattern is: rotate all qubits, entangle, rotate again, entangle again, measure.`,
+      },
+      {
+        question: `What is the expressivity-trainability trade-off in VQCs?`,
+        answer: `More expressive circuits (deeper, more parameters) can represent more functions but are harder to train due to barren plateaus — gradients vanish exponentially with circuit depth and qubit count.`,
+        explanation: `This is a fundamental limitation of VQCs. The optimal design balances enough expressivity to solve the task with enough trainability to actually find good parameters.`,
+        commonMistake: `Making the circuit as deep as possible expecting better performance — this often makes training impossible.`,
+        tip: `Start with the shallowest possible circuit and increase depth only if the task requires more expressivity. Follow the principle of minimum viable expressivity.`,
+      },
+    ],
+    virtualLab: {
+      description: `Build and experiment with VQCs of different depths and ansatz types to understand how circuit design affects expressivity and trainability.`,
+      steps: [
+        `Select an ansatz type (hardware-efficient, tensor-product, or alternating)`,
+        `Choose the number of qubits (2-6) and layers (1-8)`,
+        `Initialise random parameters and visualise the circuit`,
+        `Train the VQC on a simple binary classification task`,
+        `Observe how training convergence changes with circuit design`,
+      ],
+      stepDetails: [
+        `Circuit visualiser shows all gates with parameter labels`,
+        `Expressivity heatmap shows the range of outputs the VQC can produce`,
+        `Training dashboard shows loss curves, gradient magnitudes, and parameter trajectories`,
+        `Barren plateau detector highlights if gradients fall below threshold`,
+        `Comparison mode runs multiple ansätze side-by-side`,
+      ],
+      completionMessage: `You have mastered the fundamentals of Variational Quantum Circuit design and training!`,
+      dataFlow: `flowchart TD
+        A[Select Ansatz] --> B[Choose Qubits & Layers]
+        B --> C[Visualise Circuit]
+        C --> D[Initialise Parameters]
+        D --> E[Encode Training Data]
+        E --> F[Run VQC Forward Pass]
+        F --> G[Compute Loss]
+        G --> H[Parameter Shift ?L]
+        H --> I[Update Parameters]
+        I --> F
+        G --> J[Converged?]
+        J -->|Yes| K[Evaluate Expressivity]
+        K --> L[Report Metrics]`,
+    },
+    insights: {
+      advantages: [
+        `VQCs are the most widely studied and well-understood quantum ML architecture`,
+        `Compatible with all major quantum computing frameworks (Qiskit, Pennylane, Cirq)`,
+        `Parameter count scales linearly with circuit depth and qubit count`,
+        `Can be tailored to specific hardware connectivity graphs`,
+      ],
+      disadvantages: [
+        `Barren plateaus fundamentally limit trainable depth for large circuits`,
+        `Fixed entangling patterns may not be optimal for all tasks`,
+        `Expressivity is bounded by the chosen ansatz structure`,
+        `Circuit depth is limited by hardware coherence times`,
+      ],
+      futureScope: `Research into adaptive ansätze (circuits that grow during training), problem-specific initialisation strategies, and provably trainable VQC designs is rapidly advancing. These developments will make VQCs practical for larger-scale problems.`,
+      industrialApplications: [
+        `Quantum layers in hybrid ML models for enterprise NLP`,
+        `Variational quantum eigensolvers for chemistry and materials science`,
+        `Quantum optimisation for logistics and supply chain`,
+        `Quantum generative models for drug discovery`,
+      ],
+      careerRelevance: `VQC design is the core skill in quantum ML. Proficiency in ansatz design, expressivity analysis, and VQC training is essential for any quantum computing role in industry or research.`,
+    },
+  },
+
+  '12.3': {
+    topicId: '12.3',
+    learningObjective: `Understand the complete hybrid learning architecture: how classical and quantum components connect, communicate, and co-train.`,
+    nextPrep: `Review classical neural network architectures (feed-forward, convolutional, Transformer) and VQC concepts from the previous topic.`,
+    dependencyGraph: `flowchart LR
+      A[12.1 Why Hybrid?] --> B[12.2 VQC] --> C[12.3 Hybrid Architecture]
+      C --> D[12.4 Quantum Feature Extraction]
+      C --> E[Data Flow]
+      C --> F[Gradient Flow]
+      style C fill:#4a90d9,color:#fff`,
+    storytelling: {
+      story: `You are the architect designing a bridge that connects two cities: Classica (a well-established city with excellent infrastructure) and Quantuma (a new, experimental city with extraordinary capabilities but limited roads). The bridge needs to allow smooth traffic in both directions — data flowing from Classica to Quantuma for processing, and gradients flowing back from Quantuma to Classica for learning. This bridge is the hybrid learning architecture. Getting its design right is the key to unlocking the potential of both cities.`,
+      questions: [
+        `What information needs to flow from the classical to the quantum component?`,
+        `What information needs to flow back?`,
+        `How does the architecture change if the quantum component is at the beginning, middle, or end of the pipeline?`,
+      ],
+      connection: `The hybrid architecture defines the interface between classical and quantum computation. It specifies how data is transformed, how gradients flow, and how the two components co-adapt during training. Getting this interface right is essential for building effective hybrid models.`,
+      technicalIntro: `The hybrid architecture has three canonical configurations: (1) Quantum as feature extractor — the quantum circuit processes raw or embedded inputs and produces features for a classical classifier. (2) Quantum as middle layer — classical layers process input, a quantum circuit transforms the representations, and more classical layers produce the final output. (3) Quantum as output layer — classical layers extract features, and a quantum circuit produces the final prediction. The key architectural decisions are: the dimensionality of the quantum layer input and output, the placement of the quantum layer, the number of quantum layers, and whether to use data re-uploading (feeding the input through the quantum layer multiple times to increase expressivity). Data re-uploading has been shown to significantly improve hybrid model performance by allowing the quantum layer to repeatedly interact with the input.`,
+      lifeSkills: `Architecture — the art of designing systems where components interact effectively — is a meta-skill applicable to software design, organisational structure, urban planning, and many other domains. A good architecture makes complex systems manageable and scalable.`,
+    },
+    mathModelling: {
+      need: `The hybrid architecture requires precise mathematical specification of how data and gradients flow between classical and quantum components.`,
+      motivation: `Different architectural configurations have different expressivity, trainability, and computational characteristics. Choosing the right configuration is critical for performance.`,
+      challenge: `Designing an architecture that maximises the quantum component's contribution while maintaining end-to-end differentiability and avoiding bottlenecks.`,
+      equations: [
+        {
+          latex: `\\mathbf{y} = f_{\\text{classical}}^{(2)}\\left( f_{\\text{quantum}} \\left( f_{\\text{classical}}^{(1)}(\\mathbf{x}) \\right) \\right)`,
+          meaning: `The hybrid model with the quantum layer in the middle: classical preprocessing, quantum transformation, classical postprocessing.`,
+          interpretation: `The first classical network f?¹? reduces the input dimension to fit the qubit budget. The quantum layer f_quantum transforms the data in Hilbert space. The second classical network f?²? maps quantum measurements to final outputs. This is the most common and flexible configuration.`,
+        },
+        {
+          latex: `\\mathbf{h}_t = f_{\\text{quantum}}(\\mathbf{x}; \\theta_t) \\quad \\text{where} \\quad \\theta_t = \\theta_{t-1} + \\mathbf{x}_t`,
+          meaning: `Data re-uploading injects the input x_t at each time step t, with the circuit parameters updated to include the new data.`,
+          interpretation: `Instead of encoding the data once at the beginning, re-uploading feeds it into each layer of the VQC. This dramatically increases expressivity because the quantum circuit interacts with the data multiple times, similar to how deep classical networks have multiple layers.`,
+        },
+        {
+          latex: `\\nabla_{\\theta} L = \\underbrace{\\frac{\\partial L}{\\partial \\mathbf{h}_{\\text{q}}}}_{\\text{Classical BP}} \\cdot \\underbrace{\\nabla_{\\theta} \\mathbf{h}_{\\text{q}}}_{\\text{Parameter Shift}}`,
+          meaning: `The total gradient of the loss with respect to quantum parameters ? is the product of classical backpropagation gradients through the post-quantum layers and the parameter shift gradients through the quantum layer.`,
+          interpretation: `This factorisation reveals the modular nature of hybrid training. The classical and quantum components can be trained with their respective gradient methods independently, as long as the interface (?L/?h_q) is correctly computed and communicated.`,
+        },
+      ],
+      variables: [
+        { symbol: `f_{\\text{classical}}^{(l)}`, name: `Classical Layer l`, description: `l-th classical neural network layer in the hybrid architecture` },
+        { symbol: `f_{\\text{quantum}}`, name: `Quantum Layer`, description: `VQC that transforms classical input to measurement outputs` },
+        { symbol: `\\mathbf{h}_t`, name: `Layer Output at Step t`, description: `Output of the quantum layer at time step t (for re-uploading)` },
+        { symbol: `\\nabla_{\\theta} L`, name: `Total Quantum Gradient`, description: `Complete gradient of the loss with respect to all quantum parameters` },
+      ],
+      charts: [
+        {
+          title: `Hybrid Architecture Configurations: Accuracy Comparison`,
+          type: `bar`,
+          data: [
+            { name: `Quantum First`, accuracy: 0.82 },
+            { name: `Quantum Middle`, accuracy: 0.91 },
+            { name: `Quantum Last`, accuracy: 0.87 },
+            { name: `Data Re-upload`, accuracy: 0.94 },
+            { name: `Multi-layer Quantum`, accuracy: 0.89 },
+          ],
+        },
+        {
+          title: `Data Re-uploading: Expressivity by Number of Re-uploads`,
+          type: `line`,
+          data: [
+            { name: `1`, classical_accuracy: 0.82, hybrid_accuracy: 0.85 },
+            { name: `2`, classical_accuracy: 0.82, hybrid_accuracy: 0.89 },
+            { name: `3`, classical_accuracy: 0.82, hybrid_accuracy: 0.92 },
+            { name: `5`, classical_accuracy: 0.82, hybrid_accuracy: 0.93 },
+            { name: `8`, classical_accuracy: 0.82, hybrid_accuracy: 0.94 },
+          ],
+        },
+      ],
+      advantages: `Multiple architectural configurations provide flexibility for different tasks. Data re-uploading dramatically increases expressivity. Modular design enables independent development and testing of classical and quantum components.`,
+      limitations: `Architecture search over hybrid configurations is computationally expensive. Data re-uploading increases circuit depth linearly with the number of re-uploads. Gradient computation through the quantum layer remains the bottleneck.`,
+    },
+    activities: [
+      {
+        title: `Architecture Diagram Exercise`,
+        description: `Students draw detailed architecture diagrams for three different hybrid configurations, showing data flow and gradient flow.`,
+        steps: [
+          `Draw the "quantum as feature extractor" architecture`,
+          `Draw the "quantum in the middle" architecture`,
+          `Draw the "quantum as output" architecture`,
+          `For each, use red arrows for data flow and blue arrows for gradient flow`,
+        ],
+        materials: `Paper, red and blue pens`,
+        timeRequired: `10 min`,
+        outcomes: `Students can visualise and compare different hybrid architecture configurations`,
+      },
+      {
+        title: `Data Re-uploading Experiment`,
+        description: `Using a simulator, students compare hybrid models with and without data re-uploading.`,
+        steps: [
+          `Implement a basic hybrid model (classical ? quantum ? classical)`,
+          `Train and record accuracy`,
+          `Add data re-uploading (inject input at each of 3 circuit layers)`,
+          `Compare accuracy, training time, and circuit depth`,
+        ],
+        timeRequired: `8 min`,
+        outcomes: `Students understand the benefits and costs of data re-uploading`,
+      },
+    ],
+    project: {
+      scope: `Design, implement, and evaluate three different hybrid architecture configurations on a text classification task.`,
+      objectives: [
+        `Implement three configurations: quantum-first, quantum-middle, quantum-last`,
+        `Implement a data re-uploading variant of the best configuration`,
+        `Compare all configurations on accuracy, parameter count, and training time`,
+        `Recommend the best architecture for the given task`,
+      ],
+      timeline: [
+        { phase: `Implementation`, duration: `6 min`, percent: 50 },
+        { phase: `Evaluation`, duration: `3 min`, percent: 25 },
+        { phase: `Analysis and Recommendation`, duration: `3 min`, percent: 25 },
+      ],
+      teamRoles: [
+        { role: `Implementer A`, responsibility: `Implements quantum-first and quantum-last` },
+        { role: `Implementer B`, responsibility: `Implements quantum-middle and data re-upload` },
+        { role: `Analyst`, responsibility: `Runs comparisons and prepares recommendations` },
+      ],
+      deliverables: [
+        `Four working hybrid model implementations`,
+        `Comparison table across all metrics`,
+        `Architecture recommendation with justifications`,
+      ],
+    },
+    questions: [
+      {
+        question: `What are the three canonical configurations for placing the quantum layer in a hybrid architecture?`,
+        answer: `(1) Quantum as feature extractor (quantum circuit first, then classical network), (2) quantum in the middle (classical ? quantum ? classical), and (3) quantum as output layer (classical network followed by quantum measurement).`,
+        explanation: `Each configuration has different implications for qubit requirements, expressivity, and training dynamics. The quantum-middle configuration is most common because classical layers can reduce input dimensionality before the quantum layer and refine quantum features afterward.`,
+        commonMistake: `Assuming the quantum layer must always be at the same position — the optimal placement depends on the task, data dimensionality, and hardware constraints.`,
+        tip: `Start with quantum-middle as a baseline, then experiment with other placements to find the best configuration for your specific task.`,
+      },
+      {
+        question: `What is data re-uploading and why does it improve hybrid model performance?`,
+        answer: `Data re-uploading feeds the input data into each layer of the VQC instead of encoding it once at the beginning. It improves performance by allowing the quantum circuit to interact with the data multiple times, similar to how deep classical networks have multiple layers.`,
+        explanation: `Single encoding limits the quantum circuit to a single interaction with the data. Re-uploading effectively increases the circuit depth dedicated to processing the input, allowing the quantum model to represent more complex functions.`,
+        commonMistake: `Only encoding data once and expecting the VQC to extract all necessary information in a single pass — re-uploading almost always improves performance.`,
+        tip: `The number of re-uploads is a hyperparameter. Start with 3 re-uploads and increase until accuracy plateaus.`,
+      },
+    ],
+    virtualLab: {
+      description: `Build, train, and compare different hybrid architecture configurations interactively to understand their trade-offs.`,
+      steps: [
+        `Select a hybrid architecture configuration`,
+        `Configure the classical layers (layer sizes, activation functions)`,
+        `Configure the quantum layer (qubits, ansatz, measurement)`,
+        `Train the hybrid model on a sample NLP dataset`,
+        `Compare results across configurations in an interactive dashboard`,
+      ],
+      stepDetails: [
+        `Configuration selector provides four presets plus custom mode`,
+        `Classical layers are configurable with dropdowns for size and activation type`,
+        `Quantum layer configuration includes qubit count, ansatz type, depth, and data re-upload count`,
+        `Training visualisation shows loss curves, gradient flow, and parameter updates in real-time`,
+        `Comparison dashboard aggregates results from multiple runs with different configurations`,
+      ],
+      completionMessage: `You have mastered hybrid architecture design and can now choose the right configuration for any task!`,
+      dataFlow: `flowchart TD
+        A[Input Text] --> B[Classical Embedding]
+        B --> C[Dimensionality Reduction]
+        C --> D[Quantum Encoding]
+        D --> E[VQC Layer]
+        E --> F[Measurement]
+        F --> G[Classical Postprocessing]
+        G --> H[Output Layer]
+        H --> I[Predictions]
+        I --> J[Loss Computation]
+        J --> K{Backpropagate}
+        K --> L[Classical Gradients]
+        K --> M[Parameter Shift]
+        L --> N[Update Classical Parameters]
+        M --> O[Update Quantum Parameters]
+        N --> B
+        O --> E`,
+    },
+    insights: {
+      advantages: [
+        `Multiple architectural configurations provide flexibility for different tasks and hardware constraints`,
+        `Data re-uploading significantly increases expressivity without adding qubits`,
+        `Modular design enables independent testing of classical and quantum components`,
+        `End-to-end differentiability enables joint training of all parameters`,
+        `Architecture can be incrementally adjusted as quantum hardware improves`,
+      ],
+      disadvantages: [
+        `Architecture search is computationally expensive`,
+        `Data re-uploading increases circuit depth and hardware noise susceptibility`,
+        `Gradient computation through the quantum layer remains a bottleneck`,
+        `Optimal architecture is task-dependent and not yet theoretically predictable`,
+      ],
+      futureScope: `Automated architecture search for hybrid models (neural architecture search adapted for quantum circuits) is an active research area. Future tools will automatically find optimal hybrid configurations for given tasks and hardware.`,
+      industrialApplications: [
+        `Custom hybrid architectures for enterprise NLP pipelines`,
+        `Automated architecture search platforms for quantum ML`,
+        `Hybrid models for real-time language processing in cloud quantum services`,
+        `Domain-specific hybrid architectures for legal, medical, and financial NLP`,
+      ],
+      careerRelevance: `Hybrid architecture design is a high-value skill that combines classical ML engineering with quantum computing knowledge. Professionals who can design effective hybrid architectures are in high demand.`,
+    },
+  },
+
+  '12.4': {
+    topicId: '12.4',
+    learningObjective: `Understand how quantum circuits extract features in exponentially high-dimensional Hilbert spaces and how these features benefit NLP tasks.`,
+    nextPrep: `Review the concept of feature maps from classical ML and the quantum feature map equation.`,
+    dependencyGraph: `flowchart LR
+      A[12.3 Hybrid Architecture] --> B[12.4 Quantum Feature Extraction]
+      B --> C[12.5 Integration with Classical Nets]
+      B --> D[Feature Maps]
+      B --> E[Hilbert Space]
+      style B fill:#6a0dad,color:#fff`,
+    storytelling: {
+      story: `Imagine you are an art critic who can see details invisible to everyone else. While others see a painting's basic colours and shapes, you can see the brushstroke patterns, the chemical composition of each pigment, and the artist's emotional state at the moment of each stroke. This is what quantum feature extraction does: it transforms data into a representation where patterns that were invisible in the original space become obvious. The quantum feature map is like a magical lens that reveals hidden structure in text data.`,
+      questions: [
+        `What makes a good feature for text classification?`,
+        `How might quantum superposition help us see patterns that classical features miss?`,
+        `What is the difference between feature selection and feature extraction?`,
+      ],
+      connection: `Feature extraction is the process of transforming raw data into a representation that makes the learning task easier. Quantum feature extraction maps classical data into an exponentially large Hilbert space where classes become linearly separable even if they were not in the original space.`,
+      technicalIntro: `Quantum feature extraction uses a quantum feature map f(x) that maps classical input x to a quantum state |f(x)? in a 2^n-dimensional Hilbert space. The inner product ?f(x)|f(x')? defines a quantum kernel K(x, x') = |?f(x)|f(x')?|² that measures similarity in the quantum feature space. Unlike classical feature maps (e.g., polynomial or RBF kernels), quantum feature maps can exploit entanglement to create correlations between features that classical maps cannot represent efficiently. The quantum feature space grows exponentially with the number of qubits, meaning 10 qubits can represent a feature space of 2¹° = 1024 dimensions, and 20 qubits can represent over a million dimensions.`,
+      lifeSkills: `Feature extraction teaches us that the way we look at data matters as much as the data itself. By changing our perspective — looking through a different lens — we can discover patterns that were always there but invisible. This is true in science, business, and personal relationships.`,
+    },
+    mathModelling: {
+      need: `Quantum feature extraction requires understanding how feature maps embed classical data into quantum Hilbert spaces and how this embedding affects classification performance.`,
+      motivation: `The quantum feature space is exponentially larger than any classical feature space, potentially making complex patterns linearly separable.`,
+      challenge: `Designing feature maps that are expressive enough to separate classes but shallow enough to implement on near-term quantum hardware.`,
+      equations: [
+        {
+          latex: `\\phi: \\mathbf{x} \\mapsto \\ket{\\phi(\\mathbf{x})} = U_{\\phi}(\\mathbf{x})\\ket{0^{\\otimes n}}`,
+          meaning: `A quantum feature map f maps a classical input vector x to an n-qubit quantum state by applying a parameterised unitary U_f(x) to the initial zero state.`,
+          interpretation: `The feature map determines how classical data is embedded into the quantum Hilbert space. Different feature maps create different geometries in the quantum space, affecting which patterns are easily separable.`,
+        },
+        {
+          latex: `K(\\mathbf{x}, \\mathbf{x}') = |\\braket{\\phi(\\mathbf{x})|\\phi(\\mathbf{x}')}|^2`,
+          meaning: `The quantum kernel K measures the similarity between two data points in the quantum feature space as the squared overlap of their quantum states.`,
+          interpretation: `When K(x, x') is close to 1, the two points are similar in the quantum feature space. When it is close to 0, they are orthogonal and thus very different. The kernel defines the geometry of the feature space.`,
+        },
+        {
+          latex: `K_{\\text{QC}}(\\mathbf{x}, \\mathbf{x}') = \\sum_{i,j} \\phi_i(\\mathbf{x}) \\phi_j(\\mathbf{x}') \\bra{0} U_{\\phi}^\\dagger(\\mathbf{x}) |i\\rangle\\langle j| U_{\\phi}(\\mathbf{x}')\\ket{0}`,
+          meaning: `The quantum kernel can be expressed as a sum over all pairs of basis states, showing how quantum coherence contributes to the similarity measure.`,
+          interpretation: `Unlike classical kernels, quantum kernels include cross-terms from quantum superposition and entanglement, creating correlations between features that classical kernels cannot capture without exponential resources.`,
+        },
+      ],
+      variables: [
+        { symbol: `\\phi`, name: `Quantum Feature Map`, description: `Mapping from classical input space to quantum Hilbert space` },
+        { symbol: `U_{\\phi}(\\mathbf{x})`, name: `Feature Map Unitary`, description: `Unitary circuit that encodes classical data into quantum state` },
+        { symbol: `\\ket{\\phi(\\mathbf{x})}`, name: `Quantum Feature State`, description: `Quantum state representing the embedded classical data` },
+        { symbol: `K(\\mathbf{x}, \\mathbf{x}')`, name: `Quantum Kernel`, description: `Similarity measure between two data points in quantum feature space` },
+      ],
+      interactive: {
+        equation: `K(x, x') = |\\langle \\phi(x) | \\phi(x') \\rangle|^2`,
+        description: `See how the quantum kernel similarity changes as you move two data points in the input space:`,
+        variables: [
+          { symbol: `x`, name: `Data Point 1`, description: `First input data point` },
+          { symbol: `x'`, name: `Data Point 2`, description: `Second input data point` },
+        ],
+        sliders: [
+          { name: `x1`, label: `x1 (Point 1)`, min: -3, max: 3, step: 0.1, default: -1.0 },
+          { name: `x2`, label: `x2 (Point 2)`, min: -3, max: 3, step: 0.1, default: 1.0 },
+        ],
+      },
+      charts: [
+        {
+          title: `Classical vs Quantum Feature Space Dimensionality`,
+          type: `bar`,
+          data: [
+            { name: `4 Features`, Classical: 4, Quantum: 16 },
+            { name: `8 Features`, Classical: 8, Quantum: 256 },
+            { name: `12 Features`, Classical: 12, Quantum: 4096 },
+            { name: `16 Features`, Classical: 16, Quantum: 65536 },
+            { name: `20 Features`, Classical: 20, Quantum: 1048576 },
+          ],
+        },
+        {
+          title: `Classification Accuracy: Quantum Feature Map vs Classical Kernels`,
+          type: `line`,
+          data: [
+            { name: `50`, 'LinearKernel': 0.72, 'RBFKernel': 0.78, 'QuantumFeatureMap': 0.82 },
+            { name: `100`, 'LinearKernel': 0.76, 'RBFKernel': 0.83, 'QuantumFeatureMap': 0.88 },
+            { name: `200`, 'LinearKernel': 0.79, 'RBFKernel': 0.86, 'QuantumFeatureMap': 0.92 },
+            { name: `500`, 'LinearKernel': 0.81, 'RBFKernel': 0.88, 'QuantumFeatureMap': 0.94 },
+            { name: `1000`, 'LinearKernel': 0.82, 'RBFKernel': 0.89, 'QuantumFeatureMap': 0.95 },
+          ],
+        },
+      ],
+      advantages: `Quantum feature maps provide access to an exponentially large feature space with linear qubit count. The quantum kernel can capture complex correlations through entanglement, potentially outperforming classical kernels on structured data like text.`,
+      limitations: `Computing the quantum kernel requires O(N²) circuit evaluations for N data points, which is expensive. The feature map circuit depth is limited by hardware noise. Not all classical data benefits from quantum feature maps.`,
+    },
+    activities: [
+      {
+        title: `Feature Map Design Challenge`,
+        description: `Groups design quantum feature maps for different types of text data and compare their expressivity.`,
+        steps: [
+          `Receive a text dataset type (sentiment, topic, spam, or authorship)`,
+          `Design a 4-qubit quantum feature map appropriate for the data`,
+          `Explain what properties of the data your feature map captures`,
+          `Present your design and rationale to the class`,
+        ],
+        materials: `Paper, pens, whiteboard`,
+        timeRequired: `10 min`,
+        outcomes: `Students can design problem-specific quantum feature maps`,
+      },
+      {
+        title: `Kernel Comparison Exercise`,
+        description: `Students compute and compare classical and quantum kernel matrices for a small dataset.`,
+        steps: [
+          `Take a dataset of 5 sentences with sentiment labels`,
+          `Compute the linear kernel matrix (dot products)`,
+          `Compute an RBF kernel matrix`,
+          `Compute a quantum kernel matrix using a simple feature map`,
+          `Compare: which kernel makes positive and negative classes more separable?`,
+        ],
+        timeRequired: `10 min`,
+        outcomes: `Students understand how different feature spaces affect class separability`,
+      },
+    ],
+    project: {
+      scope: `Design and evaluate a quantum feature map for a text classification task, comparing its performance with classical kernel methods.`,
+      objectives: [
+        `Design a quantum feature map circuit for text data`,
+        `Compute the quantum kernel matrix for a small dataset`,
+        `Train a kernel SVM using the quantum kernel`,
+        `Compare accuracy with linear and RBF kernel SVMs`,
+      ],
+      timeline: [
+        { phase: `Feature Map Design`, duration: `4 min`, percent: 35 },
+        { phase: `Kernel Computation`, duration: `4 min`, percent: 35 },
+        { phase: `Evaluation`, duration: `3 min`, percent: 30 },
+      ],
+      teamRoles: [
+        { role: `Map Designer`, responsibility: `Designs the quantum feature map circuit` },
+        { role: `Kernel Engineer`, responsibility: `Computes the quantum kernel matrix` },
+        { role: `Evaluator`, responsibility: `Trains classifiers and compares results` },
+      ],
+      deliverables: [
+        `Quantum feature map circuit diagram`,
+        `Kernel matrix visualisation (heatmap)`,
+        `Performance comparison table across kernel methods`,
+      ],
+    },
+    questions: [
+      {
+        question: `What is a quantum feature map and how does it differ from a classical feature map?`,
+        answer: `A quantum feature map f maps classical data to quantum states in an exponentially large Hilbert space. Unlike classical feature maps, quantum feature maps can exploit entanglement to create correlations between features that classical maps cannot represent efficiently.`,
+        explanation: `Both map data to higher-dimensional spaces to make classes linearly separable. The key difference is that quantum feature maps operate in a Hilbert space that grows as 2^n with n qubits, and they can create entangled feature correlations.`,
+        commonMistake: `Thinking quantum feature maps are always better — they require more computational resources to evaluate and may not benefit all datasets.`,
+        tip: `Think of the quantum feature map as a kernel trick on steroids — it implicitly operates in a space so large that classical computers cannot even represent it.`,
+      },
+      {
+        question: `What is the quantum kernel and how is it computed?`,
+        answer: `The quantum kernel K(x, x') = |?f(x)|f(x')?|² measures the similarity between two data points in the quantum feature space. It is computed by preparing the quantum state for x, applying the inverse feature map for x', and measuring the probability of the zero state.`,
+        explanation: `The kernel value is 1 if the two states are identical and 0 if they are orthogonal. Computing it requires running the quantum circuit for each pair of data points, which is O(N²) total computations.`,
+        commonMistake: `Assuming the quantum kernel can be computed in O(N) time — pairwise computation is fundamentally quadratic.`,
+        tip: `For large datasets, consider using a variational quantum classifier instead of a kernel method to avoid the O(N²) cost.`,
+      },
+    ],
+    virtualLab: {
+      description: `Explore quantum feature maps interactively by applying different maps to sample data and observing how class separability changes in the quantum feature space.`,
+      steps: [
+        `Load a 2D synthetic dataset with two classes`,
+        `Select a quantum feature map from the library`,
+        `Visualise the quantum kernel matrix as a heatmap`,
+        `Project the quantum feature space back to 2D using PCA`,
+        `Compare class separability across different feature maps`,
+      ],
+      stepDetails: [
+        `Dataset contains 50 points with a non-linear decision boundary (circles or moons)`,
+        `Five feature maps are available: ZZFeatureMap, PauliFeatureMap, AngleMap, AmplitudeMap, and custom`,
+        `Kernel heatmap shows red for similar (K˜1) and blue for dissimilar (K˜0) pairs`,
+        `PCA projection shows how the data looks in the quantum feature space mapped to 2D`,
+        `Separability score quantifies how well the classes are separated in each feature map`,
+      ],
+      completionMessage: `You have explored quantum feature extraction and understand how feature maps affect class separability!`,
+      dataFlow: `flowchart LR
+        A[Input Data] --> B[Quantum Feature Map]
+        B --> C[Quantum Feature State]
+        C --> D[Kernel Matrix K]
+        D --> E[Kernel SVM]
+        E --> F[Classification]
+        C --> G[PCA Projection]
+        G --> H[Feature Space Visualisation]`,
+    },
+    insights: {
+      advantages: [
+        `Exponentially large feature space with linear qubit count`,
+        `Entanglement creates feature correlations impossible in classical maps`,
+        `Quantum kernel can outperform classical kernels on structured data`,
+        `Feature maps can be designed specifically for text data structures`,
+        `Compatible with classical kernel-based ML algorithms (SVM, PCA)`,
+      ],
+      disadvantages: [
+        `Kernel matrix computation costs O(N²) circuit evaluations`,
+        `Feature map circuit depth limited by hardware noise`,
+        `Not all datasets benefit from quantum feature maps`,
+        `Theoretical advantage is hard to prove for real-world text data`,
+      ],
+      futureScope: `Research into trainable feature maps (meta-learning the optimal embedding), efficient kernel estimation techniques, and hybrid feature spaces combining classical and quantum features is advancing rapidly.`,
+      industrialApplications: [
+        `Quantum-enhanced document similarity search`,
+        `Quantum kernel methods for anomaly detection in text streams`,
+        `Feature extraction for quantum-classical hybrid NLP pipelines`,
+        `Quantum feature spaces for large-scale text clustering`,
+      ],
+      careerRelevance: `Understanding quantum feature extraction and kernel methods is essential for researchers and engineers working on quantum ML theory and applications. It is a foundational skill for developing novel quantum algorithms.`,
+    },
+  },
+
+  '12.5': {
+    topicId: '12.5',
+    learningObjective: `Understand how quantum feature extraction integrates with classical neural networks to create powerful hybrid models for NLP tasks.`,
+    nextPrep: `Review classical neural network architectures, particularly how dense layers and attention mechanisms process features.`,
+    dependencyGraph: `flowchart LR
+      A[12.4 Quantum Feature Extraction] --> B[12.5 Integration with Classical Nets]
+      B --> C[12.6 Hybrid NLP Lab]
+      B --> D[Dense Layers]
+      B --> E[Attention Mechanisms]
+      B --> F[Transformers]
+      style B fill:#4a90d9,color:#fff`,
+    storytelling: {
+      story: `You have built a powerful quantum microscope that can see details invisible to the naked eye. But seeing those details is useless unless you can interpret them. This is where classical neural networks come in — they are the expert interpreters that take the rich, high-dimensional features from the quantum microscope and make sense of them. The quantum feature extractor reveals patterns, and the classical network understands what those patterns mean. Together, they form a complete perception system.`,
+      questions: [
+        `What advantages do classical neural networks have over quantum circuits for final decision-making?`,
+        `How should the output dimension of the quantum layer match the input dimension of the classical layer?`,
+        `What kinds of classical layers work best after quantum feature extraction?`,
+      ],
+      connection: `Integration is where the hybrid model comes together. The quantum feature map transforms data into an exponentially rich representation, and classical neural network layers learn to interpret that representation for specific NLP tasks. The interface between them is the critical design point.`,
+      technicalIntro: `Integration strategies fall into three categories: (1) Concatenation — quantum features are concatenated with classical features before being fed into classical layers. (2) Residual connection — the classical network has a parallel path that bypasses the quantum layer, allowing the model to learn both quantum and non-quantum features. (3) Attention-based integration — the quantum layer's outputs are used as queries, keys, or values in a classical attention mechanism. The most effective approach for NLP tasks is typically the residual connection, where the quantum layer augments rather than replaces classical representations. The output dimension of the quantum layer (number of measured qubits) should match the expected input dimension of the subsequent classical layers. Dense layers with batch normalisation and dropout are commonly used after quantum layers to stabilise training.`,
+      lifeSkills: `Integration — making different systems work together effectively — is a critical skill in engineering, management, and life. The best solutions rarely come from a single approach but from combining complementary strengths.`,
+    },
+    mathModelling: {
+      need: `Integrating quantum feature extraction with classical neural networks requires careful mathematical design of the interface, gradient flow, and training dynamics.`,
+      motivation: `The quantum feature space is exponentially large, but classical networks are needed to interpret these features for specific tasks. The integration determines how much of the quantum advantage is preserved.`,
+      challenge: `Designing an integration that preserves quantum information while ensuring stable gradient flow and efficient training.`,
+      equations: [
+        {
+          latex: `\\mathbf{h}_{\\text{hybrid}} = \\sigma\\left(\\mathbf{W} \\cdot [\\mathbf{h}_{\\text{classical}} \\; \\| \\; \\mathbf{h}_{\\text{quantum}}] + \\mathbf{b}\\right)`,
+          meaning: `Concatenation integration: classical features h_classical and quantum features h_quantum are concatenated and fed into a dense classical layer with activation s.`,
+          interpretation: `This is the simplest integration method. The classical layer learns to weigh both feature types. The concatenation operator ? joins the two feature vectors.`,
+        },
+        {
+          latex: `\\mathbf{h}_{\\text{out}} = \\mathbf{h}_{\\text{classical}} + f_{\\text{classical}}^{(2)}\\left(\\mathbf{h}_{\\text{quantum}}\\right)`,
+          meaning: `Residual integration: the quantum features are transformed by a classical layer and added back to the classical features via a skip connection.`,
+          interpretation: `The residual connection ensures that the quantum layer augments rather than replaces classical features. This improves gradient flow and training stability. If the quantum layer provides no useful information, the network can ignore it by learning zero weights.`,
+        },
+        {
+          latex: `\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V`,
+          meaning: `In attention-based integration, quantum features can serve as queries Q, keys K, or values V in a classical attention mechanism.`,
+          interpretation: `For example, the quantum layer could produce attention queries that attend to classical key-value pairs, allowing the quantum features to selectively focus on relevant parts of the classical representation. This is a powerful but computationally expensive integration strategy.`,
+        },
+      ],
+      variables: [
+        { symbol: `\\mathbf{h}_{\\text{classical}}`, name: `Classical Features`, description: `Features extracted by classical neural network layers` },
+        { symbol: `\\mathbf{h}_{\\text{quantum}}`, name: `Quantum Features`, description: `Features extracted by the quantum circuit (expectation values)` },
+        { symbol: `\\|`, name: `Concatenation`, description: `Vector concatenation operator joining classical and quantum features` },
+        { symbol: `Q, K, V`, name: `Attention Components`, description: `Queries, keys, and values for attention-based integration` },
+      ],
+      charts: [
+        {
+          title: `Integration Strategy Performance Comparison`,
+          type: `bar`,
+          data: [
+            { name: `Concatenation`, 'Accuracy': 0.89, 'TrainingTime': 100, 'Params': 50000 },
+            { name: `Residual`, 'Accuracy': 0.92, 'TrainingTime': 105, 'Params': 52000 },
+            { name: `Attention`, 'Accuracy': 0.93, 'TrainingTime': 150, 'Params': 75000 },
+            { name: `Gated`, 'Accuracy': 0.91, 'TrainingTime': 110, 'Params': 55000 },
+          ],
+        },
+        {
+          title: `Quantum Feature Dimension vs Accuracy`,
+          type: `line`,
+          data: [
+            { name: `2`, accuracy: 0.82 },
+            { name: `4`, accuracy: 0.88 },
+            { name: `6`, accuracy: 0.91 },
+            { name: `8`, accuracy: 0.92 },
+            { name: `10`, accuracy: 0.92 },
+            { name: `12`, accuracy: 0.93 },
+          ],
+        },
+      ],
+      advantages: `Multiple integration strategies provide flexibility for different tasks. Residual connections improve gradient flow and training stability. Attention-based integration can create powerful quantum-classical interactions.`,
+      limitations: `Concatenation increases the input dimension to subsequent layers, adding parameters. Attention-based integration is computationally expensive. The optimal integration strategy is task-dependent and requires experimentation.`,
+    },
+    activities: [
+      {
+        title: `Integration Strategy Selection`,
+        description: `Groups analyse an NLP task and select the best integration strategy, justifying their choice.`,
+        steps: [
+          `Receive an NLP task description and dataset characteristics`,
+          `Analyse: is the data high-dimensional? Are quantum features likely to be complementary?`,
+          `Select one of the three integration strategies`,
+          `Justify your selection based on task requirements and constraints`,
+        ],
+        timeRequired: `8 min`,
+        outcomes: `Students can make informed decisions about integration strategies`,
+      },
+      {
+        title: `Gradient Flow Analysis`,
+        description: `Students trace gradient flow through different integration architectures to identify potential issues.`,
+        steps: [
+          `Draw the concatenation integration architecture with gradient arrows`,
+          `Draw the residual integration architecture with gradient arrows`,
+          `Identify which architecture has better gradient flow to the quantum layer`,
+          `Discuss how gradient flow affects the trainability of quantum parameters`,
+        ],
+        timeRequired: `7 min`,
+        outcomes: `Students understand how integration affects training dynamics`,
+      },
+    ],
+    project: {
+      scope: `Implement and compare three integration strategies (concatenation, residual, attention) for a hybrid sentiment classifier.`,
+      objectives: [
+        `Implement all three integration strategies`,
+        `Train each model on a sentiment analysis dataset`,
+        `Compare accuracy, training time, and parameter count`,
+        `Recommend the best integration strategy for sentiment analysis`,
+      ],
+      timeline: [
+        { phase: `Implementation`, duration: `6 min`, percent: 50 },
+        { phase: `Training`, duration: `3 min`, percent: 25 },
+        { phase: `Analysis`, duration: `3 min`, percent: 25 },
+      ],
+      teamRoles: [
+        { role: `Implementer A`, responsibility: `Implements concatenation and residual integration` },
+        { role: `Implementer B`, responsibility: `Implements attention-based integration` },
+        { role: `Analyst`, responsibility: `Trains models and compares results` },
+      ],
+      deliverables: [
+        `Three working hybrid models with different integration strategies`,
+        `Training curves and final accuracy for each strategy`,
+        `Integration strategy recommendation report`,
+      ],
+    },
+    questions: [
+      {
+        question: `What are the three main strategies for integrating quantum features with classical neural networks?`,
+        answer: `(1) Concatenation — joining quantum and classical feature vectors and feeding them into dense layers. (2) Residual connection — adding a transformed version of quantum features back to the classical feature stream. (3) Attention-based integration — using quantum features as queries, keys, or values in an attention mechanism.`,
+        explanation: `Each strategy makes different trade-offs between simplicity, expressivity, and computational cost. Residual connections are often preferred for training stability, while attention-based integration can capture more complex quantum-classical interactions.`,
+        commonMistake: `Only trying concatenation — more sophisticated integration strategies like residual connections can significantly improve performance and training stability.`,
+        tip: `Start with concatenation as a baseline, then experiment with residual connections, which often provide the best balance of performance and simplicity.`,
+      },
+      {
+        question: `Why do residual connections improve training of hybrid quantum-classical models?`,
+        answer: `Residual connections provide a direct gradient path from the loss to both classical and quantum components, preventing vanishing gradients. They also allow the model to learn to ignore the quantum layer if it is not helpful.`,
+        explanation: `In concatenation, gradients to the quantum layer must flow through the classical layer that processes the concatenated features. In residual connections, the skip connection provides an alternative gradient path, making training more stable. Additionally, if the quantum features are not useful, the network can set the residual weight to zero and rely entirely on the classical path.`,
+        commonMistake: `Assuming concatenation is sufficient — residual connections almost always improve training stability for hybrid models.`,
+        tip: `Always use batch normalisation after the quantum layer to stabilise the distribution of quantum features during training.`,
+      },
+    ],
+    virtualLab: {
+      description: `Build hybrid models with different integration strategies and compare their performance interactively.`,
+      steps: [
+        `Load the sentiment dataset and configure the classical base network`,
+        `Add a quantum feature extraction layer with 4 qubits`,
+        `Select an integration strategy (concatenation, residual, or attention)`,
+        `Train the hybrid model and visualise the training dynamics`,
+        `Switch integration strategies and compare results`,
+      ],
+      stepDetails: [
+        `Classical base network: 2 dense layers (128, 64) with ReLU activation`,
+        `Quantum layer: 4-qubit ZZFeatureMap with 2 layers, measuring all 4 qubits`,
+        `Integration selector dropdown: concatenation (dim=64+4), residual (dim=64), attention (Q from quantum, K,V from classical)`,
+        `Training dashboard shows loss, accuracy, and gradient magnitudes for both classical and quantum parameters`,
+        `Comparison table aggregates results from all integration strategies tested`,
+      ],
+      completionMessage: `You have mastered the integration of quantum feature extraction with classical neural networks!`,
+      dataFlow: `flowchart TD
+        A[Input Text] --> B[Classical Embedding]
+        B --> C[Dense Layer 1]
+        C --> D[Classical Features h_c]
+        D --> E{Integration Strategy}
+        E --> F[Concatenation]
+        E --> G[Residual Connection]
+        E --> H[Attention Mechanism]
+        C --> I[Quantum Feature Extract]
+        I --> J[Quantum Features h_q]
+        J --> F
+        J --> G
+        J --> H
+        F --> K[Dense Layer 2]
+        G --> K
+        H --> K
+        K --> L[Output Layer]
+        L --> M[Predictions]`,
+    },
+    insights: {
+      advantages: [
+        `Multiple integration strategies provide flexibility for different tasks`,
+        `Residual connections improve gradient flow and training stability`,
+        `Attention-based integration captures complex quantum-classical interactions`,
+        `Modular design allows swapping integration strategies without changing other components`,
+        `Integration can be incrementally adjusted as quantum hardware improves`,
+      ],
+      disadvantages: [
+        `Concatenation increases parameter count of subsequent layers`,
+        `Attention-based integration is computationally expensive`,
+        `Optimal strategy is task-dependent and requires experimentation`,
+        `Integration design adds another hyperparameter dimension to search`,
+      ],
+      futureScope: `Research into learned integration mechanisms (neural gates that dynamically weigh quantum vs classical features) and automated integration strategy selection through neural architecture search is advancing. Future systems will automatically determine the optimal integration for any task.`,
+      industrialApplications: [
+        `Hybrid NLP models for enterprise document analysis integrating quantum features`,
+        `Quantum-enhanced search and recommendation systems`,
+        `Medical text analysis combining quantum feature extraction with classical diagnosis networks`,
+        `Financial NLP with quantum feature extraction integrated into risk assessment models`,
+      ],
+      careerRelevance: `Integration design is a specialised skill at the intersection of quantum computing and deep learning engineering. Professionals who can effectively integrate quantum and classical components are critical for building practical quantum-enhanced systems.`,
+    },
+  },
+
+  '12.6': {
+    topicId: '12.6',
+    learningObjective: `Build, train, and evaluate a complete hybrid quantum-classical NLP pipeline in a hands-on lab environment.`,
+    nextPrep: `Ensure you understand all previous topics in Module 12. Have a quantum computing environment (simulator) ready.`,
+    dependencyGraph: `flowchart LR
+      A[12.4 Quantum Feature Extraction] --> B[12.5 Integration]
+      B --> C[12.6 Hybrid NLP Lab]
+      C --> D[M13: Model Evaluation]
+      style C fill:#e84393,color:#fff`,
+    storytelling: {
+      story: `The day has arrived. You are no longer a student learning about hybrid quantum-classical models — you are an engineer building one. This lab is your opportunity to bring together everything you have learned: classical embeddings, quantum feature maps, VQC architectures, integration strategies, and hybrid training. You will build a pipeline that uses a quantum circuit to extract features from text, and a classical neural network to make classifications. When you are done, you will have a working hybrid NLP system that demonstrates the power of combining classical and quantum computation.`,
+      questions: [
+        `What part of the hybrid pipeline do you expect to be most challenging?`,
+        `How will you debug if your hybrid model performs worse than the classical baseline?`,
+        `What would it mean for your career to have built a working hybrid quantum-classical NLP model?`,
+      ],
+      connection: `This lab integrates every concept from Module 12 into a practical implementation. Theory becomes practice. You transition from understanding hybrid models to building them from scratch.`,
+      technicalIntro: `In this lab, you will build a complete hybrid NLP pipeline for sentiment classification: (1) Classical embedding layer converts text to 50-dimensional GloVe embeddings. (2) Dimensionality reduction layer projects to 4 dimensions (for 4 qubits). (3) Quantum feature map (ZZFeatureMap) encodes the 4D vector into a quantum state using 4 qubits. (4) Parameterised VQC with 3 variational layers transforms the quantum state. (5) Measurement of all 4 qubits produces 4 quantum features. (6) Residual integration adds quantum features back to the classical stream. (7) Two classical dense layers produce the final sentiment prediction. Training uses the Adam optimiser with gradients computed via the parameter shift rule for quantum parameters and backpropagation for classical parameters. The lab culminates in a comparison against a purely classical baseline, an ablation study, and a deployment feasibility report.`,
+      lifeSkills: `Building complex integrated systems teaches you the art of debugging, testing, and iterative improvement. These meta-skills — not the specific technology — are what make great engineers. The ability to bring together disparate components into a working whole is valued in every engineering discipline.`,
+    },
+    mathModelling: {
+      need: `The hybrid NLP pipeline requires integrating all mathematical components from Module 12 into a coherent, trainable system.`,
+      motivation: `Practical implementation reveals the real-world challenges of hybrid quantum-classical ML: data encoding, circuit depth constraints, gradient computation, and hyperparameter tuning.`,
+      challenge: `Debugging a hybrid pipeline where errors can originate in the classical data processing, the quantum circuit, the integration layer, or the training loop.`,
+      equations: [
+        {
+          latex: `\\mathbf{x}_{\\text{embed}} = \\text{GloVe}(\\text{text}) \\in \\mathbb{R}^{50}`,
+          meaning: `Input text is converted to a 50-dimensional GloVe embedding vector.`,
+          interpretation: `Pre-trained GloVe embeddings provide a dense, semantically rich representation of the input text that preserves word-level semantic relationships.`,
+        },
+        {
+          latex: `\\mathbf{x}_{\\text{4D}} = \\mathbf{W}_{\\text{reduce}} \\cdot \\mathbf{x}_{\\text{embed}} + \\mathbf{b}_{\\text{reduce}} \\in \\mathbb{R}^{4}`,
+          meaning: `The 50-dimensional embedding is projected down to 4 dimensions using a learned linear layer to match the qubit count.`,
+          interpretation: `Dimensionality reduction is necessary because current quantum hardware supports limited qubits. The reduction layer is trained end-to-end with the rest of the model.`,
+        },
+        {
+          latex: `\\mathbf{h}_{\\text{hybrid}} = \\text{ReLU}(\\mathbf{W}_{\\text{out}} \\cdot (\\mathbf{h}_{\\text{classical}} + f_{\\text{quantum}}(\\mathbf{x}_{\\text{4D}}; \\theta)) + \\mathbf{b}_{\\text{out}})`,
+          meaning: `The final prediction uses residual integration: quantum features are added to classical features, then passed through an output layer with ReLU activation.`,
+          interpretation: `The residual connection ensures stable gradient flow. The quantum features augment rather than replace the classical features. If the quantum circuit provides no benefit, the network can learn to ignore it.`,
+        },
+      ],
+      variables: [
+        { symbol: `\\mathbf{x}_{\\text{embed}}`, name: `GloVe Embedding`, description: `50-dimensional pre-trained word embedding of the input text` },
+        { symbol: `\\mathbf{W}_{\\text{reduce}}`, name: `Reduction Weights`, description: `Learned weight matrix projecting 50D to 4D for qubit encoding` },
+        { symbol: `\\mathbf{x}_{\\text{4D}}`, name: `Reduced Input`, description: `4-dimensional input fed into the quantum feature map` },
+        { symbol: `f_{\\text{quantum}}`, name: `Quantum Circuit`, description: `VQC with ZZFeatureMap encoding and 3 variational layers on 4 qubits` },
+        { symbol: `\\mathbf{h}_{\\text{hybrid}}`, name: `Hybrid Output`, description: `Final sentiment prediction from the combined classical-quantum pipeline` },
+      ],
+      charts: [
+        {
+          title: `Hybrid vs Classical Baseline: Test Accuracy`,
+          type: `bar`,
+          data: [
+            { name: `Classical Baseline`, accuracy: 0.87, 'TrainingTime': 100, 'Parameters': 85000 },
+            { name: `Hybrid Pipeline`, accuracy: 0.93, 'TrainingTime': 145, 'Parameters': 67000 },
+            { name: `Hybrid + Re-upload`, accuracy: 0.95, 'TrainingTime': 180, 'Parameters': 72000 },
+          ],
+        },
+        {
+          title: `Ablation Study: Component Contribution to Accuracy`,
+          type: `bar`,
+          data: [
+            { name: `Full Pipeline`, accuracy: 0.93 },
+            { name: `Remove Quantum Layer`, accuracy: 0.87 },
+            { name: `Remove Residual (concat)`, accuracy: 0.90 },
+            { name: `2 Qubits Only`, accuracy: 0.88 },
+            { name: `6 Qubits`, accuracy: 0.94 },
+          ],
+        },
+      ],
+      advantages: `The complete hybrid pipeline demonstrates practical quantum-enhanced NLP with measurable accuracy improvements over classical baselines. The modular design allows each component to be independently tested and improved.`,
+      limitations: `The lab runs on simulators due to hardware accessibility constraints. Real quantum hardware introduces noise and decoherence that may reduce the observed accuracy gains.`,
+    },
+    activities: [
+      {
+        title: `Pipeline Assembly Challenge`,
+        description: `Teams race to assemble the complete hybrid NLP pipeline from pre-built components.`,
+        steps: [
+          `Receive pre-built components: embedding layer, reduction layer, quantum feature map, VQC, integration module, and output layer`,
+          `Connect all components in the correct order using the provided API`,
+          `Run a forward pass on a sample input to verify correctness`,
+          `Debug any errors in the assembly`,
+        ],
+        materials: `Pre-built component library, sample input data`,
+        timeRequired: `10 min`,
+        outcomes: `Students understand how hybrid pipeline components fit together end-to-end`,
+      },
+      {
+        title: `Hyperparameter Optimisation`,
+        description: `Students tune the hybrid pipeline hyperparameters to maximise validation accuracy.`,
+        steps: [
+          `Identify the key hyperparameters: learning rate, qubit count, VQC depth, batch size`,
+          `Run a grid search over learning rate (0.001, 0.01, 0.1) and VQC depth (1, 3, 5)`,
+          `Record validation accuracy for each combination`,
+          `Report the optimal hyperparameter configuration`,
+        ],
+        timeRequired: `12 min`,
+        outcomes: `Students gain practical experience with hybrid model hyperparameter tuning`,
+      },
+    ],
+    project: {
+      scope: `Complete the hybrid NLP pipeline lab, document results, and compare with classical baselines.`,
+      objectives: [
+        `Implement the complete hybrid sentiment classifier`,
+        `Train the model and achieve >90% test accuracy`,
+        `Compare against a purely classical baseline`,
+        `Perform an ablation study to measure each component's contribution`,
+        `Document findings and propose deployment considerations`,
+      ],
+      timeline: [
+        { phase: `Implementation`, duration: `12 min`, percent: 40 },
+        { phase: `Training and Optimisation`, duration: `8 min`, percent: 30 },
+        { phase: `Ablation Study`, duration: `5 min`, percent: 20 },
+        { phase: `Report Writing`, duration: `5 min`, percent: 10 },
+      ],
+      teamRoles: [
+        { role: `Pipeline Engineer`, responsibility: `Builds the complete hybrid pipeline` },
+        { role: `Optimisation Lead`, responsibility: `Tunes hyperparameters for best performance` },
+        { role: `Analyst`, responsibility: `Evaluates results, runs ablation study, and writes report` },
+        { role: `Validator`, responsibility: `Validates against classical baseline and checks for correctness` },
+      ],
+      deliverables: [
+        `Working hybrid NLP pipeline code with documentation`,
+        `Training curves and final evaluation metrics`,
+        `Ablation study results showing contribution of each component`,
+        `Deployment feasibility report with hardware requirements analysis`,
+      ],
+    },
+    questions: [
+      {
+        question: `What are the key components of the hybrid NLP pipeline built in this lab?`,
+        answer: `(1) GloVe embedding layer for text to vector conversion, (2) dimensionality reduction to 4D for qubit encoding, (3) ZZFeatureMap quantum encoding, (4) 3-layer VQC for quantum feature transformation, (5) measurement of 4 qubits, (6) residual integration combining classical and quantum features, (7) classical dense layers for final classification.`,
+        explanation: `Each component handles a specific responsibility in the pipeline. The classical components handle text processing and final decision-making, while the quantum component handles high-dimensional feature transformation in Hilbert space.`,
+        commonMistake: `Skipping the dimensionality reduction layer — the input dimension must match the number of qubits used for encoding.`,
+        tip: `Always validate the shape of data flowing through each component. Print tensor shapes at each step during debugging.`,
+      },
+      {
+        question: `Why might the hybrid model outperformance the classical baseline, and how would you verify the quantum component is responsible?`,
+        answer: `The hybrid model may outperform due to the quantum circuit's ability to create entangled feature representations in an exponentially large Hilbert space. To verify, run an ablation study where the quantum layer is removed (set to identity) and compare performance. If performance drops, the quantum component is providing value.`,
+        explanation: `An ablation study systematically removes or disables components to measure their contribution. The most important ablation is replacing the quantum layer with an identity transformation to isolate its effect. Additional ablations include varying qubit count and circuit depth.`,
+        commonMistake: `Attributing all accuracy gains to the quantum component — some improvement may come from the increased parameter count or architectural changes introduced alongside the quantum layer.`,
+        tip: `Control for total parameter count when comparing hybrid vs classical models. A fair comparison keeps the number of trainable parameters approximately equal.`,
+      },
+    ],
+    virtualLab: {
+      description: `Step-by-step interactive lab for building, training, and evaluating a complete hybrid quantum-classical NLP pipeline.`,
+      steps: [
+        `Initialise environment with PennyLane and PyTorch`,
+        `Load and preprocess the IMDB sentiment dataset (200 samples)`,
+        `Build classical embedding and dimensionality reduction layers`,
+        `Construct ZZFeatureMap for 4-qubit quantum encoding`,
+        `Build VQC with 3 variational layers using a hardware-efficient ansatz`,
+        `Implement residual integration with a 2-layer classical classification network`,
+        `Train the hybrid model end-to-end using Adam optimiser`,
+        `Evaluate on test set and compare with classical baseline`,
+        `Run ablation study: remove quantum layer, vary qubit count, change integration strategy`,
+      ],
+      stepDetails: [
+        `Environment setup: PennyLane 0.30+, PyTorch 1.12+, NumPy, Matplotlib for visualisation`,
+        `Dataset: 200 IMDB reviews (100 positive, 100 negative), 80/20 train/test split`,
+        `Embedding: 50D GloVe pre-trained vectors, reduced to 4D via learned linear projection`,
+        `Quantum encoding: ZZFeatureMap with 4 qubits and 2 repetitions, encoding angles from the 4D input`,
+        `VQC: 3 layers of Ry rotations + CNOT entangling on a linear topology, measuring Z expectation on all 4 qubits`,
+        `Integration: residual connection adding quantum features (4D) to classical features (64D) before final dense layers`,
+        `Training: Adam optimiser with lr=0.01, batch size=16, 50 epochs, parameter shift for quantum gradients`,
+        `Comparison dashboard: side-by-side accuracy, loss curves, parameter counts, and inference times`,
+      ],
+      completionMessage: `Congratulations! You have built and evaluated a complete hybrid quantum-classical NLP pipeline. You now have a portfolio-worthy demonstration of practical quantum-enhanced natural language processing!`,
+      dataFlow: `flowchart TD
+        A[Input Text] --> B[GloVe Embedding 50D]
+        B --> C[Dimensionality Reduction 50D -> 4D]
+        C --> D[ZZFeatureMap Encoding]
+        D --> E[VQC 3 Layers]
+        E --> F[Measurement: 4 Expectation Values]
+        F --> G{Residual Integration}
+        C --> H[Classical Dense 64D]
+        H --> G
+        G --> I[Dense Layer 32D]
+        I --> J[Output Layer 2D]
+        J --> K[Softmax Prediction]
+        K --> L[Sentiment: Positive/Negative]
+        K --> M[Loss Computation]
+        M --> N{Gradient Flow}
+        N --> O[Classical Backpropagation]
+        N --> P[Parameter Shift Rule]
+        O --> Q[Update Classical Parameters]
+        P --> R[Update Quantum Parameters]
+        Q --> C
+        R --> E`,
+    },
+    insights: {
+      advantages: [
+        `End-to-end hybrid pipeline demonstrates practical quantum-enhanced NLP on a real task`,
+        `Hands-on experience with industry-relevant tools (PennyLane, PyTorch)`,
+        `Modular design allows independent testing and improvement of each component`,
+        `Clear accuracy improvements over classical baselines on benchmark datasets`,
+        `Ablation studies provide rigorous evidence of quantum component contribution`,
+      ],
+      disadvantages: [
+        `Lab runs on simulator — real hardware behaviour may differ due to noise and decoherence`,
+        `Limited qubit count (4-6) constrains the scale of quantum advantage that can be demonstrated`,
+        `Training time is significantly longer than purely classical models`,
+        `Pipeline complexity makes debugging and maintenance challenging`,
+      ],
+      futureScope: `The pipeline can be extended to multi-class classification, sequence labelling, and text generation. Integration with cloud quantum computing services would allow execution on real hardware. Automated pipeline search and optimisation tools are an emerging research area.`,
+      industrialApplications: [
+        `Production hybrid NLP systems for enterprise text analysis and sentiment monitoring`,
+        `Quantum-enhanced customer feedback analysis platforms`,
+        `Real-time content moderation using hybrid quantum-classical models`,
+        `Medical text analysis pipelines combining quantum feature extraction with classical clinical decision support`,
+      ],
+      careerRelevance: `This lab provides a portfolio piece demonstrating practical hybrid QNLP engineering skills. The ability to build end-to-end hybrid systems combining quantum and classical components is highly valued in industry quantum computing roles and quantum startup positions.`,
+    },
+  },
+}
